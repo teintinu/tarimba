@@ -1,7 +1,6 @@
 module.exports = function () {
     var titulo_da_aplicacao = 'Zscan';
 
-
     var estoria_apptitle = {
         getState: function () {
             return {
@@ -11,5 +10,7 @@ module.exports = function () {
         setTitle: function (payload) {
             titulo_da_aplicacao = payload.title;
         }
-    };
+    }
+
+    return estoria_apptitle;
 }

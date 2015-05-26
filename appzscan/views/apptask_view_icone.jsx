@@ -7,7 +7,7 @@ module.exports = function () {
       estoria_apptask: require('./stores/apptask')
     },
     render: function () {
-        var lista_de_tarefas = this.estoria_apptask.getState();
+        var lista_de_tarefas = this.estoria_apptask();
         return <div className = {
             lista_de_tarefas.length == 0 ? 'atoa' : 'trabalhando'
         }> </div>

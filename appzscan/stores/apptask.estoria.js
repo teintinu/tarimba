@@ -11,4 +11,5 @@ module.exports = function () {
         }
     };
 
+    return estoria_apptask;
 }
