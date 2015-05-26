@@ -1,10 +1,9 @@
 module.exports = {
     entry: __dirname + "/apptask.jsx",
     output: {
-        path: __dirname + "/apptask/",
+        path: __dirname,
         filename: "bundle.js"
     },
-    devtool: "source-map",
     module: {
         loaders: [
             {
@@ -21,5 +20,15 @@ module.exports = {
                 loader: "json"
             }
     ]
+    },
+    devtool: "source-map",
+    devServer: {
+        contentBase: __dirname,
+        hot: false,
+        inline: true,
+        noInfo: true,
+        host: '0.0.0.0',
+        port: 3080,
+        colors: true
     }
 };
