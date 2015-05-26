@@ -1,11 +1,25 @@
 module.exports = {
-    entry: __dirname + "/apptask.js",
+    entry: __dirname + "/appzscan.js",
     output: {
         path: __dirname,
         filename: "bundle.js"
     },
     module: {
-        loaders: []
+        loaders: [
+            {
+                test: /\.less$/,
+                loader: "style!css!less"
+            },
+            {
+                test: /\.jsx?$/,
+                loaders: ['jsx?harmony&stripTypes'],
+                exclude: /node_modules/
+            },
+            {
+                test: /\.json$/,
+                loader: "json"
+            }
+    ]
     },
     devtool: "source-map",
     devServer: {

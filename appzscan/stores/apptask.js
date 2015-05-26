@@ -1,6 +1,6 @@
 module.exports = function () {
 
-    var lista_de_tarefas = [];
+    var lista_de_tarefas = ['tarefa 1', 'tarefa 2'];
 
     var estoria_apptask = {
         getState: function () {
