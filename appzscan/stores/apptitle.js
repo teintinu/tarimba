@@ -6,7 +6,7 @@ module.exports = {
 
 function constructor_apptitle() {
 
-    var titulo_da_aplicacao = 'titulo inicial';
+    var titulo_da_aplicacao = 'Título Inicial';
 
     return {
         actions: {
