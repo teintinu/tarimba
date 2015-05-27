@@ -12,7 +12,7 @@ module.exports = {
             },
             {
                 test: /\.jsx?$/,
-                loaders: ['jsx?harmony&stripTypes'],
+                loaders: ['jsx?harmony&stripTypes', 'flowcheck'],
                 exclude: /node_modules/
             },
             {

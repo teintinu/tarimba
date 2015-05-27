@@ -47,14 +47,15 @@ function declare_actions(actions) {
     actions.zapp_id = zapp_gen_id++;
 }
 
-function cria_callback_para_acao(objEstoria) {
-    return function (payload) {
+function cria_callback_para_acoes(objEstoria) {
+    var fn = function (payload) {
         var fn = objEstoria[payload.actionType];
         if (fn && typeof fn === 'function') {
             fn.apply(this, payload.args);
             objEstoria.change_listeners.forEach(fn => fn());
         }
     };
+    return fn;
 }
 
 function cria_dispatch_para_acao(actions, name) {
@@ -73,48 +74,51 @@ function cria_dispatch_para_acao(actions, name) {
 
 // ---- sobre STORES
 
-var estorias_em_uso = {};
-
 function usar_estoria(modEstoria, change_handler) {
-    var estoria_em_uso = estorias_em_uso[modEstoria];
-    if (!estoria_em_uso) {
+    if (!modEstoria.__instance) {
         if (modEstoria.zapp_id)
             throw new Error('Tentativa de registrar a mesma estória mais de uma vez');
-        var objEstoria = modEstoria();
-        estoria_em_uso = {
+        var objEstoria = modEstoria.__constructor();
+        modEstoria.__instance = {
             contador_de_uso: 1,
             objEstoria: objEstoria
         };
         objEstoria.change_listeners = [];
-        for (var propname in objEstoria) {
-            if (propname != 'getState') {
-                var prop = objEstoria[propname];
-                if (typeof prop === 'function')
-                    usar_acao(propname);
-            }
+        for (var propname in objEstoria.actions) {
+            var prop = objEstoria.actions[propname];
+            if (typeof prop !== 'function')
+                throw new Error(propname + ' deveria ser uma função');
+            usar_acao(propname);
+            modEstoria[propname] = acoes_declaradas[propname];
         }
-        estoria_em_uso.dispathToken = AppZscan.dispatcher.register(cria_callback_para_acao(estoria_em_uso));
-        estorias_em_uso[modEstoria] = estoria_em_uso;
-        modEstoria.zapp_id = zapp_gen_id++;
+        for (var propname in objEstoria.methods) {
+            var prop = objEstoria.methods[propname];
+            if (typeof prop !== 'function')
+                throw new Error(propname + ' deveria ser uma função');
+            modEstoria[propname] = objEstoria.methods[propname];
+        }
+        modEstoria.__instance.dispathToken = AppZscan.dispatcher.register(cria_callback_para_acoes(modEstoria.__instance));
     } else
-        estoria_em_uso.contador_de_uso++;
+        modEstoria.__instance.contador_de_uso++;
 
     if (change_handler)
-        estoria_em_uso.objEstoria.change_listeners.push(change_handler);
+        modEstoria.__instance.objEstoria.change_listeners.push(change_handler);
 
-    return estoria_em_uso.objEstoria;
+    return modEstoria.__instance.objEstoria;
 }
 
 function parou_de_usar_estoria(modEstoria, change_handler) {
-    var estoria_em_uso = estorias_em_uso[modEstoria];
-    if (estoria_em_uso && estoria_em_uso.contador_de_uso <= 1) {
-        AppZscan.dispatcher.unregister(estoria_em_uso.dispathToken);
-        var i = estoria_em_uso.objEstoria.change_listeners.indexOf(change_handler);
-        if (i >= 0)
-            estoria_em_uso.objEstoria.change_listeners.splice(i, 1);
-        delete estoria_em_uso.objEstoria;
-        delete estorias_em_uso[modEstoria];
-    }
+    if (modEstoria.__instance)
+        if (modEstoria.__instance.contador_de_uso > 1)
+            modEstoria.__instance.contador_de_uso--;
+        else {
+            AppZscan.dispatcher.unregister(modEstoria.__instance.dispathToken);
+            var i = modEstoria.__instance.objEstoria.change_listeners.indexOf(change_handler);
+            if (i >= 0)
+                modEstoria.__instance.objEstoria.change_listeners.splice(i, 1);
+            delete modEstoria.__instance.objEstoria;
+            delete modEstoria.__instance;
+        }
 }
 
 function usar_acao(nome) {
@@ -157,25 +161,24 @@ function hideview(viewfn, callback) {
 function criaview(viewfn) {
     //if (view_.zapp_id)
     //    throw new Error('Tentativa de criar a mesma view mais de uma vez');
-    var viewobj = viewfn();
+    var viewobj = viewfn(AppZscan);
     viewobj.zapp_id = zapp_gen_id++;
     var change_handler_react;
-    var view_component = react.createClass({
-        getInitialState: viewobj.getInitialState,
-        render: viewobj.render,
-        componentDidMount: function () {
-            change_handler_react = this._onChange;
-            if (viewobj.componentDidMount)
-                viewobj.componentDidMount();
-        },
-        componentWillMount: viewobj.componentWillMount,
-        componentDidUnount: function () {
-            change_handler_react = null;
-            if (viewobj.componentDidUnount)
-                viewobj.componentDidUnount();
-        },
-        componentWillUnmount: viewobj.componentWillUnmount
-    });
+
+    var originalcomponentDidMount = viewobj.componentDidMount;
+    var originalcomponentDidUnount = viewobj.componentDidUnount;
+    viewobj.componentDidMount = function () {
+        change_handler_react = this._onChange;
+        if (originalcomponentDidMount)
+            originalcomponentDidMount();
+    };
+    viewobj.componentDidUnount = function () {
+        change_handler_react = null;
+        if (originalcomponentDidUnount)
+            originalcomponentDidUnount();
+    }
+
+    var view_component = react.createClass(viewobj);
     var ret = {
         viewobj: viewobj,
         render: function () {
@@ -196,7 +199,7 @@ function criaview(viewfn) {
         var fn = function () {
             return estoriaobj.getState();
         }
-        viewobj[apelido_estoria] = fn;
+        viewobj[apelido_estoria] = estoria_mod;
     }
     views_ativas[viewfn] = ret;
     if (AppZscanReact_onchange)

@@ -1,15 +1,48 @@
-module.exports = function () {
+type Tarefa = {
+    titulo: string
+};
 
-    var lista_de_tarefas = ['tarefa 1', 'tarefa 2'];
+module.exports = {
+    __constructor: constructor_apptask,
+    // acoes
+    executar_tarefa: function (titulo: string): void {},
+    // getState
+    temTarefasEmExecucao: function (): boolean {},
+    lista_tarefas: function (): Array < Tarefa > {}
+}
 
-    var estoria_apptask = {
-        getState: function () {
-            return lista_de_tarefas;
-        },
-        executar_tarefa: function (tarefa) {
-            this.lista_de_tarefas.push(tarefa);
+
+function constructor_apptask() {
+
+    type Tarefa = {
+        titulo: string
+    };
+
+    var todas_as_tarefas: Array < Tarefa > = [{
+    titulo: 'xxx'
+}];
+
+    var acoes = {
+        executar_tarefa: function executar_tarefa(titulo) {
+            this.todas_as_tarefas.push({
+                titulo: titulo
+            });
         }
     };
 
-    return estoria_apptask;
+    var getStateMethods = {
+        lista_tarefas: function () {
+            return todas_as_tarefas.map((t) =>
+                t.titulo
+            );
+        },
+        temTarefasEmExecucao: function () {
+            return todas_as_tarefas.length > 0
+        }
+    }
+
+    return {
+        actions: acoes,
+        methods: getStateMethods
+    };
 }
