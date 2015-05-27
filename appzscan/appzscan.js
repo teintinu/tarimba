@@ -10,7 +10,7 @@ var AppZscanReact = react.createClass({
     render: function () {
         var views = pagelets_ativos.map((pagelet) => pagelet.__render());
         views.push(react.createElement(AppZscanContent));
-        return react.createElement('div', {id: "todaaplicacao"}, views);
+        return react.createElement('div', {}, views);
     },
     componentDidMount: function () {
         var self = this;
