@@ -273,6 +273,7 @@ declare_actions(require('./actions/appzscan'))
 AppZscan.show_pagelet(require('./views/apptitle.jsx'));
 AppZscan.show_pagelet(require('./views/apptask_icone.jsx'));
 AppZscan.showcontent(require('./contents/app/login/view.jsx'));
+AppZscan.show_pagelet(require('./views/appmenu.jsx'));
 
 react.render(AppZscan.element, document.getElementById("app"));
 

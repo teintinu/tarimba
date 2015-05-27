@@ -8,5 +8,10 @@ module.exports = {
         icone: '',
         title: 'exec',
         shortcut: ''
+    },
+    setItensMenu: {
+        icone: '',
+        title: 'exec',
+        shortcut: ''
     }
 };
