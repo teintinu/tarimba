@@ -2,7 +2,7 @@ var flux = require('flux'),
     react = require('react');
 window.React = react;
 
-var AppZscanReact_onchange;
+var AppZscanReact_onchange, AppZscanContentReact_onchange;
 var AppZscanReact = react.createClass({
     getInitialState: function () {
         return {}
@@ -11,6 +11,7 @@ var AppZscanReact = react.createClass({
         var views = [];
         for (var viewfn in views_ativas)
             views.push(views_ativas[viewfn].render())
+        views.push(react.createElement(AppZscanContent));
         return react.createElement('div', {}, views);
     },
     componentDidMount: function () {
@@ -21,15 +22,49 @@ var AppZscanReact = react.createClass({
     },
 
     componentWillUnmount: function () {
-        this._onChange = null;
+        AppZscanReact_onchange = null;
     },
 });
+
+var AppZscanContent = react.createClass({
+    current_view: null,
+    getInitialState: function () {
+        return {}
+    },
+    render: function () {
+        if (AppZscanContent.current_view != null)
+            return AppZscanContent.current_view.render();
+        else
+            return react.createElement('h1', {}, 'ERRO: FALTA CONTEÚDO');
+    },
+    componentDidMount: function () {
+        var self = this;
+        AppZscanContentReact_onchange = function () {
+            self.setState({})
+        };
+    },
+
+    componentWillUnmount: function () {
+        AppZscanContentReact_onchange = null;
+    },
+});
+
 
 var AppZscan = {
     element: react.createElement(AppZscanReact),
     dispatcher: new flux.Dispatcher(),
     show: showview,
-    hide: hideview
+    hide: hideview,
+    showcontent: function (modView: ModView) {
+        if (AppZscanContent.current_view) {
+            parar_de_usar_view(modView);
+            delete AppZscanContent.current_view;
+        }
+        var v = usar_view(modView);
+        AppZscanContent.current_view = v;
+        if (AppZscanContentReact_onchange)
+            AppZscanContentReact_onchange();
+    }
 };
 
 var zapp_gen_id = 1;
@@ -145,8 +180,9 @@ type ModView = () => ObjView;
 
 function showview(modView: ModView, params, callback) {
     var v = views_ativas[modView];
-    if (!v)
+    if (!v) {
         v = views_ativas[modView] = criaview(modView);
+    }
     //viewfn.setParams(params);
     if (AppZscanReact_onchange)
         AppZscanReact_onchange();
@@ -166,6 +202,21 @@ function hideview(modView: ModView, callback) {
     }
     if (AppZscanReact_onchange)
         AppZscanReact_onchange();
+}
+
+function usar_view(modView: ModView, params, callback) {
+    var v = criaview(modView);
+    //viewfn.setParams(params);
+    return v;
+}
+
+function parar_de_usar_view(v, callback) {
+    for (var apelido_estoria in v.viewobj) {
+        var estoria = modView[apelido_estoria];
+        delete modView[apelido_estoria];
+        parou_de_usar_estoria(estoria, ret.change_handler);
+    }
+    delete v.viewobj;
 }
 
 function criaview(viewfn) {
@@ -214,9 +265,6 @@ function criaview(viewfn) {
         }
         viewobj[apelido_estoria] = estoria_mod;
     }
-    views_ativas[viewfn] = ret;
-    if (AppZscanReact_onchange)
-        AppZscanReact_onchange();
     return ret;
 }
 
@@ -226,7 +274,7 @@ declare_actions(require('./actions/appzscan'))
 
 AppZscan.show(require('./views/apptitle.jsx'));
 AppZscan.show(require('./views/apptask_icone.jsx'));
-//var appcontent = require('stores/appcontent');
+AppZscan.show(require('./contents/app/login/view.jsx'));
 
 react.render(AppZscan.element, document.getElementById("app"));
 
