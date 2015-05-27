@@ -16,6 +16,8 @@
     "flowcheck-loader": "^1.0.0",
     "fluxxor": "^1.5.4",
     "jsx-loader": "^0.13.2",
+    "less": "^2.5.1",
+    "less-loader": "^2.2.0",
     "react": "^0.13.3",
     "style-loader": "^0.12.2"
   }
