@@ -11,7 +11,7 @@ module.exports = function () {
         render: function () {
             return <ul>
             {view.estoria_apptask.lista_tarefas().map(
-              (tarefa)=>
+             (tarefa)=>
                 <li>
                   {tarefa.titulo}
                 </li>
@@ -19,6 +19,5 @@ module.exports = function () {
             < /ul>
         }
     };
-
     return view;
 };
