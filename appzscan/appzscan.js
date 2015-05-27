@@ -68,7 +68,7 @@ function cria_dispatch_para_acao(actions, name) {
             args: arguments
         });
     };
-    fn.meta = actions[name].meta;
+    fn.meta = actions[name];
     fn.meta.zapp_id = zapp_gen_id++;
     actions[name] = fn;
     acoes_declaradas[name] = fn;
@@ -136,26 +136,33 @@ var
         //viewfn: {render: function, component: class_react}
     };
 
-function showview(viewfn, params, callback) {
-    var v = views_ativas[viewfn];
+type RenderFunction = () => void;
+type ObjView = {
+    stories: any;
+    render: RenderFunction
+};
+type ModView = () => ObjView;
+
+function showview(modView: ModView, params, callback) {
+    var v = views_ativas[modView];
     if (!v)
-        v = views_ativas[viewfn] = criaview(viewfn);
+        v = views_ativas[modView] = criaview(modView);
     //viewfn.setParams(params);
     if (AppZscanReact_onchange)
         AppZscanReact_onchange();
-    return viewfn;
+    return modView;
 }
 
-function hideview(viewfn, callback) {
-    var v = views_ativas[viewfn];
+function hideview(modView: ModView, callback) {
+    var v = views_ativas[modView];
     if (v) {
         for (var apelido_estoria in v.viewobj) {
-            var estoria = viewfn[apelido_estoria];
-            delete viewfn[apelido_estoria];
+            var estoria = modView[apelido_estoria];
+            delete modView[apelido_estoria];
             parou_de_usar_estoria(estoria, ret.change_handler);
         }
         delete v.viewobj;
-        delete views_ativas[viewfn];
+        delete views_ativas[modView];
     }
     if (AppZscanReact_onchange)
         AppZscanReact_onchange();
@@ -215,12 +222,10 @@ function criaview(viewfn) {
 
 //- initializa aplicação
 
-declare_actions(require('./actions/apptask'))
+declare_actions(require('./actions/appzscan'))
 
+AppZscan.show(require('./views/apptitle.jsx'));
 AppZscan.show(require('./views/apptask_icone.jsx'));
-
-//var apptitle = require('stores/apptitle');
-//var apptask = require('stores/apptask');
 //var appcontent = require('stores/appcontent');
 
 react.render(AppZscan.element, document.getElementById("app"));

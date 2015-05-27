@@ -1,16 +1,23 @@
-module.exports = function () {
-    var titulo_da_aplicacao = 'Zscan';
+module.exports = {
+    __constructor: constructor_apptitle,
+    getTitle: function getTitle(): string {},
+    setTitle: function (title: string): void {}
+}
 
-    var estoria_apptitle = {
-        getState: function () {
-            return {
-                title: titulo_da_aplicacao
-            };
+function constructor_apptitle() {
+
+    var titulo_da_aplicacao = 'titulo inicial';
+
+    return {
+        actions: {
+            setTitle: function (title: string): void {
+                titulo_da_aplicacao = title;
+            }
         },
-        setTitle: function (payload) {
-            titulo_da_aplicacao = payload.title;
+        methods: {
+            getTitle: function (): string {
+                return titulo_da_aplicacao;
+            }
         }
     }
-
-    return estoria_apptitle;
 }
