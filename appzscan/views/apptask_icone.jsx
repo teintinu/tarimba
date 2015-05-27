@@ -12,8 +12,7 @@ module.exports = function (app) {
             var temTarefasEmExecucao = view.estoria_apptask.temTarefasEmExecucao();
             return <div className = {
                 temTarefasEmExecucao ? 'atoa' : 'trabalhando'
-                } onClick={this.onClick}>
-                X
+                } onClick={this.onClick} >
              < /div>
         },
         onClick: function(){
