@@ -8,9 +8,7 @@ var AppZscanReact = react.createClass({
         return {}
     },
     render: function () {
-        var views = [];
-        for (var viewfn in views_ativas)
-            views.push(views_ativas[viewfn].render())
+        var views = pagelets_ativos.map((pagelet) => pagelet.__render());
         views.push(react.createElement(AppZscanContent));
         return react.createElement('div', {}, views);
     },
@@ -33,9 +31,13 @@ var AppZscanContent = react.createClass({
     },
     render: function () {
         if (AppZscanContent.current_view != null)
-            return AppZscanContent.current_view.render();
+            return react.createElement('div', {
+                id: 'appcontent'
+            }, AppZscanContent.current_view.__render());
         else
-            return react.createElement('h1', {}, 'ERRO: FALTA CONTEÚDO');
+            return react.createElement('div', {
+                id: 'appcontent'
+            }, 'ERRO: FALTA CONTEÚDO');
     },
     componentDidMount: function () {
         var self = this;
@@ -53,15 +55,15 @@ var AppZscanContent = react.createClass({
 var AppZscan = {
     element: react.createElement(AppZscanReact),
     dispatcher: new flux.Dispatcher(),
-    show: showview,
-    hide: hideview,
+    show_pagelet: show_pagelet,
+    hide_pagelet: hide_pagelet,
     showcontent: function (modView: ModView) {
         if (AppZscanContent.current_view) {
             parar_de_usar_view(modView);
             delete AppZscanContent.current_view;
         }
-        var v = usar_view(modView);
-        AppZscanContent.current_view = v;
+        usar_view(modView);
+        AppZscanContent.current_view = modView;
         if (AppZscanContentReact_onchange)
             AppZscanContentReact_onchange();
     }
@@ -166,11 +168,6 @@ function usar_acao(nome) {
 
 // sobre VIEWS
 
-var
-    views_ativas = {
-        //viewfn: {render: function, component: class_react}
-    };
-
 type RenderFunction = () => void;
 type ObjView = {
     stories: any;
@@ -178,103 +175,104 @@ type ObjView = {
 };
 type ModView = () => ObjView;
 
-function showview(modView: ModView, params, callback) {
-    var v = views_ativas[modView];
-    if (!v) {
-        v = views_ativas[modView] = criaview(modView);
-    }
-    //viewfn.setParams(params);
+var
+    pagelets_ativos: Array < ModView > = [];
+
+
+function show_pagelet(modView: ModView, params, callback) {
+    if (!modView.__instance)
+        usar_view(modView);
+    pagelets_ativos.push(modView);
     if (AppZscanReact_onchange)
         AppZscanReact_onchange();
-    return modView;
 }
 
-function hideview(modView: ModView, callback) {
-    var v = views_ativas[modView];
-    if (v) {
-        for (var apelido_estoria in v.viewobj) {
-            var estoria = modView[apelido_estoria];
+function hide_pagelet(modView: ModView, callback): void {
+    if (modView.__instance)
+        parar_de_usar_view(modView);
+    if (AppZscanReact_onchange)
+        AppZscanReact_onchange();
+}
+
+function usar_view(modView: ModView, params, callback): void {
+    if (modView.__instance)
+        modView.__contador_de_uso++;
+    else {
+        criaview(modView);
+        modView.__contador_de_uso = 1;
+    }
+    //viewfn.setParams(params);
+}
+
+function parar_de_usar_view(modView: ModView, callback): void {
+    if (!modView.__instance)
+        return;
+    if (modView.__contador_de_uso > 1)
+        modView.__contador_de_uso--;
+    else {
+        for (var apelido_estoria in modView.stories) {
+            var estoria_link = modView[apelido_estoria];
             delete modView[apelido_estoria];
-            parou_de_usar_estoria(estoria, ret.change_handler);
+            parou_de_usar_estoria(estoria_link, modView.__change_handler);
         }
-        delete v.viewobj;
-        delete views_ativas[modView];
+        delete modView.__instance;
+        delete modView.__render;
+        delete modView.__contador_de_uso;
+        delete modView.__change_handler;
     }
-    if (AppZscanReact_onchange)
-        AppZscanReact_onchange();
 }
 
-function usar_view(modView: ModView, params, callback) {
-    var v = criaview(modView);
-    //viewfn.setParams(params);
-    return v;
-}
-
-function parar_de_usar_view(v, callback) {
-    for (var apelido_estoria in v.viewobj) {
-        var estoria = modView[apelido_estoria];
-        delete modView[apelido_estoria];
-        parou_de_usar_estoria(estoria, ret.change_handler);
-    }
-    delete v.viewobj;
-}
-
-function criaview(viewfn) {
-    //if (view_.zapp_id)
-    //    throw new Error('Tentativa de criar a mesma view mais de uma vez');
-    var viewobj = viewfn(AppZscan);
-    viewobj.zapp_id = zapp_gen_id++;
-    var change_handler_react;
-
-    var originalcomponentDidMount = viewobj.componentDidMount;
-    var originalcomponentDidUnount = viewobj.componentDidUnount;
-    viewobj.componentDidMount = function () {
-        var self = this;
-        change_handler_react = function () {
-            self.setState({})
-        };
-        if (originalcomponentDidMount)
-            originalcomponentDidMount();
+function criaview(modView: ModView): void {
+    modView.__instance = modView(AppZscan);
+    cria_funcao_change_handler();
+    var view_component = react.createClass(modView.__instance);
+    modView.__render = function () {
+        return react.createElement(view_component)
     };
-    viewobj.componentDidUnount = function () {
-        change_handler_react = null;
-        if (originalcomponentDidUnount)
-            originalcomponentDidUnount();
-    }
-
-    var view_component = react.createClass(viewobj);
-    var ret = {
-        viewobj: viewobj,
-        render: function () {
-            return react.createElement(view_component)
-        },
-        change_handler: function () {
-            if (change_handler_react)
-                change_handler_react();
-        }
-    };
-    viewobj.setParams = function () {};
-    viewobj.close = function () {
-        AppZscan.hide(viewfn);
-    };
-    for (var apelido_estoria in viewobj.stories) {
-        var estoria_mod = viewobj.stories[apelido_estoria];
-        var estoriaobj = usar_estoria(estoria_mod, ret.view_changed_handler);
+    //viewobj.setParams = function () {};
+    //viewobj.close = function () {
+    //    AppZscan.hide(viewfn);
+    //};
+    for (var apelido_estoria in modView.__instance.stories) {
+        var estoria_mod = modView.__instance.stories[apelido_estoria];
+        var estoriaobj = usar_estoria(estoria_mod, modView.__changed_handler);
         var fn = function () {
             return estoriaobj.getState();
         }
-        viewobj[apelido_estoria] = estoria_mod;
+        modView.__instance[apelido_estoria] = estoria_mod;
     }
-    return ret;
+
+    function cria_funcao_change_handler() {
+        var change_handler_react;
+        var originalcomponentDidMount = modView.__instance.componentDidMount;
+        var originalcomponentDidUnount = modView.__instance.componentDidUnount;
+        modView.__instance.componentDidMount = function () {
+            var self = this;
+            change_handler_react = function () {
+                self.setState({})
+            };
+            if (originalcomponentDidMount)
+                originalcomponentDidMount();
+        };
+        modView.__instance.componentDidUnount = function () {
+            change_handler_react = null;
+            if (originalcomponentDidUnount)
+                originalcomponentDidUnount();
+        };
+        modView.__change_handler = function () {
+            if (change_handler_react)
+                change_handler_react();
+        }
+    }
 }
 
 //- initializa aplicação
 
 declare_actions(require('./actions/appzscan'))
 
-AppZscan.show(require('./views/apptitle.jsx'));
-AppZscan.show(require('./views/apptask_icone.jsx'));
-AppZscan.show(require('./contents/app/login/view.jsx'));
+AppZscan.show_pagelet(require('./views/apptitle.jsx'));
+AppZscan.show_pagelet(require('./views/apptask_icone.jsx'));
+AppZscan.showcontent(require('./contents/app/login/view.jsx'));
 
 react.render(AppZscan.element, document.getElementById("app"));
 
