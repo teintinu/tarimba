@@ -15,8 +15,9 @@ var acoes = {
     var getStateMethods = {
         autentication: function (user, pass) {
            if(user == "ola" && pass == "ola")
-               window.alert("Acertou, miserávi")
-//                app.showcontent(require('../welcome/view.jsx'));
+               return true
+           else
+               return false
         }
     }
 
