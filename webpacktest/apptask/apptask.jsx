@@ -5,12 +5,14 @@ var constantes_das_acoes = {
    EXECUTAR_TAREFA : "CONSTANTE_EXECUTAR_TAREFA"
 };
 
+/*
 declare class Tarefa {
     titulo_da_tarefa: string;
 }
+*/
 
 var Estoria_App_Task = Fluxxor.createStore({
-    initialize: function() {
+initialize: function() {
         this.lista_de_tarefas = [{titulo_da_tarefa: "Tarefa 1"}]; //lista de de objetos Class Tarefa
         this.bindActions(
             constantes_das_acoes.EXECUTAR_TAREFA, this.ao_executar_tarefa
