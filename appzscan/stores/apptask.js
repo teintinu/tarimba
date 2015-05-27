@@ -19,7 +19,7 @@ function constructor_apptask() {
     };
 
     var todas_as_tarefas: Array < Tarefa > = [{
-    titulo: 'xxx'
+        titulo: 'xxx'
 }];
 
     var acoes = {
@@ -32,9 +32,11 @@ function constructor_apptask() {
 
     var getStateMethods = {
         lista_tarefas: function () {
-            return todas_as_tarefas.map((t) =>
-                t.titulo
-            );
+            return todas_as_tarefas.map(function (t) {
+                return {
+                    titulo: t.titulo
+                }
+            });
         },
         temTarefasEmExecucao: function () {
             return todas_as_tarefas.length > 0

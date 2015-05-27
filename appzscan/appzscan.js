@@ -14,7 +14,10 @@ var AppZscanReact = react.createClass({
         return react.createElement('div', {}, views);
     },
     componentDidMount: function () {
-        AppZscanReact_onchange = this._onChange;
+        var self = this;
+        AppZscanReact_onchange = function () {
+            self.setState({})
+        };
     },
 
     componentWillUnmount: function () {
@@ -168,7 +171,10 @@ function criaview(viewfn) {
     var originalcomponentDidMount = viewobj.componentDidMount;
     var originalcomponentDidUnount = viewobj.componentDidUnount;
     viewobj.componentDidMount = function () {
-        change_handler_react = this._onChange;
+        var self = this;
+        change_handler_react = function () {
+            self.setState({})
+        };
         if (originalcomponentDidMount)
             originalcomponentDidMount();
     };

@@ -13,7 +13,7 @@ module.exports = function () {
             {view.estoria_apptask.lista_tarefas().map(
               (tarefa)=>
                 <li>
-                   tarefa.titulo
+                  {tarefa.titulo}
                 </li>
             )}
             < /ul>

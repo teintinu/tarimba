@@ -1,7 +1,7 @@
-module.exports = function () {
+module.exports = function (app) {
 
     require('./apptask_icone.less');
-    var app=require('./apptask_lista.jsx');
+    //var app=require('./apptask_lista.jsx');
     var lista=require('./apptask_lista.jsx');
 
     var view = {
@@ -17,7 +17,7 @@ module.exports = function () {
              < /div>
         },
         onClick: function(){
-          app.abrir_view(lista);
+          app.show(lista);
         }
     };
 
