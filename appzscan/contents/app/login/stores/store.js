@@ -1,9 +1,9 @@
 var transform_sha1 = require('../validateLogin/validateSHA_1');
 module.exports = {
     __constructor: constructor_apptask,
-    //action
-//    logIn: function (user: String): void {},
-    //methods
+//action
+    //logIn: function (user: String): void {},
+//methods
     autentication: function (user: String, pass: String): Boolean {},
     whoOnline: function(): Object {},
 }
