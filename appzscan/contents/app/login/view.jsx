@@ -41,10 +41,11 @@ module.exports = function (app) {
         onClick: function(){
             var user = this.state.username;
             var pass = this.state.password;
-            if(view.stories.estorias_login.autentication(user, pass))
-                app.showcontent(require('../welcome/view.jsx'));
-            else
-                alert("Senha incorreta"); //marcello tive que modificar porque atrapalhou minhas modificações
+            view.stories.estorias_login.autentication(user, pass, function(err, res){
+                if(!err)
+                    if(res)
+                        app.showcontent(require('../welcome/view.jsx'));
+            });
         }
     };
 
