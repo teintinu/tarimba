@@ -17,7 +17,7 @@ module.exports = function (app) {
              < /div>
         },
         onClick: function(){
-          app.show(lista);
+          app.show_pagelet(lista);
         }
     };
 
