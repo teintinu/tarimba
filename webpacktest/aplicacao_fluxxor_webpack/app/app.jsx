@@ -72,10 +72,12 @@ var Application = React.createClass({
     return { valor: 0, tempo: 0};
   },
 
+/*
   getStateFromFlux: function() {
     var flux = this.getFlux();
     return flux.store("Calculo_de_Juros").getState();
   },
+*/
 
   render: function() {
     var calculos = this.state.calculos;
