@@ -5,10 +5,18 @@ module.exports = function (app) {
         },
         render: function () {
           return (
-            <h2 >
-              Bem vindo
-            </h2>
+            <div>
+                <h2 >
+                    Bem vindo
+                </h2>
+                <button onClick={this.onClick}>
+                    cadastrar
+                </button>
+            </div>
           );
+        },
+        onClick: function(){
+          app.showcontent(require('../cadastro/view.jsx'));
         }
     };
 

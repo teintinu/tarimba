@@ -66,6 +66,8 @@ var AppZscan = {
         AppZscanContent.current_view = modView;
         if (AppZscanContentReact_onchange)
             AppZscanContentReact_onchange();
+        if (AppZscanReact_onchange)
+            AppZscanReact_onchange();
     }
 };
 
@@ -272,8 +274,10 @@ declare_actions(require('./actions/appzscan'))
 
 AppZscan.show_pagelet(require('./views/apptitle.jsx'));
 AppZscan.show_pagelet(require('./views/apptask_icone.jsx'));
+AppZscan.show_pagelet(require('./views/apptask_userLogado.jsx'));
 AppZscan.showcontent(require('./contents/app/login/view.jsx'));
 //AppZscan.show_pagelet(require('./views/appmenu.jsx'));
+//AppZscan.showcontent(require('./contents/app/cadastro/chamaform.jsx'));
 
 react.render(AppZscan.element, document.getElementById("app"));
 

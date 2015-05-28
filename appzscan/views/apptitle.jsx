@@ -1,4 +1,6 @@
+
 module.exports = function (app) {
+require('./apptitle.less');
   var estoria=require('../stores/apptitle');
   return {
     stories:{
@@ -7,9 +9,10 @@ module.exports = function (app) {
     render: function(){
     var s=estoria.getTitle()
       return (
-         <h1>
-           {s}
-         </h1>
+             <h1 className="title">
+               {s}
+             </h1>
+
          );
     }
   }

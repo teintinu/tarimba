@@ -1,7 +1,23 @@
-.atoa {
-    color: red
+@corBase: white;
+.icon_task(1) {
+    font-family: FontAwesome;
+    color: fadeout(@corBase, 30%);
+    font-size: 30px;
 }
 
-.trabalhando {
-    color: blue
+.atoa {
+    float: right;
+    position: relative;
+    margin-top: -49px;
+    margin-right: 20px;
+}
+
+.atoa:before {
+    .icon_task(1);
+    content: "\f013";
+}
+
+.trabalhando:before {
+    .icon_task(1);
+    content: "\f013";
 }
