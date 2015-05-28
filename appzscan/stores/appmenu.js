@@ -1,21 +1,21 @@
 module.exports = {
     __constructor: constructor_appmenu,
-    getItensMenu: function getItensMenu(): array {},
-    setItensMenu: function (itens: array): void {}
+    getItensMenu: function getItensMenu(): Array<string> {},
+    setItensMenu: function (itens: Array<string>): void {}
 }
 
 function constructor_appmenu() {
 
-    var array_do_menu = ['Home','Serviços','Suporte'];
+    var array_do_menu = ['Home','Servicos','Suporte', 'Documentos','Guia','Dicas','Utilidades','Orientações','Dicas','Sugestões','Help'];
 
     return {
         actions: {
-            setItensMenu: function (itens: array): void {
+            setItensMenu: function (itens: Array<string>): void {
                 array_do_menu = itens;
             }
         },
         methods: {
-            getItensMenu: function (): array {
+            getItensMenu: function (): Array<string> {
                 return array_do_menu;
             }
         }
