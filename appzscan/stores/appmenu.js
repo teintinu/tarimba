@@ -6,7 +6,7 @@ module.exports = {
 
 function constructor_appmenu() {
 
-    var array_do_menu = ['Home','Servicos','Suporte', 'Documentos','Guia','Suporte','Suporte','Suporte','Suporte','Suporte','Suporte'];
+    var array_do_menu = ['Home','Servicos','Suporte', 'Documentos','Guia','Dicas','Utilidades','Orientações','Dicas','Sugestões','Help'];
 
     return {
         actions: {

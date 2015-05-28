@@ -23,5 +23,10 @@ module.exports = {
         icone: '',
         title: 'Alguem saiu da app',
         shortcut: ''
+    },
+    autentication:{
+        icone: '',
+        title: '',
+        shortcut: ''
     }
 };

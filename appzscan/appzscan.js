@@ -66,8 +66,6 @@ var AppZscan = {
         AppZscanContent.current_view = modView;
         if (AppZscanContentReact_onchange)
             AppZscanContentReact_onchange();
-        if (AppZscanReact_onchange)
-            AppZscanReact_onchange();
     }
 };
 
@@ -89,12 +87,12 @@ function declare_actions(actions) {
     actions.zapp_id = zapp_gen_id++;
 }
 
-function cria_callback_para_acoes(objEstoria) {
+function cria_callback_para_acoes(modEstoria) {
     var fn = function (payload) {
-        var fn = objEstoria[payload.actionType];
+        var fn = modEstoria.__instance.actions[payload.actionType];
         if (fn && typeof fn === 'function') {
             fn.apply(this, payload.args);
-            objEstoria.change_listeners.forEach(fn => fn());
+            modEstoria.__change_listeners.forEach(fn => fn());
         }
     };
     return fn;
@@ -120,46 +118,46 @@ function usar_estoria(modEstoria, change_handler) {
     if (!modEstoria.__instance) {
         if (modEstoria.zapp_id)
             throw new Error('Tentativa de registrar a mesma estória mais de uma vez');
-        var objEstoria = modEstoria.__constructor();
-        modEstoria.__instance = {
-            contador_de_uso: 1,
-            objEstoria: objEstoria
-        };
-        objEstoria.change_listeners = [];
-        for (var propname in objEstoria.actions) {
-            var prop = objEstoria.actions[propname];
+        modEstoria.__instance = modEstoria.__constructor();
+        modEstoria.__contador_de_uso = 1;
+        modEstoria.__change_listeners = [];
+        for (var propname in modEstoria.__instance .actions) {
+            var prop = modEstoria.__instance .actions[propname];
             if (typeof prop !== 'function')
                 throw new Error(propname + ' deveria ser uma função');
             usar_acao(propname);
             modEstoria[propname] = acoes_declaradas[propname];
         }
-        for (var propname in objEstoria.methods) {
-            var prop = objEstoria.methods[propname];
+        for (var propname in modEstoria.__instance.methods) {
+            var prop = modEstoria.__instance.methods[propname];
             if (typeof prop !== 'function')
                 throw new Error(propname + ' deveria ser uma função');
-            modEstoria[propname] = objEstoria.methods[propname];
+            modEstoria[propname] = modEstoria.__instance .methods[propname];
         }
-        modEstoria.__instance.dispathToken = AppZscan.dispatcher.register(cria_callback_para_acoes(modEstoria.__instance));
+        modEstoria.__dispathToken = AppZscan.dispatcher.register(cria_callback_para_acoes(modEstoria));
     } else
-        modEstoria.__instance.contador_de_uso++;
+        modEstoria.__contador_de_uso++;
 
     if (change_handler)
-        modEstoria.__instance.objEstoria.change_listeners.push(change_handler);
+        modEstoria.__change_listeners.push(change_handler);
 
-    return modEstoria.__instance.objEstoria;
+    return modEstoria.__instance;
 }
 
 function parou_de_usar_estoria(modEstoria, change_handler) {
     if (modEstoria.__instance)
-        if (modEstoria.__instance.contador_de_uso > 1)
-            modEstoria.__instance.contador_de_uso--;
+        if (modEstoria.__contador_de_uso > 1)
+            modEstoria.__contador_de_uso--;
         else {
-            AppZscan.dispatcher.unregister(modEstoria.__instance.dispathToken);
-            var i = modEstoria.__instance.objEstoria.change_listeners.indexOf(change_handler);
+            AppZscan.dispatcher.unregister(modEstoria.__dispathToken);
+            var i = modEstoria.__change_listeners.indexOf(change_handler);
             if (i >= 0)
-                modEstoria.__instance.objEstoria.change_listeners.splice(i, 1);
-            delete modEstoria.__instance.objEstoria;
+                modEstoria.__change_listeners.splice(i, 1);
             delete modEstoria.__instance;
+            delete modEstoria.__contador_de_uso;
+            delete modEstoria.__dispathToken;
+            delete modEstoria.__change_listeners;
+
         }
 }
 
@@ -237,7 +235,7 @@ function criaview(modView: ModView): void {
     //};
     for (var apelido_estoria in modView.__instance.stories) {
         var estoria_mod = modView.__instance.stories[apelido_estoria];
-        var estoriaobj = usar_estoria(estoria_mod, modView.__changed_handler);
+        var estoriaobj = usar_estoria(estoria_mod, modView.__change_handler);
         var fn = function () {
             return estoriaobj.getState();
         }
