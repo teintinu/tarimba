@@ -8,5 +8,10 @@ module.exports = {
         icone: '',
         title: 'exec',
         shortcut: ''
+    },
+    gravarCliente:{
+        icone: '',
+        title: 'Grava Cliente',
+        shortcut: ''
     }
 };
