@@ -39,7 +39,7 @@ function constructor_apptask() {
         setOnline: function setOnline(user) {
             user.online = true;
         },
-        setOffline: function setOffline(user){
+        setOffline: function setOffline(user) {
         }
 
     };
@@ -54,8 +54,13 @@ function constructor_apptask() {
                                 var app = require('../../../../appzscan');
                                 return app.showcontent(require('../../welcome/view.jsx'));
                             }
-                        window.alert("login incorreto")
                     })
+                    return
+                } else {
+                    var usuario = document.getElementsByName("username")[0];
+                    usuario.setAttribute("class", "erro");
+                    var senha = document.getElementsByName("password")[0];
+                    senha.setAttribute("class", "erro");
                 }
             })
         },

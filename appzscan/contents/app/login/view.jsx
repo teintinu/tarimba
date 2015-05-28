@@ -1,4 +1,5 @@
 module.exports = function (app) {
+    require('./view.less');
     var estorias_login = require("../login/stores/store");
     var view = {
         stories: {
@@ -31,7 +32,7 @@ module.exports = function (app) {
 
                 <input type="text" name="username" placeholder="Digite o usuário"
                          value={this.state.username} onChange={this.handleChangeUser} />
-                <input type="password" name="password" placeholder="Digite a senha"
+                <input className={''} type="password" name="password" placeholder="Digite a senha"
                         value={this.state.password} onChange={this.handleChangePass} />
                 <button onClick={this.onClick}>Login</button>
 
