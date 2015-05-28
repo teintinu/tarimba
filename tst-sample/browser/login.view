@@ -10,7 +10,8 @@ var login = require('./login.store');
 view={
   getInitialState: function()
   {
-    return{
+    return
+    {
         username: '',
         password: ''
     }
