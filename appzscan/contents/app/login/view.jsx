@@ -28,13 +28,13 @@ module.exports = function (app) {
         render: function () {
           return (
           <div>
-          <form>
+
                 <input type="text" name="username" placeholder="Digite o usuário"
                          value={this.state.username} onChange={this.handleChangeUser} />
                 <input type="password" name="password" placeholder="Digite a senha"
                         value={this.state.password} onChange={this.handleChangePass} />
                 <button onClick={this.onClick}>Login</button>
-              </form>
+
             </div>
           );
         },

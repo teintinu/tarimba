@@ -66,6 +66,8 @@ var AppZscan = {
         AppZscanContent.current_view = modView;
         if (AppZscanContentReact_onchange)
             AppZscanContentReact_onchange();
+        if (AppZscanReact_onchange)
+            AppZscanReact_onchange();
     }
 };
 
