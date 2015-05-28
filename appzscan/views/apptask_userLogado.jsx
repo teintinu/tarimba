@@ -7,8 +7,8 @@ module.exports = function (app) {
             login_store: login_store
         },
         render: function () {
-            var obj = login_store.whoOnline();
-            return <div onClick={this.doubleClick}><h3 className = {obj.user?"online":"offline"}>{obj.user?obj.user:""}</h3></div>
+            var obj = login_store.whoOnline;
+            return <div onClick={this.doubleClick}><h3 className = {obj?"online":"offline"}>{obj?obj.user:""}</h3></div>
         },
         doubleClick: function(){
 
