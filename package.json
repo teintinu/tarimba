@@ -22,6 +22,7 @@
     "style-loader": "^0.12.2"
   },
   "dependencies": {
+    "actionhero-client": "^4.0.0",
     "escodegen-jsx": "0.1.0-1.4.2dev",
     "flux": "^2.0.3"
   }

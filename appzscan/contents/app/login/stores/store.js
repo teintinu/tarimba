@@ -1,4 +1,10 @@
 var transform_sha1 = require('../validateLogin/validateSHA_1');
+var actionheroClient = require("actionhero-client");
+var client = new actionheroClient();
+client.defaults.host = "127.0.0.1";
+client.defaults.port = "5000";
+
+
 
 module.exports = {
     __constructor: constructor_apptask,
@@ -18,13 +24,26 @@ function constructor_apptask() {
             online = true;
         },
 
-        autentication: function (user, pass) {
 
-            if (who == user && pass == "adm") {
+        autentication: function (user, pass) {
+            client.action('login', {
+                    user: user,
+                    password: pass
+                },
+
+                function (err, data) {
+                    if (err)
+                        return erro()
+                    sucesso()
+                });
+
+            function sucesso() {
                 acoes.setOnline();
                 var app = require('../../../../appzscan');
                 return app.showcontent(require('../../welcome/view.jsx'));
-            } else {
+            }
+
+            function erro() {
                 var usuario = document.getElementsByName("username")[0];
                 usuario.setAttribute("class", "erro");
                 var senha = document.getElementsByName("password")[0];
@@ -36,7 +55,7 @@ function constructor_apptask() {
     };
     var getStateMethods = {
         whoOnline: function () {
-            if(online){
+            if (online) {
                 return who;
             }
         }
