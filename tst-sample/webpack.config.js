@@ -1,4 +1,3 @@
-var tst = require('./tstloader');
 
 module.exports = {
     entry: __dirname + "/apptask.store",
@@ -10,7 +9,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.store$/,
-                loader: tst
+                loaders: ["tst",'jsx']
             }
     ]
     },

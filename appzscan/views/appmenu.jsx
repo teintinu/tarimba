@@ -10,7 +10,11 @@ require('./appmenu.less');
       return (
          <div className="menu">
            <ul className="menu-list">
-           {itens_menu.map((item)=> <li><a href="#">{item}</a></li>)}
+           {itens_menu.map((item)=>
+              <React.addons.TransitionGroup component="li" transitionName="aparecer">
+                <a href="#">{item}</a>
+              </React.addons.TransitionGroup>
+           )}
            </ul>
          </div>
          );

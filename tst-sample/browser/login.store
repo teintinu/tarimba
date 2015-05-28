@@ -1,0 +1,15 @@
+type store = {
+    nome: string
+};
+
+"actions";
+
+function logar(nome, senha) {
+    if (nome == '1' && senha == '1')
+        store.nome = 'um';
+    else throw "Senha inválida";
+}
+
+function logar(nome, senha) {
+    store.nome = null;
+}

@@ -1,5 +1,5 @@
 var flux = require('flux'),
-    react = require('react');
+    react = require('react/addons');
 window.React = react;
 
 var AppZscanReact_onchange, AppZscanContentReact_onchange;

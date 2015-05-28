@@ -33,3 +33,21 @@
 .menu > .menu-list > li:hover a {
   background: #444;
 }
+
+.aparecer-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.aparecer-enter.aparecer-enter-active {
+  opacity: 1;
+}
+
+.aparecer-leave {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.aparecer-leave.aparecer-leave-active {
+  opacity: 0.01;
+}
