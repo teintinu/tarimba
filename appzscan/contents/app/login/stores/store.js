@@ -4,18 +4,18 @@ module.exports = {
     __constructor: constructor_apptask,
     setOnline: function (): void {},
     autentication: function (user: String, pass: String): Boolean {},
-    whoOnline: function (): Boolean {},
+    whoOnline: function (): String {},
 }
 
 
 function constructor_apptask() {
 
-    var who: string = "marcello@";
+    var who: string = "mar@";
     var online: boolean = false;
 
     var acoes = {
         setOnline: function setOnline(user) {
-            this.online = true;
+            online = true;
         },
 
         autentication: function (user, pass) {
@@ -36,8 +36,9 @@ function constructor_apptask() {
     };
     var getStateMethods = {
         whoOnline: function () {
-            if(this.online)
-                return true;
+            if(online){
+                return who;
+            }
         }
     }
 
