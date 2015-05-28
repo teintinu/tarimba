@@ -8,5 +8,25 @@ module.exports = {
         icone: '',
         title: 'exec',
         shortcut: ''
+    },
+    setItensMenu: {
+        icone: '',
+        title: 'exec',
+        shortcut: ''
+    },
+    setOnline: {
+        icone: '',
+        title: 'Alguem logou na app',
+        shortcut: ''
+    },
+    setOffline: {
+        icone: '',
+        title: 'Alguem saiu da app',
+        shortcut: ''
+    },
+    autentication:{
+        icone: '',
+        title: '',
+        shortcut: ''
     }
 };
