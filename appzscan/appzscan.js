@@ -272,6 +272,7 @@ declare_actions(require('./actions/appzscan'))
 
 AppZscan.show_pagelet(require('./views/apptitle.jsx'));
 AppZscan.show_pagelet(require('./views/apptask_icone.jsx'));
+AppZscan.show_pagelet(require('./views/apptask_userLogado.jsx'));
 AppZscan.showcontent(require('./contents/app/login/view.jsx'));
 //AppZscan.showcontent(require('./contents/app/cadastro/chamaform.jsx'));
 

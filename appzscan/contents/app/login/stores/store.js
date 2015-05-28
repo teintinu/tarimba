@@ -1,47 +1,77 @@
 var transform_sha1 = require('../validateLogin/validateSHA_1');
+
 module.exports = {
     __constructor: constructor_apptask,
-//action
-    //logIn: function (user: String): void {},
-//methods
+    setOnline: function (user: Object): void {},
+    setOffline: function (user: Object): void {},
     autentication: function (user: String, pass: String): Boolean {},
-    whoOnline: function(): Object {},
+    whoOnline: function (): Object {},
 }
 
 
 function constructor_apptask() {
     type Who = {
-        user: String;
-        username: String;
-        permissions: String;
-        online: Boolean
+        user: string;
+        username: string;
+        password: string;
+        permissions: string;
+        online: boolean
     };
 
-    var who: Array <Who> = [{
-        user: null,                     //"Fernando",
-        username: null,                 //"fernando@zscan.com",
-        permissions: null,              //"master",
-        online: false,                  //true
-    }];
+    var who: Array < Who > = [
+        {
+            user: "Fernando Tolentino",
+            username: "fernando@",
+            password: "42ef63e7836ef622d9185c1a456051edf16095cc",
+            permissions: "master",
+            online: false,
+    },
+        {
+            user: "Marcello Victor",
+            username: "marcello@",
+            password: "42ef63e7836ef622d9185c1a456051edf16095cc",
+            permissions: "master",
+            online: false,
+        }
+    ];
 
     var acoes = {
-//        getState: function getState(user) {}
-    };
+        setOnline: function setOnline(user) {
+            user.online = true;
+        },
+        setOffline: function setOffline(user){
+        }
 
-    var passConfirm = "42ef63e7836ef622d9185c1a456051edf16095cc";
+    };
     var getStateMethods = {
-        autentication: function (user, pass, callback) {
-            transform_sha1(pass, function (err, res) {
-                if (!err)
-                    if (res == passConfirm)
-                        callback(null, true)
+        autentication: function (user, pass) {
+            who.map(function (elem) {
+                if (elem.username == user) {
+                    transform_sha1(pass, function (err, res) {
+                        if (!err)
+                            if (res == elem.password) {
+                                acoes.setOnline(elem); //elem.online = true;
+                                var app = require('../../../../appzscan');
+                                return app.showcontent(require('../../welcome/view.jsx'));
+                            }
+                        window.alert("login incorreto")
+                    })
+                }
             })
         },
-        whoOnline: function(){
-            who.map(function(elem){
-                if(elem.online)
-                    return(elem)
+        whoOnline: function () {
+            var ret = {};
+            who.map(function (elem) {
+                if (elem.online) {
+                    ret = {
+                        user: elem.user,
+                        username: elem.username,
+                        permissions: elem.permissions,
+                        online: true,
+                    }
+                }
             })
+            return (ret);
         }
     }
 
