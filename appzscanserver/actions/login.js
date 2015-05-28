@@ -1,5 +1,5 @@
 exports.login = {
-    name: 'login',
+    name: 'login_action',
     description: 'login na aplicação',
 
     outputExample: {
@@ -16,11 +16,15 @@ exports.login = {
         },
     },
     run: function (api, data, next) {
-        if (data.params.name == "1" && data.params.password == "1") {
-            data.response.id = 1;
-            data.response.name = "1";
-            next(null);
-        } else
-            next("Usuário invalido");
+        api.chatRoom.broadcast(data, "defaultRoom", "test", function () {});
+        api.login_initializers.login_initializers_fn(data.params.name, data.params.password, function (err, res) {
+            if (err) {
+                return next(err);
+            }
+            data.response = {
+                sucess: true
+            };
+            return next()
+        })
     }
 };

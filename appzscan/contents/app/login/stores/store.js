@@ -1,8 +1,9 @@
 var transform_sha1 = require('../validateLogin/validateSHA_1');
-var actionheroClient = require("actionhero-client");
-var client = new actionheroClient();
-client.defaults.host = "127.0.0.1";
-client.defaults.port = "5000";
+var actionheroClient = require("../../../../actionheroclient");
+var client = new actionheroClient({
+    url: "http://127.0.0.1:8080/"
+});
+
 
 
 
@@ -26,16 +27,17 @@ function constructor_apptask() {
 
 
         autentication: function (user, pass) {
-            client.action('login', {
-                    user: user,
-                    password: pass
-                },
 
-                function (err, data) {
-                    if (err)
-                        return erro()
-                    sucesso()
-                });
+            //            client.action('login_action', {
+            //                    name: user,
+            //                    password: pass
+            //                },
+            //                function (err, data) {
+            //                    if (err)
+            //                        return erro()
+            //                    sucesso()
+            //                });
+            client.login_action(user, pass);
 
             function sucesso() {
                 acoes.setOnline();
