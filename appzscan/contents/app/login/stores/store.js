@@ -40,11 +40,8 @@ function constructor_apptask() {
             user.online = true;
         },
         setOffline: function setOffline(user) {
-        }
-
-    };
-    var getStateMethods = {
-        autentication: function (user, pass) {
+        },
+         autentication: function (user, pass) {
             who.map(function (elem) {
                 if (elem.username == user) {
                     transform_sha1(pass, function (err, res) {
@@ -63,7 +60,11 @@ function constructor_apptask() {
                     senha.setAttribute("class", "erro");
                 }
             })
-        },
+        }
+
+    };
+    var getStateMethods = {
+
         whoOnline: function () {
             var ret = {};
             who.map(function (elem) {

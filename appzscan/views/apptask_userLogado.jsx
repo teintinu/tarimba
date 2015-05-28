@@ -4,7 +4,7 @@ module.exports = function (app) {
 
     var view = {
         stories: {
-            estoria_apptask: require('../stores/apptask')
+            login_store: login_store
         },
         render: function () {
             var obj = login_store.whoOnline();
