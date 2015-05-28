@@ -1,0 +1,36 @@
+type View = {
+    nome: string ;
+    senha: string;
+};
+
+require('./view.less');
+
+var login = require('./login.store');
+
+view={
+  getInitialState: function()
+  {
+    return{
+        username: '',
+        password: ''
+    }
+  },
+  render: function () {
+    return (
+      <div>
+          <input type="text" name="username" placeholder="Digite o usuário"
+                   valueLink={this.state.username} />
+          <input className={''} type="password" name="password" placeholder="Digite a senha"
+                  valueLink={this.state.password} />
+          <button onClick={this.onClick}>Login</button>
+      </div>
+    );
+  },
+  onClick: function(){
+    var user = this.state.username;
+    var pass = this.state.password;
+    await login.autentication(user, pass);
+    if (login.nome != null)
+      app.show('./welcome');
+  }
+};
