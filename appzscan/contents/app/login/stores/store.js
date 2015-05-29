@@ -1,9 +1,43 @@
 var transform_sha1 = require('../validateLogin/validateSHA_1');
-var actionheroClient = require("../../../../actionheroclient");
-var client = new actionheroClient({
-    url: "http://127.0.0.1:8080/"
+//var ac = require("../../../../actionheroclient");
+//var primus = require("../../../../../node_modules/primus/primus.js");
+//
+//
+Primus('http://localhost:9090');
+
+var client = new ActionheroClient({
+    host: "127.0.0.1",
+    port: "5000",
+    url: "http://127.0.0.1:9090"
 });
 
+//var client = new ac("http://127.0.0.1:9090/api/login_action", {
+//    params: {
+//        id: 1
+//    }
+//});
+client.action("login_action", {
+        name: 1,
+        password: 123
+    }, function (err, res) {
+        if (res.success == true)
+            alert("action executada");
+    })
+    //client.connect(function (err, details) {
+    //    client.roomAdd("defaultRoom");
+    //    alert("HAAAA!!")
+    //});
+
+
+client.on('connected', function () {
+    console.log('você está conectado no chat!')
+});
+client.on('disconnected', function () {
+    console.log('você está disconectado do chat!')
+})
+client.on('error', function (err) {
+    console.log('error', err.stack)
+});
 
 
 
@@ -27,6 +61,10 @@ function constructor_apptask() {
 
 
         autentication: function (user, pass) {
+            actionclient.roomAdd("defaultRoom", function () {
+                console.log("sucesso");
+            });
+
 
             //            client.action('login_action', {
             //                    name: user,
@@ -37,7 +75,7 @@ function constructor_apptask() {
             //                        return erro()
             //                    sucesso()
             //                });
-            client.login_action(user, pass);
+            //            client.login_action(user, pass);
 
             function sucesso() {
                 acoes.setOnline();

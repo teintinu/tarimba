@@ -22,7 +22,7 @@ exports.login = {
                 return next(err);
             }
             data.response = {
-                sucess: true
+                success: data.params.password == "123"
             };
             return next()
         })

@@ -13,27 +13,25 @@
     <script type="text/javascript">
         var client;
         var boot = function () {
-            client = new ActionheroClient;
+            client = new ActionheroClient();
 
+            //Eventos que são criados lado browser para escutar ações disparadas pelo servidor
             client.on('connected', function () {
-                console.log('connected!')
+                console.log('você está conectado no chat!')
             });
             client.on('disconnected', function () {
-                console.log('disconnected :(')
+                console.log('você está disconectado do chat!')
             })
-
             client.on('error', function (err) {
                 console.log('error', err.stack)
             });
             client.on('reconnect', function () {
-                console.log('reconnect')
+                console.log('Você foi reconectado ao chat!')
             });
             client.on('reconnecting', function () {
-                console.log('reconnecting')
-            })
-
+                console.log('Estamos tentando reconectar')
+            });
             // client.on('message',      function(message){ console.log(message) })
-
             client.on('alert', function (message) {
                 alert(JSON.stringify(message))
             });
@@ -47,6 +45,8 @@
             client.on('say', function (message) {
                 appendMessage(message);
             });
+
+
 
             client.connect(function (err, details) {
                 if (err != null) {
@@ -128,33 +128,29 @@
 
     <section class="intro">
         <div class="thin-intro-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <br />
-                        <h1>Real-Time Chat with Actionhero</h1>
-                    </div>
-                </div>
-            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
 
             <div class="container">
                 <div class="row">
                     <div class="col-4 col-sm-4 col-lg-4">
 
-                        Hello, <strong><span id="name"></span></strong>
+                        Olá, <strong><span id="name"></span></strong>
 
                         <form id="messageForm" class="form-inline">
                             <div class="form-group">
-                                <label class="sr-only">Chat Message</label>
+                                <label class="sr-only">Chat da Happa5</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"></div>
-                                    <input type="text" class="form-control" id="message" placeholder="Your Message">
+                                    <input type="text" class="form-control" id="message" placeholder="Sua Mensagem">
                                     <div class="input-group-addon"></div>
                                 </div>
                             </div>
                             <br>
                             <br>
-                            <button type="submit" class="btn btn-primary">Send Message</button>
+                            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
                         </form>
 
                     </div>

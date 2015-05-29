@@ -2755,6 +2755,7 @@
 
     // depricated lowercase name
     var actionheroClient = ActionheroClient;
+    window.ActionheroClient = ActionheroClient;
 
     exports.ActionheroClient = ActionheroClient;
     exports.actionheroClient = actionheroClient;

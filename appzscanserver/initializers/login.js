@@ -7,7 +7,7 @@ module.exports = {
             name: "autenticacao initialize",
             global: true,
             login_initializers_fn: function (name, password, next) {
-                if (name == 1 && password == 1)
+                if (name == 1 && password == 123)
                     return next();
                 next("Usuário inexistente!")
 
@@ -18,27 +18,32 @@ module.exports = {
         var authenticationMiddleware = {
             name: 'authentication Middleware',
             global: true,
-            create: function (data, next) {
-                api.log("Create", "info");
-                for (var n in data)
-                    if (typeof data[n] != "function")
-                        api.log(" for " + n + " = " + JSON.stringify(data[n]), "info");
-                api.log(JSON.stringify(data.params), "info");
+            preProcessor: function (data, next) {
+                    data.response.ok = "ok";
+                    next();
+                }
+                //            create: function (connection) {
+                //                api.log("Create", "info");
 
-                next();
-                //                if (data.actionTemplate.authenticated === true) {
-                //                    api.users.authenticate(data.params.userName, data.params.password, function (error, match) {
-                //                        if (match === true) {
-                //                            next();
-                //                        } else {
-                //                            error = new Error("Authentication Failed.  userName and password required");
-                //                            next(error);
-                //                        }
-                //                    });
-                //                } else {
-                //                    next();
-                //                }
-            }
+            //                for(var n in data)
+            //                    if (typeof data[n] != "function")
+            //                        api.log(" for " + n + " = " + JSON.stringify(data[n]), "info");
+            //                api.log(JSON.stringify(data.params), "info");
+
+            //                next();
+            //                if (data.actionTemplate.authenticated === true) {
+            //                    api.users.authenticate(data.params.userName, data.params.password, function (error, match) {
+            //                        if (match === true) {
+            //                            next();
+            //                        } else {
+            //                            error = new Error("Authentication Failed.  userName and password required");
+            //                            next(error);
+            //                        }
+            //                    });
+            //                } else {
+            //                    next();
+            //                }
+            //            }
         };
 
         api.connections.addMiddleware(authenticationMiddleware);
@@ -71,6 +76,17 @@ module.exports = {
 //
 //        };
 //
+//        next();
+//    },
+//    start: function (api, next) {
+//        api.log("Ao conectar", "info");
+//        next();
+//    },
+//    stop: function (api, next) {
+//        next();
+//    }
+//};
+
 //        var authenticationMiddleware = {
 //            name: 'authentication Middleware',
 //            global: true,
@@ -98,14 +114,3 @@ module.exports = {
 //        api.connections.addCreateCallback(function (connection) {
 //            api.log(connection.params.name, "info");
 //        });
-//
-//        next();
-//    },
-//    start: function (api, next) {
-//        api.log("Ao conectar", "info");
-//        next();
-//    },
-//    stop: function (api, next) {
-//        next();
-//    }
-//};
