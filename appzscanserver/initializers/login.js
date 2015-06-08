@@ -7,10 +7,11 @@ module.exports = {
             name: "autenticacao initialize",
             global: true,
             login_initializers_fn: function (name, password, next) {
-                if (name == 1 && password == 123)
+                if (name == 1 && password == 123){
                     return next();
-                next("Usuário inexistente!")
 
+                }
+                next("Usuário inexistente!")
             }
 
         };

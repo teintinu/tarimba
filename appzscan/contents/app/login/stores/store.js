@@ -16,17 +16,11 @@ var client = new ActionheroClient({
 //        id: 1
 //    }
 //});
-client.action("login_action", {
-        name: 1,
-        password: 123
-    }, function (err, res) {
-        if (res.success == true)
-            alert("action executada");
-    })
-    //client.connect(function (err, details) {
-    //    client.roomAdd("defaultRoom");
-    //    alert("HAAAA!!")
-    //});
+
+//client.connect(function (err, details) {
+//    client.roomAdd("defaultRoom");
+//    alert("HAAAA!!")
+//});
 
 
 client.on('connected', function () {
@@ -61,10 +55,17 @@ function constructor_apptask() {
 
 
         autentication: function (user, pass) {
-            actionclient.roomAdd("defaultRoom", function () {
-                console.log("sucesso");
-            });
-
+            //            actionclient.roomAdd("defaultRoom", function () {
+            //                console.log("sucesso");
+            //            });
+            client.action("login_action", {
+                name: user,
+                password: pass
+            }, function (err, res) {
+                if (res.success != true)
+                    return erro()
+                sucesso()
+            })
 
             //            client.action('login_action', {
             //                    name: user,
