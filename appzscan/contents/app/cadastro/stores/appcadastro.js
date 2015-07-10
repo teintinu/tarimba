@@ -8,22 +8,17 @@ type Dados = {
 
 module.exports = {
     __constructor: constructor_appcadastro,
-    gravarCliente: function gravarCliente(dados):void {},
-    gCliente: function gCliente(dados){}
+    gravarCliente: function gravarCliente(dados):void {}
 }
 
 function constructor_appcadastro() {
-    var dados = {};
     return {
         actions: {
-            gravarCliente: function(dados):void{
-                this.gCliente(dados);
+            gravarCliente: function(dados: Dados):void{
+                alert(JSON.stringify(dados));
             }
         },
         methods: {
-            gCliente: function(dados):void{
-                console.log(dados);
-            }
         }
     }
 }

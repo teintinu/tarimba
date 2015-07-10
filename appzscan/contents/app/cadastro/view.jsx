@@ -39,8 +39,8 @@ module.exports = function (app) {
                 <input type="text" key="endereco" name="endereco" value={this.state.endereco} onChange={this.handleChangeEndereco}/></label>
                <label>Sexo:
                 <select key="sexo" name="sexo" value={this.state.sexo} onChange={this.handleChangeSexo}>
-                 <option value="masculino">Masculino</option>
-                 <option value="feminino">Feminino</option>
+                 <option>Masculino</option>
+                 <option>Feminino</option>
                 </select></label>
                <label>Data Nascimento:
                 <input type="date" key="data-nascimento" name="datanascimento" value={this.state.datanascimento} onChange={this.handleChangeDatanascimento}/></label>
@@ -59,78 +59,7 @@ module.exports = function (app) {
             telefone: this.state.telefone
           };
           view.estoriacadastro.gravarCliente(dados);
-//          view.estoriacadastro.gCliente(dados);
         }
     };
     return view;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//module.exports = function (app) {
-//    require('./view.less');
-//    var appcadastro = require('../../../stores/appcadastro');
-//    var view = {
-//        stories: {
-//            estoriacadastro : appcadastro
-//        },
-//        render: function () {
-//            var obj = view.estoriacadastro.getCampos();
-//            var arr_itens = [];
-//            for (var campo in obj){
-//                arr_itens.push(
-//                <label>
-//                  {obj[campo].label}:<input type={obj[campo].type} />
-//                </label>
-//                )
-//            }
-//          return (
-//            <div>
-//              {arr_itens.map((item)=>
-//               <div className={item._store.props.children[0]+" geral"}>{item}
-//              </div>
-//              )}
-//            <button onClick={this.onClick}>cadastrar
-//            </button>
-//            </div>
-//          );
-//        },
-//        onClick: function(){
-//          view.estoriacadastro.gravarCliente();
-//        }
-//    };
-//    return view;
-//};

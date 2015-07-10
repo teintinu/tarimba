@@ -1,0 +1,12 @@
+@@ Set
+    domain   0.0.0.0:3080/# 
+  
+@@ Table devices
+    |device    |tags         |size      |
+    |mobile    |all,mobile   |400x500   |
+    |desktop   |all,desktop  |640x480   |
+  
+@@ Parameterized using devices
+Homepage on ${device} device
+    http://${domain}  ${size}
+        check index.spec --include "${tags}" 
