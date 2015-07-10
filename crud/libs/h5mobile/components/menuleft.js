@@ -13,6 +13,11 @@ var HMenuLeft = React.createClass({
         refMenu: React.PropTypes.string.isRequired,
     },
     mixins: [h5mixinprops],
+    getInitialState: function(){
+        return {
+            open: false
+        };
+    },
     render: function () {
 
         if (!this.props.menuItems)
@@ -35,17 +40,53 @@ var HMenuLeft = React.createClass({
         }
 
         props.onChange = props.onClick;
-        props.ref = this.props.refMenu;
 
         delete props.onClick;
 
+        var propsMenuLateral = {};
+        var propsOverlay = {};
+        if(this.state.open){
+            propsMenuLateral.style = {
+                height: '100%',
+                width: '256px',
+                position: 'fixed',
+                zIndex: '1000',
+                left: '0px',
+                top: '0px',
+                overflow: 'hidden',
+                backgroundColor: '#FFF'
+            };
 
+            propsOverlay.style = {
+                position: 'fixed',
+                height: '100%',
+                width: '100%',
+                zIndex: '999',
+                top: '0px',
+                left: '0px',
+                opacity: '0.5',
+                backgroundColor: '#000'
+            };
+            propsOverlay.onTouchTap = this.toggle;
+        }
         return (
-            React.createElement(mui.LeftNav, props)
+            React.createElement('div', {}, [React.createElement('div', propsMenuLateral, [this.createItensMenu(props.menuItems)]), React.createElement('div', propsOverlay)])
         )
     },
+    createItensMenu: function(menuItems){
+       return menuItems.map(function(item, index, array){
+           var propsItemMenu = {};
+           propsItemMenu.onTouchTap = this.props.onClick.bind(this, item, index, array);
+
+          return (React.createElement('div', propsItemMenu, [
+                item.text
+          ]))
+       }.bind(this));
+    },
     toggle: function(e){
-        this.refs[this.props.refMenu].toggle();
+        this.setState({
+            open: !this.state.open
+        });
     },
     trataLabelText: function (propsMenu) {
         return propsMenu.map(function (prop) {
