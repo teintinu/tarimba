@@ -6,18 +6,41 @@ var h5mixinprops = require('../mixins/h5mixinprops');
 
 mui.LeftNav = require('../componentsmodifield/left-nav');
 
+var hdropDownState = {
+    current: null
+};
+
+var hdropDown = {
+    toggleDropDown: function(){
+        if(this.isDropDown())
+            this.closeDropDown();
+        else
+            this.openDropDown();
+    },
+    openDropDown: function(){
+        var old = hdropDownState.current;
+        hdropDownState.current = this;
+        this.setState({});
+        if(old)
+            old.setState({});
+    },
+    closeDropDown: function(){
+        if(hdropDownState.current == this)
+            hdropDownState.current = null;
+        this.setState({});
+    },
+    isDropDown: function(){
+        return hdropDownState.current == this;
+    }
+};
+
 var HMenuLeft = React.createClass({
     propTypes: {
         menuItems: React.PropTypes.array.isRequired,
         onClick: React.PropTypes.func.isRequired,
         refMenu: React.PropTypes.string.isRequired,
     },
-    mixins: [h5mixinprops],
-    getInitialState: function(){
-        return {
-            open: false
-        };
-    },
+    mixins: [h5mixinprops, hdropDown],
     render: function () {
 
         if (!this.props.menuItems)
@@ -45,7 +68,7 @@ var HMenuLeft = React.createClass({
 
         var propsMenuLateral = {};
         var propsOverlay = {};
-        if(this.state.open){
+        if(this.isDropDown()){
             propsMenuLateral.style = {
                 height: '100%',
                 width: '256px',
@@ -67,7 +90,7 @@ var HMenuLeft = React.createClass({
                 opacity: '0.5',
                 backgroundColor: '#000'
             };
-            propsOverlay.onTouchTap = this.toggle;
+            propsOverlay.onTouchTap = this.closeDropDown;
         }
         return (
             React.createElement('div', {}, [React.createElement('div', propsMenuLateral, [this.createItensMenu(props.menuItems)]), React.createElement('div', propsOverlay)])
@@ -76,7 +99,9 @@ var HMenuLeft = React.createClass({
     createItensMenu: function(menuItems){
        return menuItems.map(function(item, index, array){
            var propsItemMenu = {};
-           propsItemMenu.onTouchTap = this.props.onClick.bind(this, item, index, array);
+           propsItemMenu.onTouchTap = function(e) {
+               this.props.onClick(e, index, array);
+           };
 
           return (React.createElement('div', propsItemMenu, [
                 item.text
@@ -84,9 +109,7 @@ var HMenuLeft = React.createClass({
        }.bind(this));
     },
     toggle: function(e){
-        this.setState({
-            open: !this.state.open
-        });
+        this.toggleDropDown();
     },
     trataLabelText: function (propsMenu) {
         return propsMenu.map(function (prop) {

@@ -39,7 +39,7 @@ class AppView extends FluxEasy.View {
                 React.createElement(this.title.Class, {openMenu: this.toggle}),
                 <div>
                 {window.innerWidth > 750 ?
-                     <H.MenuLeft docked={true} menuItems={this.app.getState().menuItems} onClick={this.onItemClick} /> :
+                     <H.MenuLeft ref="menu" docked={true} menuItems={this.app.getState().menuItems} onClick={this.onItemClick} /> :
                       <H.MenuLeft ref="menu" refMenu="leftMenu" docked={window.innerWidth > 750} menuItems={this.app.getState().menuItems} onClick={this.onItemClick} />
                  }
                 </div>,
