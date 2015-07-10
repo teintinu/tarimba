@@ -9,6 +9,11 @@ module.exports = {
         title: 'exec',
         shortcut: ''
     },
+    gravarCliente:{
+        icone: '',
+        title: 'Grava Cliente',
+        shortcut: ''
+    },
     setItensMenu: {
         icone: '',
         title: 'exec',

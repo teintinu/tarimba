@@ -1,0 +1,49 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="800" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="213.5" cy="71.5" rx="30" ry="30"/>
+	<text x="189.5" y="77.5" font-family="Times New Roman" font-size="20">listaV</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="213.5" cy="71.5" rx="24" ry="24"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="590.5" cy="79.5" rx="30" ry="30"/>
+	<text x="568.5" y="85.5" font-family="Times New Roman" font-size="20">editV</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="406.5" cy="42.5" rx="30" ry="30"/>
+	<text x="390.5" y="48.5" font-family="Times New Roman" font-size="20">Fim</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="86.5" cy="429.5" rx="30" ry="30"/>
+	<text x="62.5" y="435.5" font-family="Times New Roman" font-size="20">listaD</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="618.5" cy="414.5" rx="30" ry="30"/>
+	<text x="590.5" y="420.5" font-family="Times New Roman" font-size="20">editing</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 561.389,86.737 A 665.081,665.081 0 0 1 242.278,79.965"/>
+	<polygon fill="black" stroke-width="1" points="561.389,86.737 552.487,83.613 554.68,93.37"/>
+	<text x="366.5" y="124.5" font-family="Times New Roman" font-size="20">add, edit</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 569.554,100.95 A 244.663,244.663 0 0 1 233.518,93.82"/>
+	<polygon fill="black" stroke-width="1" points="233.518,93.82 235.703,102.997 242.725,95.877"/>
+	<text x="332.5" y="186.5" font-family="Times New Roman" font-size="20">save,cancel,back</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 186.703,84.725 A 22.5,22.5 0 1 1 186.703,58.275"/>
+	<text x="32.5" y="77.5" font-family="Times New Roman" font-size="20">delete, search</text>
+	<polygon fill="black" stroke-width="1" points="186.703,58.275 183.17,49.527 177.292,57.618"/>
+	<polygon stroke="black" stroke-width="1" points="243.167,67.042 376.833,46.958"/>
+	<polygon fill="black" stroke-width="1" points="376.833,46.958 368.179,43.202 369.665,53.091"/>
+	<text x="300.5" y="80.5" font-family="Times New Roman" font-size="20">back</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 94.778,400.786 A 22.5,22.5 0 1 1 114.326,418.605"/>
+	<text x="137.5" y="370.5" font-family="Times New Roman" font-size="20">search(''). search(?),scroll, delete</text>
+	<polygon fill="black" stroke-width="1" points="114.326,418.605 123.171,421.886 121.151,412.092"/>
+	<path stroke="black" stroke-width="1" fill="none" d="M 116.329,431.301 A 22.5,22.5 0 1 1 103.215,454.271"/>
+	<text x="151.5" y="481.5" font-family="Times New Roman" font-size="20">add,save,save</text>
+	<polygon fill="black" stroke-width="1" points="103.215,454.271 101.946,463.62 111.062,459.508"/>
+	<path stroke="black" stroke-width="1" fill="none" d="M 85.323,399.528 A 474.575,474.575 0 0 1 193.698,94.03"/>
+	<polygon fill="black" stroke-width="1" points="193.698,94.03 184.752,97.022 192.468,103.383"/>
+	<text x="25.5" y="235.5" font-family="Times New Roman" font-size="20">refreshlist</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 643.306,431.162 A 22.5,22.5 0 1 1 620.364,444.325"/>
+	<text x="656.5" y="494.5" font-family="Times New Roman" font-size="20">edit = {id=x}</text>
+	<polygon fill="black" stroke-width="1" points="620.364,444.325 614.535,451.742 624.477,452.815"/>
+	<path stroke="black" stroke-width="1" fill="none" d="M 611.222,443.483 A 22.5,22.5 0 1 1 591.068,426.353"/>
+	<text x="419.5" y="486.5" font-family="Times New Roman" font-size="20">save,cancel -&gt; null</text>
+	<polygon fill="black" stroke-width="1" points="591.068,426.353 582.115,423.379 584.472,433.098"/>
+	<path stroke="black" stroke-width="1" fill="none" d="M 614.026,384.954 A 22.5,22.5 0 1 1 639.23,392.977"/>
+	<text x="634.5" y="338.5" font-family="Times New Roman" font-size="20">add = { id=null }</text>
+	<polygon fill="black" stroke-width="1" points="639.23,392.977 648.637,392.263 642.711,384.209"/>
+	<path stroke="black" stroke-width="1" fill="none" d="M 608.603,386.183 A 614.013,614.013 0 0 1 585.441,109.067"/>
+	<polygon fill="black" stroke-width="1" points="585.441,109.067 579.337,116.261 589.232,117.706"/>
+	<text x="489.5" y="255.5" font-family="Times New Roman" font-size="20">refreshedit</text>
+</svg>
