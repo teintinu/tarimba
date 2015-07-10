@@ -1,0 +1,31 @@
+{
+    "name": "tst-loader",
+    "version": "0.0.0",
+    "description": "",
+    "main": "tstloader.js",
+    "scripts": {
+        "test": "istanbul cover ./node_modules/.bin/_mocha -- test/*.test.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tr0l/tst-loader.git"
+    },
+    "author": "tr0l",
+    "license": "GPL3",
+    "bugs": {
+        "url": "https://github.com/tr0l/tst-loader/issues"
+    },
+    "homepage": "https://github.com/tr0l/tst-loader",
+    "dependencies": {
+        "object-assign": "^2.0.0",
+        "loader-utils": "^0.2.7"
+    },
+    "devDependencies": {
+        "expect.js": "^0.3.1",
+        "istanbul": "^0.3.14",
+        "mkdirp": "^0.5.1",
+        "mocha": "^2.2.5",
+        "rimraf": "^2.3.3",
+        "webpack": "^1.9.5"
+    }
+}

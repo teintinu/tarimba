@@ -6,16 +6,15 @@ require('./appmenu.less');
       appmenu: estoria
     },
     render: function(){
-    var itens_menu=estoria.getItensMenu()
+    var itens_menu=estoria.getItensMenu();
       return (
-         <div class="menu">
-           <ul class="menu-list">
-              itens_menu.map(function(item){
-                <li>
-                   item
-                </li>
-
-             });
+         <div className="menu">
+           <ul className="menu-list">
+           {itens_menu.map((item)=>
+              <React.addons.TransitionGroup component="li" transitionName="aparecer">
+                <a href="#">{item}</a>
+              </React.addons.TransitionGroup>
+           )}
            </ul>
          </div>
          );

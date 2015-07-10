@@ -1,5 +1,5 @@
 var flux = require('flux'),
-    react = require('react');
+    react = require('react/addons');
 window.React = react;
 
 var AppZscanReact_onchange, AppZscanContentReact_onchange;
@@ -274,7 +274,7 @@ AppZscan.show_pagelet(require('./views/apptitle.jsx'));
 AppZscan.show_pagelet(require('./views/apptask_icone.jsx'));
 AppZscan.show_pagelet(require('./views/apptask_userLogado.jsx'));
 AppZscan.showcontent(require('./contents/app/login/view.jsx'));
-//AppZscan.show_pagelet(require('./views/appmenu.jsx'));
+AppZscan.show_pagelet(require('./views/appmenu.jsx'));
 //AppZscan.showcontent(require('./contents/app/cadastro/chamaform.jsx'));
 
 react.render(AppZscan.element, document.getElementById("app"));
