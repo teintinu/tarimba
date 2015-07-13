@@ -103,7 +103,6 @@ var Lookup = React.createClass({
         var propsIcon = {}
 
         propsIcon.onClick = this.searchLupa.bind(this, '');
-        propsIcon.onItemTap = this.searchLupa.bind(this, '');
         propsIcon.iconClassName = this.state._searching ? 'fa fa-search searching' : 'fa fa-search';
         propsIcon.style = {
             left: '0px',
@@ -116,7 +115,6 @@ var Lookup = React.createClass({
 
         var propsIconApaga = {};
         propsIconApaga.onClick = this.clearAndSearch;
-        propsIconApaga.onItemTap = this.clearAndSearch;
         propsIconApaga.iconClassName = 'fa fa-times-circle hoverRed';
         propsIconApaga.style = {
             right: '10px',
@@ -310,7 +308,7 @@ var Lookup = React.createClass({
         }
     },
     clearAndSearch: function(){
-        this.refs[this.props.field].focus();
+        React.findDOMNode(this.refs[this.props.field]).focus();
         var editing = this.getEditingStore();
 
         if(editing[this.props.field].display != this.state.lookupDataBackup.display){
@@ -325,7 +323,7 @@ var Lookup = React.createClass({
         this.setState({});
     },
     searchLupa: function(v){
-        this.refs[this.props.field].focus();
+        React.findDOMNode(this.refs[this.props.field]).focus();
         this.search(v);
     },
     search: function(v){

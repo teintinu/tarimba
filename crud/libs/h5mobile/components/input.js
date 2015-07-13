@@ -113,7 +113,7 @@ var HInput = React.createClass({
                 React.createElement('label', {style: {
                   color: 'red',
                   fontSize: '13px',
-                  bottom: '-9px',
+                  bottom: '-12px',
                   position: 'absolute',
                   left: '0px'
                 }}, [error]) : null

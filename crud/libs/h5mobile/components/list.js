@@ -137,7 +137,19 @@ var HList = React.createClass({
             var src = item.avatar;
 
         if (letra != "")
-           return React.createElement(mui.Avatar, {key: keyAvatar, style:this.props.avatarStyle?this.props.avatarStyle:{}, src: src}, src != undefined ? '' : letra);
+           return React.createElement(src == undefined ? 'span' : 'img', {key: keyAvatar, style:this.props.avatarStyle?this.props.avatarStyle:{
+                height: '40px',
+                width: '40px',
+                backgroundColor: '#bdbdbd',
+                borderRadius: '50%',
+                border: 'none',
+                borderColor: '#e0e0e0',
+                display: 'inline-block',
+                textAlign: 'center',
+                lineHeight: '40px',
+                fontSize: '24px',
+                color: '#ffffff'
+           }, src: src}, src != undefined ? '' : letra);
         return false;
     },
     defineLetterAvatar: function(text, index, arr){
