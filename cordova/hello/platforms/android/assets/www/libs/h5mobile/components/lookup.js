@@ -1,13 +1,12 @@
-var mui = require('material-ui');
-var ClickAwayable = mui.Mixins.ClickAwayable;
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops');
+var h5dropdown = require('../mixins/h5dropdown');
 var Icon = require('./icon');
-var Transitions = mui.Styles.Transitions;
+var Input = require('./input');
 
 var zIndex= 100;
 var Lookup = React.createClass({
-    mixins: [ClickAwayable],
+    mixins: [h5dropdown],
     propTypes: {
         store: React.PropTypes.object.isRequired,
         floatingLabelText: React.PropTypes.string.isRequired,
@@ -19,14 +18,15 @@ var Lookup = React.createClass({
     },
     getInitialState: function () {
         return {
-            open: false,
+
             tmSearch: null,
             _searching: false,
             searchingText: null,
             searchResult: [],
             searchResultIndex: -1,
             lookupDataBackup: {},
-            zIndex: --zIndex
+            zIndex: --zIndex,
+            focus: false
         }
     },
     render: function () {
@@ -57,7 +57,11 @@ var Lookup = React.createClass({
         var colspanx = p[1];
 
         var propstd = {
-            colSpan: colspanx
+            colSpan: colspanx,
+            style: {
+                position: 'relative',
+                height: '72px'
+            }
         };
 
         if (this.props.rowSpan)
@@ -79,39 +83,51 @@ var Lookup = React.createClass({
         propsTextField.onKeyDown = this.keyDown;
         propsTextField.ref = this.props.field;
         propsTextField.className = this.props.iconAlign ? 'input' + this.props.iconAlign : 'inputleft'
+        propsTextField.onFocus = this.focus;
+        propsTextField.onBlur = this.blur;
+        propsTextField.style = {
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              border: 'none',
+              outline: 'none',
+              backgroundColor: 'transparent',
+              color: 'rgba(0, 0, 0, 0.87)',
+              font: 'inherit',
+              boxSizing: 'border-box',
+              paddingTop: '26px'
+        };
 
 
 
         var propsIcon = {}
 
         propsIcon.onClick = this.searchLupa.bind(this, '');
-        propsIcon.onItemTap = this.searchLupa.bind(this, '');
         propsIcon.iconClassName = this.state._searching ? 'fa fa-search searching' : 'fa fa-search';
         propsIcon.style = {
             left: '0px',
             fontSize: '14px',
             width: '14px',
-            color: mui.Styles.Colors.grey500,
+            color: '#9e9e9e',
             position: 'absolute',
             bottom: '18px'
         };
 
         var propsIconApaga = {};
         propsIconApaga.onClick = this.clearAndSearch;
-        propsIconApaga.onItemTap = this.clearAndSearch;
         propsIconApaga.iconClassName = 'fa fa-times-circle hoverRed';
         propsIconApaga.style = {
             right: '10px',
             fontSize: '14px',
             width: '10px',
-            color: mui.Styles.Colors.grey500,
+            color: '#9e9e9e',
             position: 'absolute',
             bottom: '18px'
         };
 
-        var classPaper = this.state.open ? 'animationDropDown' : '';
+        var classPaper = this.isDropDown() ? 'animationDropDown' : '';
         var stylePaper = {
-            maxHeight: '165px',
+            maxHeight: '178px',
             overflow: 'auto',
             position: 'absolute',
             width:'100%',
@@ -129,32 +145,56 @@ var Lookup = React.createClass({
 
         var styleDivQueEnglobaTodoLookup ={
             position: 'absolute',
-            height: '247px',
+            height: '260px',
             width: 'calc(100% + 7px)',
             marginLeft: '-6px',
             boxShadow: 'rgba(0, 151, 167, 0.3) 0px 1px 6px, rgba(0, 151, 167, 0.5) 0px 1px 4px',
             backgroundColor: "white"
         };
 
-        var listResult = this.state.searchResult ? <mui.List style={styleList} >{this.state.searchResult.length > 0 ? this.state.searchResult.map(function (item, index) {
+
+        var styleLabel = {}
+        styleLabel = this.state.focus || propsTextField.value || propsTextField.value == '' ?
+            {
+              position: 'absolute',
+              lineHeight: '22px',
+              opacity: '1',
+              color: this.state.focus ? 'rgb(0, 188, 212)' :  'rgba(0, 0, 0, 0.298039)',
+              top: '15px',
+              fontSize: '14px'
+        } :
+            {
+              position: 'absolute',
+              lineHeight: '22px',
+              opacity: '1',
+              color: 'rgba(0, 0, 0, 0.298039)',
+              top: '38px',
+              left: '20px'
+        };
+
+
+        var listResult = this.state.searchResult ? <div style={styleList} >{this.state.searchResult.length > 0 ? this.state.searchResult.map(function (item, index) {
                         var style = {
                             height: '30px',
-                            lineHeight: '0px'
+                            padding: '3px'
                         };
                         if(index == self.state.searchResultIndex){
-                            style.backgroundColor = mui.Styles.Colors.grey300;
+                            style.backgroundColor = '#e0e0e0';
                         }
                         var propsItemList={};
-                        propsItemList.onTouchTap = self._click.bind(self, index);
+                        propsItemList.onTouchTap = function(e){
+                                    e.preventDefault();
+                                    self._click(index);
+                        };
                         propsItemList.style=style;
-                        return React.createElement(mui.ListItem, propsItemList, [item.name])
+                        return React.createElement('div', propsItemList, [React.createElement('span', {style:{verticalAlign: 'middle'}}, item.name)])
                     }) : <span style={{color: 'gray', fontFamily: 'Roboto', fontSize: '100%'}}>
                             {notFoundText}
-                        </span>}</mui.List>
+                        </span>}</div>
                     : <span className="fa fa-repeat gira"></span>
 
 
-        var listLookup = this.state.open ?
+        var listLookup = this.isDropDown() ?
             <div style={styleDiv}>
                 <div ref="lookup" className={classPaper} style={stylePaper}>
                     {listResult}
@@ -162,9 +202,41 @@ var Lookup = React.createClass({
                 : null;
 
         return (React.createElement("td", propstd,
-                        React.createElement("div", {style:{position: 'relative', zIndex: this.state.zIndex}},
-                        [this.state.open ? React.createElement("div", {style: styleDivQueEnglobaTodoLookup}) : null,
-                         React.createElement(mui.TextField, propsTextField),
+                        React.createElement("div", {style:{position: 'relative', zIndex: this.state.zIndex, height: '100%'}},
+                        [this.isDropDown() ? React.createElement("div", {style: styleDivQueEnglobaTodoLookup}) : null,
+                         React.createElement('label', {style: styleLabel}, [
+            this.state.focus || propsTextField.value || propsTextField.value == '' ? this.props.hintText : this.props.floatingLabelText]),
+                         React.createElement('input', propsTextField),
+                         React.createElement('hr', {style: {
+                            border: 'none',
+                            borderBottom: 'solid 1px #e0e0e0',
+                            position: 'absolute',
+                            width: '100%',
+                            bottom: '8px',
+                            margin: '0',
+                            boxSizing: 'content-box',
+                            height: '0'
+                        }}),
+                        this.state.focus ? React.createElement('hr', {style: {
+                              borderStyle: 'none none solid',
+                              borderBottomWidth: '2px',
+                              position: 'absolute',
+                              width: '100%',
+                              bottom: '8px',
+                              margin: '0px',
+                              boxSizing: 'content-box',
+                              height: '0px',
+                              borderColor: 'rgb(0, 188, 212)',
+                              transform: 'scaleX(1)'
+                        }}) : null ,
+                        error ?
+                        React.createElement('label', {style: {
+                          color: 'red',
+                          fontSize: '13px',
+                          bottom: '-9px',
+                          position: 'absolute',
+                          left: '0px'
+                        }}, [error]) : null ,
                          React.createElement('div', {position: 'relative'}, React.createElement(Icon, propsIcon)),
                          listLookup,
                          this.getEditingStore()[this.props.field].display ?
@@ -176,16 +248,16 @@ var Lookup = React.createClass({
     },
 
     componentClickAway: function componentClickAway() {
-        this.closeDropDown();
+        this.closeDropDownlookup();
     },
-    openDropDown: function(){
+    openDropDownlookup: function(){
+        this.openDropDown();
        this.setState({
-           open: true,
            keyUpScroll: 0
        });
     },
-    closeDropDown: function(){
-       this.setState({ open: false });
+    closeDropDownlookup: function(){
+       this.closeDropDown();
     },
     _click: function(index){
         this.state.searchResultIndex = index;
@@ -195,13 +267,13 @@ var Lookup = React.createClass({
       if(this.state.keyUpScroll > 1)
         this.state.keyUpScroll -= 1;
       else
-        React.findDOMNode(this.refs.lookup).scrollTop -= 30;
+        React.findDOMNode(this.refs.lookup).scrollTop -= 36;
     },
     scrollItemDown: function(){
       if(this.state.keyUpScroll < 5)
          this.state.keyUpScroll += 1;
       else
-         React.findDOMNode(this.refs.lookup).scrollTop += 30;
+         React.findDOMNode(this.refs.lookup).scrollTop += 36;
     },
     keyDown: function(e){
         if (e.key == 'Tab') {
@@ -236,7 +308,7 @@ var Lookup = React.createClass({
         }
     },
     clearAndSearch: function(){
-        this.refs[this.props.field].focus();
+        React.findDOMNode(this.refs[this.props.field]).focus();
         var editing = this.getEditingStore();
 
         if(editing[this.props.field].display != this.state.lookupDataBackup.display){
@@ -251,7 +323,7 @@ var Lookup = React.createClass({
         this.setState({});
     },
     searchLupa: function(v){
-        this.refs[this.props.field].focus();
+        React.findDOMNode(this.refs[this.props.field]).focus();
         this.search(v);
     },
     search: function(v){
@@ -281,7 +353,7 @@ var Lookup = React.createClass({
             }
 
             function triggerSearch() {
-                self.openDropDown()
+                self.openDropDownlookup()
                 self.setState({
                     searchResult: null
                 });
@@ -318,7 +390,7 @@ var Lookup = React.createClass({
         }
     },
     selectItem: function(){
-        this.closeDropDown();
+        this.closeDropDownlookup();
         var selected = this.state.searchResult[this.state.searchResultIndex];
         this.state.lookupDataBackup._id = selected._id;
         this.state.lookupDataBackup.display = selected.name;
@@ -337,7 +409,7 @@ var Lookup = React.createClass({
         var editing = this.getEditingStore()
         editing[this.props.field]._id = this.state.lookupDataBackup._id;
         editing[this.props.field].display = this.state.lookupDataBackup.display;
-        this.closeDropDown();
+        this.closeDropDownlookup();
         this.setState({
             searchingText: null,
             searchResult: [],
@@ -352,7 +424,17 @@ var Lookup = React.createClass({
             editing[this.props.field] = {_id: null, display:null};
            return editing;
         }
-    }
+    },
+    focus: function(e){
+        this.setState({focus: true})
+    },
+    blur: function(e){
+        var self = this;
+        setTimeout(function(){
+            self.closeDropDownlookup();
+        }, 100);
+        this.setState({focus: false})
+    },
 });
 
 module.exports = Lookup;

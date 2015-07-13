@@ -1,6 +1,3 @@
-var mui = require('material-ui');
-
-
 var React = require('react');
 require('../less/input.less');
 var h5mixinprops = require('../mixins/h5mixinprops')

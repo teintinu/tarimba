@@ -28,3 +28,5 @@ node_modules
 
 bundle.*
 webpack-profile.json
+/cordova/lumxpassobebeapp/bower_components/
+/cordova/lumxpassobebeapp/www/bower_components/

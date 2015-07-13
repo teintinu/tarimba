@@ -11,7 +11,6 @@ var H5frontEnd = {
     Row: require('./components/row'),
     List: require('./components/list'),
     Select: require('./components/select'),
-    DropDownIcon: require('./components/dropDownIcon'),
     Lookup: require('./components/lookup.js')
 }
 

@@ -1,8 +1,6 @@
-var mui = require('material-ui');
-
-
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops');
+var h5dropdown = require('../mixins/h5dropdown');
 
 var HIcon = React.createClass({
     propTypes: {
@@ -10,10 +8,10 @@ var HIcon = React.createClass({
         onClick: React.PropTypes.func,
         style: React.PropTypes.object,
     },
-    mixins: [h5mixinprops],
+    mixins: [h5mixinprops, h5dropdown],
     render: function () {
 
-        if (!this.props.iconClassName)
+        if (!this.props.iconClassName && !this.props.className)
             return console.error("Is necessary propreyty iconClassName or name in button");
 
         var props = {};
@@ -31,13 +29,15 @@ var HIcon = React.createClass({
             else
                 props.className = this.props.name;
         }
-
+        else if(this.props.className)
+            props.className = this.props.className;
         else
             props.className = this.props.iconClassName;
         props.style = this.props.style;
         props.onTouchTap = this.props.onClick;
 
-        return (React.createElement(mui.FontIcon, props));
+        var self = this;
+        return (React.createElement('div', {}, [React.createElement('icon', props)]));
     }
 
 });

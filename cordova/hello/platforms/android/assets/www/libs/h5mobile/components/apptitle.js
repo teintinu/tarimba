@@ -1,10 +1,5 @@
-var mui = require('material-ui');
-
-
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops');
-
-mui.AppBar = require('../componentsmodifield/app-bar');
 
 var HAppTitle = React.createClass({
     propTypes: {
@@ -24,10 +19,6 @@ var HAppTitle = React.createClass({
 
         var props = {};
 
-        props.iconClassNameRight = this.props.iconClassNameRight ? this.props.iconClassNameRight: null ;
-        props.onLeftIconButtonTouchTap = this.props.onLeftIconButtonTouchTap ? this.props.onLeftIconButtonTouchTap: null ;
-        props.children = this.props.children;
-
         var propsAppTitle = {};
         propsAppTitle.style = {
             position: "fixed",
@@ -40,7 +31,7 @@ var HAppTitle = React.createClass({
         var propsH1 = {};
         propsH1.style ={
             color: 'white',
-            fontSize: '28px',
+            fontSize: '24px',
             left: '58px',
             top: '20px',
             position: 'fixed',
@@ -56,6 +47,7 @@ var HAppTitle = React.createClass({
             left: '20px',
             cursor: 'pointer'
         };
+        propsMenuBar.onTouchTap = this.props.onLeftIconButtonTouchTap;
 
         propsMenuBar.className = 'fa fa-bars';
 

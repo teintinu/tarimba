@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="bower_components/lumx/dist/lumx.css">
+    <link rel="stylesheet" href="bower_components/mdi/css/materialdesignicons.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/velocity/velocity.js"></script>
+    <script src="bower_components/moment/min/moment-with-locales.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/lumx/dist/lumx.js"></script>
+    <script src="./app.js"></script>
+</head>
+
+<body ng-app="getLostApp">
+    <div ng-controller="MainCtrl">
+        <div class="mt++" flex-container="row" flex-gutter="24">
+            <div flex-item>
+                <lx-select ng-model="info.origin" placeholder="Cidade" choices="cities" floating-label>
+                    <lx-select-selected>
+                        {{ $selected.name }} - {{ $selected.code }}
+                    </lx-select-selected>
+
+                    <lx-select-choices>
+                        {{ $choice.name }} - {{ $choice.code }}
+                    </lx-select-choices>
+                </lx-select>
+            </div>
+            <div flex-item>
+                <lx-select ng-model="info.maxfare" placeholder="Preço" choices="prices" floating-label>
+                    <lx-select-selected>
+                        {{ $selected.show }}
+                    </lx-select-selected>
+
+                    <lx-select-choices>
+                        {{ $choice.show }}
+                    </lx-select-choices>
+                </lx-select>
+            </div>
+        </div>
+        <div class="mt++" flex-container="row" flex-gutter="24">
+            <div flex-item>
+                <form>
+                    <lx-date-picker model="info.departuredate" label="Start date" locale="en" fixed-label="true" icon="calendar"></lx-date-picker>
+                </form>
+            </div>
+            <div flex-item>
+                <form>
+                    <lx-date-picker model="info.returndate" label="End date" locale="en" fixed-label="true" icon="calendar"></lx-date-picker>
+                </form>
+            </div>
+        </div>
+        <div class="mt++" flex-container="row" flex-gutter="24">
+            <div flex-item>
+                <div flex-container="column" flex-align="space-between center">
+                    <button class="btn btn--m btn--blue btn--raised" lx-ripple ng-click="submit()">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="mt++" flex-container="row" flex-gutter="24" flex-wrap ng-show="results">
+            <div ng-show="results.status" class="p++">
+                <div flex-item="6">
+                    <span class="fs-title display-block mb">Places you can go...</span>
+                    <div class="divider divider--dark"></div>
+                    <ul class="list mt++">
+                        <div ng-repeat="d in fareinfo | orderBy: 'LowestFare'">
+                            <li class="list-row list-row--has-separator">
+                                <div class="list-row__content">
+                                    <span>{{d.LowestFare}}, {{d.DestinationLocation}}</span>
+                                </div>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+            <div ng-hide="results.status" class="p++">
+                <h2>Error</h2> {{error}}
+            </div>
+        </div>
+    </div>
+    <div flex-item="6">
+        <span class="fs-title display-block mb">Text only</span>
+
+        <div class="divider divider--dark"></div>
+
+        <ul class="list mt++">
+            <li class="list-row list-row--has-separator">
+                <div class="list-row__content">
+                    <span>Single-line item</span>
+                </div>
+            </li>
+            <li class="list-row list-row--has-separator">
+                <div class="list-row__content">
+                    <span>Single-line item</span>
+                </div>
+            </li>
+            <li class="list-row list-row--has-separator">
+                <div class="list-row__content">
+                    <span>Single-line item</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div flex-item="6" class="mt++">
+        <span class="fs-title display-block mb">Circled icon with text</span>
+
+        <div class="divider divider--dark"></div>
+
+        <ul class="list mt++">
+            <li class="list-row list-row--has-separator">
+                <div class="list-row__primary">
+                    <i class="icon icon--l icon--grey icon--circled mdi mdi-folder"></i>
+                </div>
+
+                <div class="list-row__content">
+                    <span>Single-line item</span>
+                </div>
+            </li>
+            <li class="list-row list-row--has-separator">
+                <div class="list-row__primary">
+                    <i class="icon icon--l icon--blue icon--circled mdi mdi-file"></i>
+                </div>
+
+                <div class="list-row__content">
+                    <span>Single-line item</span>
+                </div>
+            </li>
+            <li class="list-row list-row--has-separator">
+                <div class="list-row__primary">
+                    <i class="icon icon--l icon--green icon--circled mdi mdi-plus"></i>
+                </div>
+
+                <div class="list-row__content">
+                    <span>Single-line item</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
