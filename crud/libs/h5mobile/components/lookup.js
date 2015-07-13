@@ -158,7 +158,7 @@ var Lookup = React.createClass({
 
 
         var styleLabel = {}
-        styleLabel = this.state.focus ?
+        styleLabel = this.state.focus || propsTextField.value || propsTextField.value == '' ?
             {
               position: 'absolute',
               lineHeight: '22px',
@@ -177,10 +177,10 @@ var Lookup = React.createClass({
         };
 
 
-        var listResult = this.state.searchResult ? <mui.List style={styleList} >{this.state.searchResult.length > 0 ? this.state.searchResult.map(function (item, index) {
+        var listResult = this.state.searchResult ? <div style={styleList} >{this.state.searchResult.length > 0 ? this.state.searchResult.map(function (item, index) {
                         var style = {
                             height: '30px',
-                            lineHeight: '0px'
+                            padding: '3px'
                         };
                         if(index == self.state.searchResultIndex){
                             style.backgroundColor = mui.Styles.Colors.grey300;
@@ -188,10 +188,10 @@ var Lookup = React.createClass({
                         var propsItemList={};
                         propsItemList.onTouchTap = self._click.bind(self, index);
                         propsItemList.style=style;
-                        return React.createElement(mui.ListItem, propsItemList, [item.name])
+                        return React.createElement('div', propsItemList, [React.createElement('span', {style:{verticalAlign: 'middle'}}, item.name)])
                     }) : <span style={{color: 'gray', fontFamily: 'Roboto', fontSize: '100%'}}>
                             {notFoundText}
-                        </span>}</mui.List>
+                        </span>}</div>
                     : <span className="fa fa-repeat gira"></span>
 
 
@@ -206,7 +206,7 @@ var Lookup = React.createClass({
                         React.createElement("div", {style:{position: 'relative', zIndex: this.state.zIndex, height: '100%'}},
                         [this.state.open ? React.createElement("div", {style: styleDivQueEnglobaTodoLookup}) : null,
                          React.createElement('label', {style: styleLabel}, [
-            this.state.focus ? this.props.hintText : this.props.floatingLabelText]),
+            this.state.focus || propsTextField.value || propsTextField.value == '' ? this.props.hintText : this.props.floatingLabelText]),
                          React.createElement('input', propsTextField),
                          React.createElement('hr', {style: {
                             border: 'none',

@@ -68,7 +68,7 @@ var HInput = React.createClass({
         if (this.props.rowSpan)
             propstd.rowSpan = this.props.rowSpan;
         var styleLabel = {}
-        styleLabel = this.state.focus || props.value != '' ?
+        styleLabel = this.state.focus || props.value || props.value != '' ?
             {
               position: 'absolute',
               lineHeight: '22px',
@@ -87,7 +87,7 @@ var HInput = React.createClass({
 
 
         return (React.createElement("td", propstd, [React.createElement('label', {style: styleLabel}, [
-            this.state.focus || props.value != '' ? this.props.hintText : this.props.floatingLabelText]),
+            this.state.focus || props.value || props.value != '' ? this.props.hintText : this.props.floatingLabelText]),
                 React.createElement('input', props),
                 React.createElement('hr', {style: {
                     border: 'none',
