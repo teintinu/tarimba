@@ -2,13 +2,14 @@ var mui = require('material-ui');
 var ClickAwayable = mui.Mixins.ClickAwayable;
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops');
+var h5dropdown = require('../mixins/h5dropdown');
 var Icon = require('./icon');
 var Input = require('./input');
 var Transitions = mui.Styles.Transitions;
 
 var zIndex= 100;
 var Lookup = React.createClass({
-    mixins: [ClickAwayable],
+    mixins: [h5dropdown],
     propTypes: {
         store: React.PropTypes.object.isRequired,
         floatingLabelText: React.PropTypes.string.isRequired,
@@ -20,7 +21,7 @@ var Lookup = React.createClass({
     },
     getInitialState: function () {
         return {
-            open: false,
+
             tmSearch: null,
             _searching: false,
             searchingText: null,
@@ -129,7 +130,7 @@ var Lookup = React.createClass({
             bottom: '18px'
         };
 
-        var classPaper = this.state.open ? 'animationDropDown' : '';
+        var classPaper = this.isDropDown() ? 'animationDropDown' : '';
         var stylePaper = {
             maxHeight: '165px',
             overflow: 'auto',
@@ -186,7 +187,10 @@ var Lookup = React.createClass({
                             style.backgroundColor = mui.Styles.Colors.grey300;
                         }
                         var propsItemList={};
-                        propsItemList.onTouchTap = self._click.bind(self, index);
+                        propsItemList.onTouchTap = function(e){
+                                    e.preventDefault();
+                                    self._click(index);
+                        };
                         propsItemList.style=style;
                         return React.createElement('div', propsItemList, [React.createElement('span', {style:{verticalAlign: 'middle'}}, item.name)])
                     }) : <span style={{color: 'gray', fontFamily: 'Roboto', fontSize: '100%'}}>
@@ -195,7 +199,7 @@ var Lookup = React.createClass({
                     : <span className="fa fa-repeat gira"></span>
 
 
-        var listLookup = this.state.open ?
+        var listLookup = this.isDropDown() ?
             <div style={styleDiv}>
                 <div ref="lookup" className={classPaper} style={stylePaper}>
                     {listResult}
@@ -204,7 +208,7 @@ var Lookup = React.createClass({
 
         return (React.createElement("td", propstd,
                         React.createElement("div", {style:{position: 'relative', zIndex: this.state.zIndex, height: '100%'}},
-                        [this.state.open ? React.createElement("div", {style: styleDivQueEnglobaTodoLookup}) : null,
+                        [this.isDropDown() ? React.createElement("div", {style: styleDivQueEnglobaTodoLookup}) : null,
                          React.createElement('label', {style: styleLabel}, [
             this.state.focus || propsTextField.value || propsTextField.value == '' ? this.props.hintText : this.props.floatingLabelText]),
                          React.createElement('input', propsTextField),
@@ -249,16 +253,16 @@ var Lookup = React.createClass({
     },
 
     componentClickAway: function componentClickAway() {
-        this.closeDropDown();
+        this.closeDropDownlookup();
     },
-    openDropDown: function(){
+    openDropDownlookup: function(){
+        this.openDropDown();
        this.setState({
-           open: true,
            keyUpScroll: 0
        });
     },
-    closeDropDown: function(){
-       this.setState({ open: false });
+    closeDropDownlookup: function(){
+       this.closeDropDown();
     },
     _click: function(index){
         this.state.searchResultIndex = index;
@@ -354,7 +358,7 @@ var Lookup = React.createClass({
             }
 
             function triggerSearch() {
-                self.openDropDown()
+                self.openDropDownlookup()
                 self.setState({
                     searchResult: null
                 });
@@ -391,7 +395,7 @@ var Lookup = React.createClass({
         }
     },
     selectItem: function(){
-        this.closeDropDown();
+        this.closeDropDownlookup();
         var selected = this.state.searchResult[this.state.searchResultIndex];
         this.state.lookupDataBackup._id = selected._id;
         this.state.lookupDataBackup.display = selected.name;
@@ -410,7 +414,7 @@ var Lookup = React.createClass({
         var editing = this.getEditingStore()
         editing[this.props.field]._id = this.state.lookupDataBackup._id;
         editing[this.props.field].display = this.state.lookupDataBackup.display;
-        this.closeDropDown();
+        this.closeDropDownlookup();
         this.setState({
             searchingText: null,
             searchResult: [],
@@ -430,6 +434,10 @@ var Lookup = React.createClass({
         this.setState({focus: true})
     },
     blur: function(e){
+        var self = this;
+        setTimeout(function(){
+            self.closeDropDownlookup();
+        }, 100);
         this.setState({focus: false})
     },
 });
