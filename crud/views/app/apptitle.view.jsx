@@ -25,8 +25,6 @@ class AppTitleView extends FluxEasy.View {
         var tasks = zscanapp.tasks();
         var altTask = tasks.length ? tasks[0].title : null;
         var classIcon = 'fa fa-cog gira';
-        var classIput = this.state.activeSearch ? 'inputVisible' : 'inputInvisible';
-        classIput = this.state.createSearch ? 'criado' : classIput;
         var styleIcon = {
             color: 'white',
             fontSize: '20px'
@@ -41,10 +39,8 @@ class AppTitleView extends FluxEasy.View {
 
         var styleSearch = {
             color: 'white',
-            float: 'right',
-            paddingLeft: '10px',
-            marginTop: '20px',
-            marginRight: '25px',
+            right: '25px',
+            top: '20px',
             fontSize: '18px',
             position: 'absolute'
         }
@@ -65,8 +61,17 @@ class AppTitleView extends FluxEasy.View {
                    }
                }>
 
-
-
+                    <H.Icon onClick={this.appSearch.bind(this, "iconSearch")}
+                            style={styleSearch}
+                            iconClassName={classSearch}
+                            title={altTask}/>
+                    {this.state.activeSearch ?
+                    <input ref="search"
+                           className='hInputSearch'
+                           hintText="Search"
+                           valueLink={this.state.searchText}
+                           onKeyUp={this.pesquisa}
+                           onBlur={this.fechaSearch} /> : null}
 
                     {tasks.length ? <div style = {styleDivIcon}>
                    < H.Icon onClick={this.appTaskClick}
@@ -83,15 +88,15 @@ class AppTitleView extends FluxEasy.View {
     }
 
     appSearch() {
-        setTimeout(function () {
-            this.refs.search.focus();
-        }.bind(this), 300);
-
+        var self = this;
         this.setState({
             searchText: "",
             createSearch: false,
             activeSearch: !this.state.activeSearch,
         });
+         setTimeout(function(){
+            React.findDOMNode(self.refs.search).focus();
+         }, 0);
     }
 
     fechaSearch(e) {
@@ -121,17 +126,3 @@ class AppTitleView extends FluxEasy.View {
 
 export default AppTitleView;
 
-
-/*
-
-<H.Icon onClick={this.appSearch.bind(this, "iconSearch")}
-                    style={styleSearch}
-                    iconClassName={classSearch}
-                    title={altTask}/>
-<mui.TextField ref="search"
-                           hintText="Search"
-                            style={{marginLeft: '10px'}}
-                           valueLink={this.state.searchText}
-                           onKeyUp={this.pesquisa}
-                           className={classIput}
-                           onBlur={this.fechaSearch} />*/

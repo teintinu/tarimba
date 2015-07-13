@@ -58,21 +58,26 @@
     display: none !important;
 }
 
-.inputVisible {
-    opacity: 1;
-    -webkit-animation-timing-function: ease-in;
-    -webkit-animation-name: animationIn;
-    -webkit-animation-duration: 500ms;
+.hInputSearch {
+    top: 19px;
+    position: absolute;
+    right: 48px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    border-bottom: white solid 1px;
+    color: white;
+//    -webkit-animation-timing-function: ease-in;
+//    -webkit-animation-name: animationIn;
+//    -webkit-animation-duration: 500ms;
 }
 
-.inputVisible > div,
-.inputVisible > hr,
-.inputVisible > input,
-.inputInvisible > div,
-.inputInvisible > hr,
-.inputInvisible > input {
-    color: white !important;
-    border-color: white !important;
+.hInputSearch:focus {
+    outline: 0;
+    border-bottom: white solid 2px;
+//    -webkit-animation-timing-function: ease-in;
+//    -webkit-animation-name: animationIn;
+//    -webkit-animation-duration: 500ms;
 }
 
 .listaLookupSearching {
