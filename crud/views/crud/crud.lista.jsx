@@ -14,14 +14,14 @@ class AppCRUD extends FluxEasy.View {
     }
     render() {
         return ( < div >
-           <mui.Paper zDepth={1} style={{marginBottom: "78px"}}>
+           <div zDepth={1} style={{marginBottom: "78px"}}>
                <H.List text={this.fnText}
                    detail={this.fnDetail}
                    actionEdit = {this._editar}
                    itensList = {this.CRUD.getState().listing}
                    actionDelete = {this._delete} >
                < /H.List>
-           </mui.Paper>
+           </div>
            <H.Floatingactionbutton style={{zIndex: '12'}}
                iconClassName="fa fa-bed"
                onClick={this.add}/>
