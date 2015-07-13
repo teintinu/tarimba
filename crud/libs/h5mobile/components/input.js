@@ -71,7 +71,7 @@ var HInput = React.createClass({
               position: 'absolute',
               lineHeight: '22px',
               opacity: '1',
-              color: this.state.focus ? 'rgb(0, 188, 212)' :  'rgba(0, 0, 0, 0.298039)',
+              color: this.state.focus ? error ? 'red' : 'rgb(0, 188, 212)' :  error ? 'red' : 'rgba(0, 0, 0, 0.298039)',
               top: '15px',
               fontSize: '14px'
         } :
@@ -79,7 +79,7 @@ var HInput = React.createClass({
               position: 'absolute',
               lineHeight: '22px',
               opacity: '1',
-              color: 'rgba(0, 0, 0, 0.298039)',
+              color: error ? 'red' : 'rgba(0, 0, 0, 0.298039)',
               top: '38px'
         };
 
@@ -89,7 +89,7 @@ var HInput = React.createClass({
                 React.createElement('input', props),
                 React.createElement('hr', {style: {
                     border: 'none',
-                    borderBottom: 'solid 1px #e0e0e0',
+                    borderBottom: error ? 'solid 1px red' : 'solid 1px #e0e0e0',
                     position: 'absolute',
                     width: '100%',
                     bottom: '8px',
@@ -106,14 +106,14 @@ var HInput = React.createClass({
                       margin: '0px',
                       boxSizing: 'content-box',
                       height: '0px',
-                      borderColor: 'rgb(0, 188, 212)',
+                      borderColor: error ? 'red' : 'rgb(0, 188, 212)',
                       transform: 'scaleX(1)'
                 }}) : null],
                 error ?
                 React.createElement('label', {style: {
                   color: 'red',
-                  fontSize: '13px',
-                  bottom: '-12px',
+                  fontSize: '10px',
+                  bottom: '-10px',
                   position: 'absolute',
                   left: '0px'
                 }}, [error]) : null
