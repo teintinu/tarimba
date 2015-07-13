@@ -3,6 +3,7 @@ var ClickAwayable = mui.Mixins.ClickAwayable;
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops');
 var Icon = require('./icon');
+var Input = require('./input');
 var Transitions = mui.Styles.Transitions;
 
 var zIndex= 100;

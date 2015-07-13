@@ -58,6 +58,20 @@
     display: none !important;
 }
 
+.hInput, .hInputSearch{
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    color: black;
+    width: 100%;
+    position: relative;
+}
+
+.hInput:focus, .hInputSearch:focus{
+    outline: 0;
+}
+
+
 .hInputSearch {
     top: 19px;
     position: absolute;
@@ -65,16 +79,16 @@
     height: 24px;
     background-color: transparent;
     border: none;
-    border-bottom: white solid 1px;
-    color: white;
+    border-bottom: white solid 1px !important;
+    color: white !important;
+    width: 200px !important;
 //    -webkit-animation-timing-function: ease-in;
 //    -webkit-animation-name: animationIn;
 //    -webkit-animation-duration: 500ms;
 }
 
 .hInputSearch:focus {
-    outline: 0;
-    border-bottom: white solid 2px;
+    border-bottom: white solid 2px !important;
 //    -webkit-animation-timing-function: ease-in;
 //    -webkit-animation-name: animationIn;
 //    -webkit-animation-duration: 500ms;
