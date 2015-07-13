@@ -37,10 +37,30 @@ var HIcon = React.createClass({
         else
             props.className = this.props.iconClassName;
         props.style = this.props.style;
-        props.onTouchTap = this.props.onClick;
+        props.onTouchTap = this.toggleDropDown;
 
         var self = this;
-        return (React.createElement('div', {}, [React.createElement('icon', props)]));
+        return (React.createElement('div', {}, [React.createElement('icon', props),
+            this.isDropDown() ?
+                <div style={{position: 'absolute', right: '40px', top: '19px', zIndex: '10'}}>
+                    {this.props.menuDropDownItens.map(function(item, idx, arrayDropDown){
+                        return(
+                                <div style={
+                                    {right: "55px",
+                                     top: "40px",
+                                     width: "150px",
+                                     padding: '6px',
+                                     backgroundColor: 'white',
+                                     border: 'lightgray solid 1px',
+                                     cursor: 'pointer'}} onClick={function(e){
+                                        e.preventDefault();
+                                        self.props.onItemClick(self.props.indexItens, self.props.arrayItens, e, idx, arrayDropDown[idx]);
+                                }}>{item.text}</div>
+                            )
+                        })
+                    }
+                </div> : null
+        ]));
     }
 
 });

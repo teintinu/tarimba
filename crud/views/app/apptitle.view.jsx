@@ -36,7 +36,7 @@ class AppTitleView extends FluxEasy.View {
             marginRight: '5px',
             marginTop: '20px',
             marginRigth: '10px',
-            position: 'fixed'
+            position: 'absolute'
         }
 
         var styleSearch = {
@@ -46,11 +46,11 @@ class AppTitleView extends FluxEasy.View {
             marginTop: '20px',
             marginRight: '25px',
             fontSize: '18px',
-            position: 'static'
+            position: 'absolute'
         }
 
         var styleLinerProgress = {
-            position: 'fixed',
+            position: 'absolute',
             marginTop: '60px',
             left: '0px'
         }
@@ -64,18 +64,9 @@ class AppTitleView extends FluxEasy.View {
                      es: "Zscan - es"
                    }
                }>
-               <mui.TextField ref="search"
-                           hintText="Search"
-                            style={{marginLeft: '10px'}}
-                           valueLink={this.state.searchText}
-                           onKeyUp={this.pesquisa}
-                           className={classIput}
-                           onBlur={this.fechaSearch} />
 
-               <H.Icon onClick={this.appSearch.bind(this, "iconSearch")}
-                    style={styleSearch}
-                    iconClassName={classSearch}
-                    title={altTask}/>
+
+
 
                     {tasks.length ? <div style = {styleDivIcon}>
                    < H.Icon onClick={this.appTaskClick}
@@ -129,3 +120,18 @@ class AppTitleView extends FluxEasy.View {
 }
 
 export default AppTitleView;
+
+
+/*
+
+<H.Icon onClick={this.appSearch.bind(this, "iconSearch")}
+                    style={styleSearch}
+                    iconClassName={classSearch}
+                    title={altTask}/>
+<mui.TextField ref="search"
+                           hintText="Search"
+                            style={{marginLeft: '10px'}}
+                           valueLink={this.state.searchText}
+                           onKeyUp={this.pesquisa}
+                           className={classIput}
+                           onBlur={this.fechaSearch} />*/

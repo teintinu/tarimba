@@ -1,7 +1,7 @@
 var mui = require('material-ui');
 
 var React = require('react');
-var Icon = require('./icon');
+var IconDropDown = require('./iconDropDown');
 var Select = require('./select');
 var DropDownIcon = require('./dropDownIcon');
 var h5mixinprops = require('../mixins/h5mixinprops');
@@ -175,7 +175,7 @@ var HList = React.createClass({
         return(
 
             <div key={keyDIV} style={{position:'relative'}}>
-                <Icon
+                <IconDropDown
                      key={keyDropDownIcon}
                      indexItens={indexItens}
                      arrayItens={arrayItens}

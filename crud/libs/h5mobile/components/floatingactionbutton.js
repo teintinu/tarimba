@@ -28,20 +28,32 @@ var Hfloating = React.createClass({
             position: 'fixed',
             bottom: '30px',
             right: '30px',
-            zIndex:'100'
+            zIndex:'100',
+            border: '10px',
+            background: 'none',
+            display: 'inline-block',
+            font: 'inherit',
+            fontFamily: 'Roboto, sans-serif',
+            cursor: 'pointer',
+            height: '56px',
+            width: '56px',
+            backgroundColor: '#ff4081',
+            borderRadius: '50%'
         }
 
         var props_icon = {};
         props_icon.iconClassName = this.props.iconClassName;
         props_icon.style = { //colocando style no icon
-            lineHeight: "2.2",
-            height: '56px',
-            color: 'white'
-
+            top: "18px",
+            height: '29px',
+            color: 'white',
+            fontSize: '19px',
+            left: '18px',
+            position: 'absolute'
         }
 
         var icon = React.createElement(HIcon, props_icon)
-        return (React.createElement(mui.FloatingActionButton, props_button, icon));
+        return (React.createElement('div', props_button, icon));
     }
 
 });
