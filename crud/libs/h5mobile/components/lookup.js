@@ -27,7 +27,8 @@ var Lookup = React.createClass({
             searchResult: [],
             searchResultIndex: -1,
             lookupDataBackup: {},
-            zIndex: --zIndex
+            zIndex: --zIndex,
+            focus: false
         }
     },
     render: function () {
@@ -58,7 +59,11 @@ var Lookup = React.createClass({
         var colspanx = p[1];
 
         var propstd = {
-            colSpan: colspanx
+            colSpan: colspanx,
+            style: {
+                position: 'relative',
+                height: '72px'
+            }
         };
 
         if (this.props.rowSpan)
@@ -80,6 +85,20 @@ var Lookup = React.createClass({
         propsTextField.onKeyDown = this.keyDown;
         propsTextField.ref = this.props.field;
         propsTextField.className = this.props.iconAlign ? 'input' + this.props.iconAlign : 'inputleft'
+        propsTextField.onFocus = this.focus;
+        propsTextField.onBlur = this.blur;
+        propsTextField.style = {
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              border: 'none',
+              outline: 'none',
+              backgroundColor: 'transparent',
+              color: 'rgba(0, 0, 0, 0.87)',
+              font: 'inherit',
+              boxSizing: 'border-box',
+              paddingTop: '26px'
+        };
 
 
 
@@ -137,6 +156,27 @@ var Lookup = React.createClass({
             backgroundColor: "white"
         };
 
+
+        var styleLabel = {}
+        styleLabel = this.state.focus ?
+            {
+              position: 'absolute',
+              lineHeight: '22px',
+              opacity: '1',
+              color: this.state.focus ? 'rgb(0, 188, 212)' :  'rgba(0, 0, 0, 0.298039)',
+              top: '15px',
+              fontSize: '14px'
+        } :
+            {
+              position: 'absolute',
+              lineHeight: '22px',
+              opacity: '1',
+              color: 'rgba(0, 0, 0, 0.298039)',
+              top: '38px',
+              left: '20px'
+        };
+
+
         var listResult = this.state.searchResult ? <mui.List style={styleList} >{this.state.searchResult.length > 0 ? this.state.searchResult.map(function (item, index) {
                         var style = {
                             height: '30px',
@@ -163,9 +203,41 @@ var Lookup = React.createClass({
                 : null;
 
         return (React.createElement("td", propstd,
-                        React.createElement("div", {style:{position: 'relative', zIndex: this.state.zIndex}},
+                        React.createElement("div", {style:{position: 'relative', zIndex: this.state.zIndex, height: '100%'}},
                         [this.state.open ? React.createElement("div", {style: styleDivQueEnglobaTodoLookup}) : null,
-                         React.createElement(mui.TextField, propsTextField),
+                         React.createElement('label', {style: styleLabel}, [
+            this.state.focus ? this.props.hintText : this.props.floatingLabelText]),
+                         React.createElement('input', propsTextField),
+                         React.createElement('hr', {style: {
+                            border: 'none',
+                            borderBottom: 'solid 1px #e0e0e0',
+                            position: 'absolute',
+                            width: '100%',
+                            bottom: '8px',
+                            margin: '0',
+                            boxSizing: 'content-box',
+                            height: '0'
+                        }}),
+                        this.state.focus ? React.createElement('hr', {style: {
+                              borderStyle: 'none none solid',
+                              borderBottomWidth: '2px',
+                              position: 'absolute',
+                              width: '100%',
+                              bottom: '8px',
+                              margin: '0px',
+                              boxSizing: 'content-box',
+                              height: '0px',
+                              borderColor: 'rgb(0, 188, 212)',
+                              transform: 'scaleX(1)'
+                        }}) : null ,
+                        error ?
+                        React.createElement('label', {style: {
+                          color: 'red',
+                          fontSize: '13px',
+                          bottom: '-9px',
+                          position: 'absolute',
+                          left: '0px'
+                        }}, [error]) : null ,
                          React.createElement('div', {position: 'relative'}, React.createElement(Icon, propsIcon)),
                          listLookup,
                          this.getEditingStore()[this.props.field].display ?
@@ -353,7 +425,13 @@ var Lookup = React.createClass({
             editing[this.props.field] = {_id: null, display:null};
            return editing;
         }
-    }
+    },
+    focus: function(e){
+        this.setState({focus: true})
+    },
+    blur: function(e){
+        this.setState({focus: false})
+    },
 });
 
 module.exports = Lookup;

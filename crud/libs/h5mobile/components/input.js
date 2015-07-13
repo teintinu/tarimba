@@ -32,7 +32,6 @@ var HInput = React.createClass({
             });
         }
 
-        props.fullWidth = true;
         props.value = value;
         props.errorText = error ? error : ''
         props.name = this.props.field;
@@ -61,7 +60,8 @@ var HInput = React.createClass({
         var propstd = {
             colSpan: colspanx,
             style: {
-                position: 'relative'
+                position: 'relative',
+                height: '72px'
             }
         };
 
@@ -110,7 +110,16 @@ var HInput = React.createClass({
                       height: '0px',
                       borderColor: 'rgb(0, 188, 212)',
                       transform: 'scaleX(1)'
-                }}) : null]));
+                }}) : null],
+                error ?
+                React.createElement('label', {style: {
+                  color: 'red',
+                  fontSize: '13px',
+                  bottom: '-9px',
+                  position: 'absolute',
+                  left: '0px'
+                }}, [error]) : null
+            ));
     },
     changed: function (ev) {
         var editing = this.props.store.getState().editing;
