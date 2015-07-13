@@ -1,11 +1,8 @@
-var mui = require('material-ui');
-var ClickAwayable = mui.Mixins.ClickAwayable;
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops');
 var h5dropdown = require('../mixins/h5dropdown');
 var Icon = require('./icon');
 var Input = require('./input');
-var Transitions = mui.Styles.Transitions;
 
 var zIndex= 100;
 var Lookup = React.createClass({
@@ -112,7 +109,7 @@ var Lookup = React.createClass({
             left: '0px',
             fontSize: '14px',
             width: '14px',
-            color: mui.Styles.Colors.grey500,
+            color: '#9e9e9e',
             position: 'absolute',
             bottom: '18px'
         };
@@ -125,14 +122,14 @@ var Lookup = React.createClass({
             right: '10px',
             fontSize: '14px',
             width: '10px',
-            color: mui.Styles.Colors.grey500,
+            color: '#9e9e9e',
             position: 'absolute',
             bottom: '18px'
         };
 
         var classPaper = this.isDropDown() ? 'animationDropDown' : '';
         var stylePaper = {
-            maxHeight: '165px',
+            maxHeight: '178px',
             overflow: 'auto',
             position: 'absolute',
             width:'100%',
@@ -150,7 +147,7 @@ var Lookup = React.createClass({
 
         var styleDivQueEnglobaTodoLookup ={
             position: 'absolute',
-            height: '247px',
+            height: '260px',
             width: 'calc(100% + 7px)',
             marginLeft: '-6px',
             boxShadow: 'rgba(0, 151, 167, 0.3) 0px 1px 6px, rgba(0, 151, 167, 0.5) 0px 1px 4px',
@@ -184,7 +181,7 @@ var Lookup = React.createClass({
                             padding: '3px'
                         };
                         if(index == self.state.searchResultIndex){
-                            style.backgroundColor = mui.Styles.Colors.grey300;
+                            style.backgroundColor = '#e0e0e0';
                         }
                         var propsItemList={};
                         propsItemList.onTouchTap = function(e){
@@ -272,13 +269,13 @@ var Lookup = React.createClass({
       if(this.state.keyUpScroll > 1)
         this.state.keyUpScroll -= 1;
       else
-        React.findDOMNode(this.refs.lookup).scrollTop -= 30;
+        React.findDOMNode(this.refs.lookup).scrollTop -= 36;
     },
     scrollItemDown: function(){
       if(this.state.keyUpScroll < 5)
          this.state.keyUpScroll += 1;
       else
-         React.findDOMNode(this.refs.lookup).scrollTop += 30;
+         React.findDOMNode(this.refs.lookup).scrollTop += 36;
     },
     keyDown: function(e){
         if (e.key == 'Tab') {

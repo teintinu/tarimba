@@ -1,13 +1,8 @@
 import FluxEasy from 'flux-easy';
 import AppStore from '../../stores/app.store.js';
-import mui from 'material-ui'
 
 import H from '../../libs/h5mobile/h5frontend.js';
 var test;
-
-var {
-    LinearProgress
-} = mui;
 
 class AppTitleView extends FluxEasy.View {
 
@@ -78,7 +73,6 @@ class AppTitleView extends FluxEasy.View {
                             style = {styleIcon}
                             iconClassName = {classIcon}
                             title = {altTask}/></div > : ""}
-               {tasks.length ? < LinearProgress style = {styleLinerProgress} /> : ""}
             < /H.AppTitle>
         );
     }

@@ -3,7 +3,6 @@ var mui = require('material-ui');
 var React = require('react');
 var IconDropDown = require('./iconDropDown');
 var Select = require('./select');
-var DropDownIcon = require('./dropDownIcon');
 var h5mixinprops = require('../mixins/h5mixinprops');
 var h5dropdown = require('../mixins/h5dropdown');
 var Colors = mui.Styles.Colors;

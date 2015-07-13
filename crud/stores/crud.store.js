@@ -79,7 +79,14 @@ function DB() {
             doc: '',
             mae: 9,
             sexo: 'M'
-            }
+            },
+        {
+            _id: 12,
+            name: "Neide",
+            doc: '123123',
+            mae: 9,
+            sexo: 'F'
+            },
         ];
 
     this.find = function (id, callback) {
