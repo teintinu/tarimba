@@ -90,42 +90,46 @@ function DB() {
         ];
 
     this.find = function (id, callback) {
-        var dado = db.reduce(function (ret, item) {
-            if (!ret && item._id == id)
-                return item;
-            return ret;
-        }, null);
-        if (dado.mae)
-            dado={
-                _id: dado._id,
-                name: dado.name,
-                doc: dado.doc,
-                sexo: dado.sexo,
-               mae : {
-                  _id: dado.mae,
-                  display: db.reduce(function (ret, item) {
-                      if (!ret && item._id == dado.mae)
-                          return item.name+' '+item.doc;
-                      return ret;
-                  }, null)
-               }
-            };
-        callback(null, dado);
+        setTimeout(function(){
+            var dado = db.reduce(function (ret, item) {
+                if (!ret && item._id == id)
+                    return item;
+                return ret;
+            }, null);
+            if (dado.mae)
+                dado={
+                    _id: dado._id,
+                    name: dado.name,
+                    doc: dado.doc,
+                    sexo: dado.sexo,
+                   mae : {
+                      _id: dado.mae,
+                      display: db.reduce(function (ret, item) {
+                          if (!ret && item._id == dado.mae)
+                              return item.name+' '+item.doc;
+                          return ret;
+                      }, null)
+                   }
+                };
+            callback(null, dado);
+        }, 1000);
     };
 
     this.search = function (searchText, callback) {
-        callback(null, db.reduce(function (ret, item) {
-            var itemName = item.name.toUpperCase();
-            var searchTextaux = searchText.toUpperCase();
-            if (searchText === '' || itemName.indexOf(searchTextaux) >= 0 || item._id == searchText) {
-                ret.push({
-                    _id: item._id,
-                    name: item.name,
-                    sexo: item.sexo
-                });
-            }
-            return ret;
-        }, []));
+        setTimeout(function(){
+            callback(null, db.reduce(function (ret, item) {
+                var itemName = item.name.toUpperCase();
+                var searchTextaux = searchText.toUpperCase();
+                if (searchText === '' || itemName.indexOf(searchTextaux) >= 0 || item._id == searchText) {
+                    ret.push({
+                        _id: item._id,
+                        name: item.name,
+                        sexo: item.sexo
+                    });
+                }
+                return ret;
+            }, []));
+        }, 200);
     }
 
     this.save = function (listing, editing, callback) {

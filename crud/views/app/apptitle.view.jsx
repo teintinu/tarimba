@@ -19,18 +19,7 @@ class AppTitleView extends FluxEasy.View {
     render() {
         var tasks = zscanapp.tasks();
         var altTask = tasks.length ? tasks[0].title : null;
-        var classIcon = 'fa fa-cog gira';
-        var styleIcon = {
-            color: 'white',
-            fontSize: '20px'
-        }
-        var styleDivIcon = {
-            float: 'right',
-            marginRight: '5px',
-            marginTop: '20px',
-            marginRigth: '10px',
-            position: 'absolute'
-        }
+
 
         var styleSearch = {
             color: 'white',
@@ -67,12 +56,6 @@ class AppTitleView extends FluxEasy.View {
                            valueLink={this.state.searchText}
                            onKeyUp={this.pesquisa}
                            onBlur={this.fechaSearch} /> : null}
-
-                    {tasks.length ? <div style = {styleDivIcon}>
-                   < H.Icon onClick={this.appTaskClick}
-                            style = {styleIcon}
-                            iconClassName = {classIcon}
-                            title = {altTask}/></div > : ""}
             < /H.AppTitle>
         );
     }

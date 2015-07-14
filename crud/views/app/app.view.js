@@ -20,6 +20,7 @@ class AppView extends FluxEasy.View {
 
         AppView.content = Content.createViewReference(dispatcher);
         this.app.addEventListener('RefreshAll', this);
+        zscanapp.addEventListener('RefreshTasks', this);
 
         AppView.childContextTypes = {
             muiTheme: React.PropTypes.object,
@@ -34,7 +35,19 @@ class AppView extends FluxEasy.View {
     }
 
     render() {
+        var tasks = zscanapp.tasks();
         var state = this.app.getState();
+        var styleIcon = {
+          position: 'fixed',
+          color: 'black',
+          fontSize: '40px',
+          zIndex: '100',
+          top: '48%',
+          left: '44%'
+        }
+        var styleDivIcon = {
+            position: 'relative'
+        }
         return (React.createElement('div', {}, [
                 React.createElement(this.title.Class, {openMenu: this.toggle}),
                 <div>
@@ -43,7 +56,14 @@ class AppView extends FluxEasy.View {
                       <H.MenuLeft ref="menu" refMenu="leftMenu" docked={window.innerWidth > 750} menuItems={this.app.getState().menuItems} onClick={this.onItemClick} />
                  }
                 </div>,
-                React.createElement(this.content.Class)
+                React.createElement(this.content.Class),
+
+
+                <div style = {styleDivIcon}>
+                {tasks.length > 0 ?
+                 <H.Icon onClick={this.appTaskClick}
+                    style = {styleIcon}
+                    iconClassName = 'fa fa-cog gira'/>: null}</div>
         ]));
     }
     toggle(){
