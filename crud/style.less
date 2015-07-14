@@ -49,9 +49,9 @@
 
 .inputInvisible {
     opacity: 0;
-    -webkit-animation-timing-function: ease-out;
-    -webkit-animation-name: animationOut;
-    -webkit-animation-duration: 500ms;
+    animation-timing-function: ease-out;
+    animation-name: animationOut;
+    animation-duration: 500ms;
 }
 
 .criado {
@@ -82,53 +82,53 @@
     border-bottom: white solid 1px !important;
     color: white !important;
     width: 200px !important;
-//    -webkit-animation-timing-function: ease-in;
-//    -webkit-animation-name: animationIn;
-//    -webkit-animation-duration: 500ms;
+    animation-timing-function: ease-in;
+    animation-name: animationIn;
+    animation-duration: 500ms;
 }
 
 .hInputSearch:focus {
     border-bottom: white solid 2px !important;
-//    -webkit-animation-timing-function: ease-in;
-//    -webkit-animation-name: animationIn;
-//    -webkit-animation-duration: 500ms;
+    animation-timing-function: ease-in;
+    animation-name: animationIn;
+    animation-duration: 500ms;
 }
 
 .listaLookupSearching {
     pointer-events: none;
     opacity: 0.5;
-    -webkit-animation-name: animationLookup;
-    -webkit-animation-duration: 1000ms;
+    animation-name: animationLookup;
+    animation-duration: 1000ms;
 }
 
 .searching {
     transform: scale(0.8);
-    -webkit-animation-name: animationSearching;
-    -webkit-animation-duration: 1500ms;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
+    animation-name: animationSearching;
+    animation-duration: 1500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 .contentBusy {
     pointer-events: none;
     cursor: wait;
     opacity: 0.5;
-    -webkit-animation-name: animationAplicationBusy;
-    -webkit-animation-duration: 1ms;
+    animation-name: animationAplicationBusy;
+    animation-duration: 1ms;
 }
 
 .gira {
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-name: rotateSpin;
-    -webkit-animation-duration: 1500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: rotateSpin;
+    animation-duration: 1500ms;
 }
 
 .animationDropDown {
     opacity: 1;
-    -webkit-animation-timing-function: ease-in;
-    -webkit-animation-name: animationIn;
-    -webkit-animation-duration: 200ms;
+    animation-timing-function: ease-in;
+    animation-name: animationIn;
+    animation-duration: 200ms;
 }
 
 @media screen and (max-device-width: 750px),
@@ -146,7 +146,7 @@
     }
 }
 
-@-webkit-keyframes animationSearching {
+@keyframes animationSearching {
     0% {
         transform: scale(1);
     }
@@ -158,7 +158,7 @@
     }
 }
 
-@-webkit-keyframes rotateSpin {
+@keyframes rotateSpin {
     from {
         transform: rotate(0deg);
     }
@@ -167,7 +167,7 @@
     }
 }
 
-@-webkit-keyframes animationOut {
+@keyframes animationOut {
     from {
         opacity: 1
     }
@@ -177,7 +177,7 @@
     }
 }
 
-@-webkit-keyframes animationIn {
+@keyframes animationIn {
     from {
         opacity: 0
     }
@@ -186,7 +186,7 @@
     }
 }
 
-@-webkit-keyframes animationAplicationBusy {
+@keyframes animationAplicationBusy {
     from {
         opacity: 1
     }
@@ -195,7 +195,7 @@
     }
 }
 
-@-webkit-keyframes animationLookup {
+@keyframes animationLookup {
     from {
         opacity: 1
     }
