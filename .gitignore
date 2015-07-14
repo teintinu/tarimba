@@ -28,4 +28,9 @@ node_modules
 
 bundle.*
 webpack-profile.json
-/cordova/lumxpassobebeapp/www/bower_components/
+/cordova/lumxpassobebeapp/www/bower_components/**
+/cordova/lumxpassobebeapp/platforms/**
+/cordova/lumxapp/platforms/**
+/cordova/hello/platforms/**
+/cordova/crosswalkapp/platforms/**
+/cordova/ccaapp/platforms/**

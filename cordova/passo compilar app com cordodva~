@@ -1,5 +1,0 @@
-cordova create nameapp  com.example.nameapp
-cordova platform add {plataforma}
-cordova prepare
-cordova build {--debug/--release}
-cordova run {--device/--emulator}
