@@ -1,0 +1,10 @@
+cordova plugin add cordova-plugin-crosswalk-webview
+cordova build android
+cordova build --release
+
+
+
+
+link git 
+
+https://github.com/infil00p/cordova-crosswalk-engine

@@ -1,0 +1,16 @@
+-------prerequisitos-------------- 
+
+android_sdks (baixar no site google developers)
+
+------------setar variareis do ambiente-----------
+
+export ANDROID_HOME=/<installation location>/android-sdk-linux
+export PATH=${PATH}:/<installation location>/android_sdks/plataform-tools:/<installation location>/android_sdks/tools
+
+------------build app------------------
+
+cordova create nameapp  com.example.nameapp
+cordova platform add {plataforma}
+cordova prepare
+cordova build {--debug/--release}
+cordova run {--device/--emulator}

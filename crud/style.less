@@ -1,0 +1,205 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'FontAwesome';
+}
+
+.muidocs-icon-action-grade:before {
+    font-family: 'Roboto';
+    content: "\f09b";
+}
+
+.content,
+.contentBusy {
+    box-sizing: border-box;
+    padding-top: 64px;
+}
+
+.hoverRed:hover {
+    color: firebrick !important;
+}
+
+.fieldsPatient {
+    width: 70%;
+    float: left;
+}
+
+.imgVideosLaudos {
+    width: 30%;
+    float: left;
+}
+
+.itemMenuLeft {
+    padding: 16px;
+}
+.itemMenuLeft:hover, .itemMenuList:hover {
+    background-color: lightgray;
+}
+
+.inputleft {
+    width: ~'calc(100% - 40px) !important';
+    left: 18px;
+}
+
+.inputInvisible,
+.inputVisible {
+    margin-top: 5px;
+    width: 200px !important;
+}
+
+.inputInvisible {
+    opacity: 0;
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-name: animationOut;
+    -webkit-animation-duration: 500ms;
+}
+
+.criado {
+    display: none !important;
+}
+
+.hInput, .hInputSearch{
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    color: black;
+    width: 100%;
+    position: relative;
+}
+
+.hInput:focus, .hInputSearch:focus{
+    outline: 0;
+}
+
+
+.hInputSearch {
+    top: 19px;
+    position: absolute;
+    right: 48px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    border-bottom: white solid 1px !important;
+    color: white !important;
+    width: 200px !important;
+//    -webkit-animation-timing-function: ease-in;
+//    -webkit-animation-name: animationIn;
+//    -webkit-animation-duration: 500ms;
+}
+
+.hInputSearch:focus {
+    border-bottom: white solid 2px !important;
+//    -webkit-animation-timing-function: ease-in;
+//    -webkit-animation-name: animationIn;
+//    -webkit-animation-duration: 500ms;
+}
+
+.listaLookupSearching {
+    pointer-events: none;
+    opacity: 0.5;
+    -webkit-animation-name: animationLookup;
+    -webkit-animation-duration: 1000ms;
+}
+
+.searching {
+    transform: scale(0.8);
+    -webkit-animation-name: animationSearching;
+    -webkit-animation-duration: 1500ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+.contentBusy {
+    pointer-events: none;
+    cursor: wait;
+    opacity: 0.3;
+    -webkit-animation-name: animationAplicationBusy;
+    -webkit-animation-duration: 2000ms;
+}
+
+.gira {
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-name: rotateSpin;
+    -webkit-animation-duration: 1500ms;
+}
+
+.animationDropDown {
+    opacity: 1;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-name: animationIn;
+    -webkit-animation-duration: 200ms;
+}
+
+@media screen and (max-device-width: 750px),
+(max-width: 750px) {
+    .fieldsPatient {
+        width: 100%;
+    }
+    .imgVideosLaudos {
+        width: 100%;
+    }
+    .content,
+    .contentBusy {
+        box-sizing: border-box;
+        margin-left: 0px;
+    }
+}
+
+@-webkit-keyframes animationSearching {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.7);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes rotateSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes animationOut {
+    from {
+        opacity: 1
+    }
+    to {
+        opacity: 0;
+        display: none !important;
+    }
+}
+
+@-webkit-keyframes animationIn {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes animationAplicationBusy {
+    from {
+        opacity: 1
+    }
+    to {
+        opacity: 0.3;
+    }
+}
+
+@-webkit-keyframes animationLookup {
+    from {
+        opacity: 1
+    }
+    to {
+        opacity: 0.5;
+    }
+}

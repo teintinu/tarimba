@@ -8,8 +8,8 @@ module.exports = function (app) {
         getInitialState: function()
         {
             return{
-                username: '',
-                password: ''
+                username: 'mar@',
+                password: 'adm'
             }
         },
         handleChangeUser: function(event) {
