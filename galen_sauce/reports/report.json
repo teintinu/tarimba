@@ -1,0 +1,59 @@
+{
+  "tests" : [ {
+    "name" : "Login sucesso (Firefox)",
+    "startedAt" : 1436870431947,
+    "endedAt" : 1436870440883,
+    "failed" : false,
+    "statistic" : {
+      "passed" : 51,
+      "errors" : 0,
+      "warnings" : 0,
+      "total" : 51
+    },
+    "testId" : "1-login-sucesso-firefox-",
+    "failed" : false,
+    "duration" : 8936
+  }, {
+    "name" : "Login falha (Firefox)",
+    "startedAt" : 1436870431945,
+    "endedAt" : 1436870441270,
+    "failed" : false,
+    "statistic" : {
+      "passed" : 60,
+      "errors" : 0,
+      "warnings" : 0,
+      "total" : 60
+    },
+    "testId" : "2-login-falha-firefox-",
+    "failed" : false,
+    "duration" : 9325
+  }, {
+    "name" : "Login sucesso (Chrome)",
+    "startedAt" : 1436870431947,
+    "endedAt" : 1436870441806,
+    "failed" : false,
+    "statistic" : {
+      "passed" : 51,
+      "errors" : 0,
+      "warnings" : 0,
+      "total" : 51
+    },
+    "testId" : "3-login-sucesso-chrome-",
+    "failed" : false,
+    "duration" : 9859
+  }, {
+    "name" : "Login falha (Chrome)",
+    "startedAt" : 1436870431947,
+    "endedAt" : 1436870442063,
+    "failed" : false,
+    "statistic" : {
+      "passed" : 60,
+      "errors" : 0,
+      "warnings" : 0,
+      "total" : 60
+    },
+    "testId" : "4-login-falha-chrome-",
+    "failed" : false,
+    "duration" : 10116
+  } ]
+}

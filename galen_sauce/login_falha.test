@@ -1,0 +1,21 @@
+@@ set 
+    gridUrl         http://192.168.25.102:4444/wd/hub
+    website         http://testapp.galenframework.com
+
+@@ table browsers
+    | browserName   | gridArgs                            |
+    | Firefox       | --browser "firefox"                 |
+    | Chrome        | --browser "chrome"                  |
+
+@@ parameterized using browsers
+Login falha (${browserName})
+    selenium grid ${gridUrl} --page ${website} ${gridArgs}
+        check homepage.spec
+        
+        run clica_login.js  
+                
+        check loginpage.spec
+        
+        run login_falha.js
+        
+        check login_falha.spec

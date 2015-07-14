@@ -1,0 +1,14 @@
+{
+    "name": "galen_sauce",
+    "version": "0.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "node_modules/galenframework-cli/bin/galen test *.test --htmlreport reports --parallel-suites 10"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "galenframework-cli": "^1.6.4"
+    }
+}
