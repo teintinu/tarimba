@@ -22,7 +22,8 @@ var HList = React.createClass({
     mixins: [h5mixinprops, h5dropdown],
     getInitialState: function(){
         return {
-            listInOrder: []
+            listInOrder: [],
+            clickedItem: null
         }
     },
     render: function () {
@@ -82,7 +83,7 @@ var HList = React.createClass({
             }
         }
 
-        propsItemList.onTouchTap = this._click.bind(this, item);
+        propsItemList.onTouchTap = this._click.bind(this, item, index);
 
 
         return propsItemList;
@@ -107,10 +108,11 @@ var HList = React.createClass({
                 marginBottom: '0px !important',
                 height: '52px',
                 padding: '10px',
-                width: '100%'
+                width: '100%',
+                backgroundColor: index == self.state.clickedItem ? 'lightgray' : 'white'
             }
             var propsDivItem = {};
-            propsDivItem.className= 'itemMenuList';
+            propsDivItem.className ='itemMenuList';
             propsDivItem.key= keyDiv;
 
             return React.createElement("div", propsDivItem, [iconList,
@@ -198,7 +200,8 @@ var HList = React.createClass({
             </div>
         )
     },
-    _click: function(item){
+    _click: function(item, index){
+        this.setState({clickedItem: index});
         this.props.actionEdit(item);
     },
     _changeItens: function(index, array, e, selectedIndex, menuItem){
