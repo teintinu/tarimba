@@ -223,6 +223,7 @@ class CRUDStore extends FluxEasy.Store {
             this.task();
             if(this.state.step == steps.lista)
                 zscanapp.setContent("#crud/");
+
         }.bind(this));
     }
 

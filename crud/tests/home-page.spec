@@ -1,10 +1,6 @@
 ==================================================
-header              id      header
-menu                id      menu
+header      id   title
 ==================================================
 
 header
-    height: 100px
-    
-menu
     height: 100px

@@ -1,0 +1,31 @@
+{
+  "tests" : [ {
+    "name" : "Input sem validação (Firefox)",
+    "startedAt" : 1436897391908,
+    "endedAt" : 1436897395472,
+    "failed" : false,
+    "statistic" : {
+      "passed" : 6,
+      "errors" : 0,
+      "warnings" : 0,
+      "total" : 6
+    },
+    "testId" : "1-input-sem-valida-o-firefox-",
+    "failed" : false,
+    "duration" : 3564
+  }, {
+    "name" : "Input sem validação (Chrome)",
+    "startedAt" : 1436897391916,
+    "endedAt" : 1436897395710,
+    "failed" : false,
+    "statistic" : {
+      "passed" : 6,
+      "errors" : 0,
+      "warnings" : 0,
+      "total" : 6
+    },
+    "testId" : "2-input-sem-valida-o-chrome-",
+    "failed" : false,
+    "duration" : 3794
+  } ]
+}

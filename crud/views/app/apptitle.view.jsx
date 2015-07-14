@@ -47,7 +47,7 @@ class AppTitleView extends FluxEasy.View {
         }
 
         var classSearch = (tasks.length && this.state.searchText != '') ? 'searching fa fa-search' : 'fa fa-search';
-        return ( <H.AppTitle onLeftIconButtonTouchTap = {this.props.openMenu} showMenuIconButton = {window.innerWidth < 750}
+        return ( <H.AppTitle id='title' onLeftIconButtonTouchTap = {this.props.openMenu} showMenuIconButton = {window.innerWidth < 750}
               titleText = {
                   {
                       pt_br: "Zscan - pt_br",

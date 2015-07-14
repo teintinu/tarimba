@@ -1,0 +1,128 @@
+{
+  "testId" : "2-input-sem-valida-o-chrome-",
+  "name" : "Input sem validação (Chrome)",
+  "report" : {
+    "nodes" : [ {
+      "status" : "info",
+      "nodes" : [ {
+        "name" : "        check testone.spec",
+        "status" : "info",
+        "nodes" : [ {
+          "name" : "Check layout: testone.spec included tags: ",
+          "status" : "info",
+          "time" : 1436897394420,
+          "sections" : [ {
+            "name" : "",
+            "objects" : [ {
+              "name" : "body",
+              "specs" : [ {
+                "status" : "info",
+                "place" : {
+                  "filePath" : "testone.spec",
+                  "lineNumber" : 7
+                },
+                "name" : "contains: name",
+                "highlight" : [ "body", "name" ]
+              } ]
+            }, {
+              "name" : "name",
+              "specs" : [ {
+                "status" : "info",
+                "place" : {
+                  "filePath" : "testone.spec",
+                  "lineNumber" : 10
+                },
+                "name" : "text is:",
+                "highlight" : [ "name" ]
+              } ]
+            } ]
+          } ],
+          "objects" : {
+            "name" : {
+              "area" : [ 8, 8, 1019, 908 ]
+            },
+            "body" : {
+              "area" : [ 8, 8, 1019, 929 ]
+            }
+          },
+          "screenshot" : "layout-1-screenshot.png",
+          "type" : "layout"
+        } ],
+        "time" : 1436897393790,
+        "type" : "node"
+      }, {
+        "name" : "        run testone.js",
+        "status" : "info",
+        "nodes" : [ {
+          "name" : "Type text \"teste de campo\" to input",
+          "status" : "info",
+          "nodes" : [ {
+            "name" : "css: input[name='name']",
+            "type" : "text"
+          } ],
+          "time" : 1436897394477,
+          "type" : "node"
+        }, {
+          "name" : "Click btn",
+          "status" : "info",
+          "nodes" : [ {
+            "name" : "css: #btn",
+            "type" : "text"
+          } ],
+          "time" : 1436897394647,
+          "type" : "node"
+        } ],
+        "time" : 1436897394420,
+        "type" : "node"
+      }, {
+        "name" : "        check testtwo.spec",
+        "status" : "info",
+        "nodes" : [ {
+          "name" : "Check layout: testtwo.spec included tags: ",
+          "status" : "info",
+          "time" : 1436897395148,
+          "sections" : [ {
+            "name" : "",
+            "objects" : [ {
+              "name" : "body",
+              "specs" : [ {
+                "status" : "info",
+                "place" : {
+                  "filePath" : "testtwo.spec",
+                  "lineNumber" : 6
+                },
+                "name" : "contains: name",
+                "highlight" : [ "body", "name" ]
+              } ]
+            }, {
+              "name" : "name",
+              "specs" : [ {
+                "status" : "info",
+                "place" : {
+                  "filePath" : "testtwo.spec",
+                  "lineNumber" : 9
+                },
+                "name" : "text is: teste de campo",
+                "highlight" : [ "name" ]
+              } ]
+            } ]
+          } ],
+          "objects" : {
+            "name" : {
+              "area" : [ 8, 8, 1019, 908 ]
+            },
+            "body" : {
+              "area" : [ 8, 8, 1019, 929 ]
+            }
+          },
+          "screenshot" : "layout-3-screenshot.png",
+          "type" : "layout"
+        } ],
+        "time" : 1436897394712,
+        "type" : "node"
+      } ],
+      "time" : 1436897391928,
+      "type" : "node"
+    } ]
+  }
+}
