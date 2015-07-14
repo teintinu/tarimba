@@ -1,11 +1,9 @@
-var mui = require('material-ui');
-
 var React = require('react');
 var IconDropDown = require('./iconDropDown');
 var Select = require('./select');
 var h5mixinprops = require('../mixins/h5mixinprops');
 var h5dropdown = require('../mixins/h5dropdown');
-var Colors = mui.Styles.Colors;
+require('./style/list.less');
 
 var listKey = 0;
 
@@ -104,28 +102,16 @@ var HList = React.createClass({
             var keyDiv = "DIV1" + (++listKey);
 
             propsItemList.key = "IL" + (++listKey)
-            propsItemList.style = {
-                marginBottom: '0px !important',
-                height: '52px',
-                padding: '10px',
-                width: '100%',
-                backgroundColor: index == self.state.clickedItem ? 'lightgray' : 'white'
-            }
+            propsItemList.className = index == self.state.clickedItem ? 'list_ItemList list_ItemList_click': 'list_ItemList';
+
             var propsDivItem = {};
             propsDivItem.className ='itemMenuList';
             propsDivItem.key= keyDiv;
 
             return React.createElement("div", propsDivItem, [iconList,
                 React.createElement('table', propsItemList, [
-                    React.createElement('td', {style: {
-                        height: '40px',
-                        position: 'relative'
-                    }}, [propsItemList.leftAvatar,
-                        React.createElement('span', {style:{
-                            left: '52px',
-                            position: 'absolute',
-                            top: '10px'
-                        }}, self.props.text(item))
+                    React.createElement('td', {className: 'td_ItemList'}, [propsItemList.leftAvatar,
+                        React.createElement('span', {className: 'text_ItemList'}, self.props.text(item))
                    ])
                ])
            ]);
@@ -139,19 +125,7 @@ var HList = React.createClass({
             var src = item.avatar;
 
         if (letra != "")
-           return React.createElement(src == undefined ? 'span' : 'img', {key: keyAvatar, style:this.props.avatarStyle?this.props.avatarStyle:{
-                height: '40px',
-                width: '40px',
-                backgroundColor: '#bdbdbd',
-                borderRadius: '50%',
-                border: 'none',
-                borderColor: '#e0e0e0',
-                display: 'inline-block',
-                textAlign: 'center',
-                lineHeight: '40px',
-                fontSize: '24px',
-                color: '#ffffff'
-           }, src: src}, src != undefined ? '' : letra);
+           return React.createElement(src == undefined ? 'span' : 'img', {key: keyAvatar, className : 'avatar_ItemList', src: src}, src != undefined ? '' : letra);
         return false;
     },
     defineLetterAvatar: function(text, index, arr){
@@ -164,37 +138,25 @@ var HList = React.createClass({
         return letra;
     },
     criaIcon: function (indexItens, arrayItens){
-        var style;
-        if(this.props.style)
-            style = this.props.style;
+
         var menuDropDownItens = [
           {text: 'Editar', action: this.props.actionEdit},
           {text: 'Excluir', action: this.props.actionDelete}
         ];
-
-        var styleIconMenu = {
-            position: 'absolute',
-            cursor: 'pointer',
-            right: '10px',
-            zIndex: '2',
-            top: '6px',
-            fontSize: '21px',
-            padding: '13px'
-        }
 
         var keyDropDownIcon = "DDI" + (++listKey);
         var keyDIV = "DIV2" + (++listKey);
         var self = this;
         return(
 
-            <div key={keyDIV} style={{position:'relative'}}>
+            <div key={keyDIV} className='divIcon_ItemList'>
                 <IconDropDown
                      key={keyDropDownIcon}
                      indexItens={indexItens}
                      arrayItens={arrayItens}
                      onItemClick={this._changeItens}
-                     className = {!this.props.iconClassName ? "fa fa-ellipsis-v" : this.props.iconClassName}
-                     style={styleIconMenu}
+                     className = {!this.props.iconClassName ?
+                          "fa fa-ellipsis-v icon_ItemList" : this.props.iconClassName + ' icon_ItemList'}
                     menuDropDownItens = {menuDropDownItens}
                 />
             </div>

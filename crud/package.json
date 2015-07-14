@@ -22,9 +22,11 @@
     "material-ui": "^0.8.0",
     "node-libs-browser": "^0.5.2",
     "react": "^0.13.3",
+    "react-style-normalizer": "^1.2.8",
     "webpack": "^1.9.10"
   },
   "devDependencies": {
+    "autoprefixer-loader": "^2.0.0",
     "css-loader": "^0.14.4",
     "flux-easy": "latest",
     "flux-easy-loader": "latest",
@@ -32,6 +34,7 @@
     "less-loader": "^2.2.0",
     "material-ui": "latest",
     "react-router": "^0.13.3",
+    "react-style": "^0.5.5",
     "react-tap-event-plugin": "^0.1.7",
     "style": "0.0.3",
     "style-loader": "^0.12.3"

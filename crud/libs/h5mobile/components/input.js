@@ -1,5 +1,6 @@
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops');
+require('./style/input.less');
 
 var HInput = React.createClass({
     propTypes: {
@@ -16,7 +17,7 @@ var HInput = React.createClass({
         if (!this.props.store)
             return console.error("Is necessary propreyty state in input");
 
-        var props = {};
+        var propsInput = {};
 
         var state = this.props.store.getState();
         var value = state.editing[this.props.field];
@@ -30,26 +31,15 @@ var HInput = React.createClass({
             });
         }
 
-        props.value = value;
-        props.errorText = error ? error : ''
-        props.name = this.props.field;
-        props.onFocus = this.focus;
-        props.style = {
-              position: 'relative',
-              width: '100%',
-              height: '100%',
-              border: 'none',
-              outline: 'none',
-              backgroundColor: 'transparent',
-              color: 'rgba(0, 0, 0, 0.87)',
-              font: 'inherit',
-              boxSizing: 'border-box',
-              paddingTop: '26px'
-        };
+        propsInput.value = value;
+        propsInput.errorText = error ? error : ''
+        propsInput.name = this.props.field;
+        propsInput.onFocus = this.focus;
+        propsInput.className = 'h_input';
 
-        props.onChange = this.changed;
+        propsInput.onChange = this.changed;
         if(state.validations && state.validations[this.props.field])
-            props.onBlur = this.blur;
+            propsInput.onBlur = this.blur;
 
         var p = /(\d+)/.exec(this.props.className);
         var colspanx = p[1];
@@ -57,36 +47,20 @@ var HInput = React.createClass({
 
         var propstd = {
             colSpan: colspanx,
-            style: {
-                position: 'relative',
-                height: '72px'
-            }
+            className: 'h_input_td'
         };
 
         if (this.props.rowSpan)
             propstd.rowSpan = this.props.rowSpan;
         var styleLabel = {}
-        styleLabel = this.state.focus || props.value || props.value != '' ?
-            {
-              position: 'absolute',
-              lineHeight: '22px',
-              opacity: '1',
-              color: this.state.focus ? error ? 'red' : 'rgb(0, 188, 212)' :  error ? 'red' : 'rgba(0, 0, 0, 0.298039)',
-              top: '15px',
-              fontSize: '14px'
-        } :
-            {
-              position: 'absolute',
-              lineHeight: '22px',
-              opacity: '1',
-              color: error ? 'red' : 'rgba(0, 0, 0, 0.298039)',
-              top: '38px'
-        };
+        styleLabel = this.state.focus || propsInput.value || propsInput.value != '' ?
+             'h_Input_LabelComValue ' + (this.state.focus ? error ? 'erro' : 'focus' :  error ? 'erro' : '') :
+            'h_Input_LabelSemValue ' + (error ? 'erro' : '');
 
 
-        return (React.createElement("td", propstd, [React.createElement('label', {style: styleLabel}, [
-            this.state.focus || props.value || props.value != '' ? this.props.hintText : this.props.floatingLabelText]),
-                React.createElement('input', props),
+        return (React.createElement("td", propstd, [React.createElement('label', {className: styleLabel}, [
+            this.state.focus || propsInput.value || propsInput.value != '' ? this.props.hintText : this.props.floatingLabelText]),
+                React.createElement('input', propsInput),
                 React.createElement('hr', {style: {
                     border: 'none',
                     borderBottom: error ? 'solid 1px red' : 'solid 1px #e0e0e0',
