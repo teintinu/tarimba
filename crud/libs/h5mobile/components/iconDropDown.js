@@ -1,6 +1,7 @@
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops');
 var h5dropdown = require('../mixins/h5dropdown');
+require('./style/iconDropDown.less');
 
 var HIcon = React.createClass({
     propTypes: {
@@ -39,18 +40,12 @@ var HIcon = React.createClass({
         var self = this;
         return (React.createElement('div', {}, [React.createElement('icon', props),
             this.isDropDown() ?
-                <div style={{position: 'absolute', right: '40px', top: '19px', zIndex: '10'}}>
+                <div className='h_iconDropDown_div'>
                     {this.props.menuDropDownItens.map(function(item, idx, arrayDropDown){
                         return(
-                                <div style={
-                                    {right: "55px",
-                                     top: "40px",
-                                     width: "150px",
-                                     padding: '6px',
-                                     backgroundColor: 'white',
-                                     border: 'lightgray solid 1px',
-                                     cursor: 'pointer'}} onClick={function(e){
+                                <div className='h_iconDropDown_itens' onClick={function(e){
                                         e.preventDefault();
+                                                self.closeDropDown();
                                         self.props.onItemClick(self.props.indexItens, self.props.arrayItens, e, idx, arrayDropDown[idx]);
                                 }}>{item.text}</div>
                             )

@@ -5,6 +5,8 @@ var FontIcon = mui.FontIcon;
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops')
 
+require('./style/choose-an-image.less');
+
 var ChooseAnImage = React.createClass({
     propTypes: {
         onClick: React.PropTypes.func,
@@ -20,37 +22,16 @@ var ChooseAnImage = React.createClass({
             return console.error("Add a label='Button Name'");
         }
 
-        var styleInput = {
-            cursor: 'pointer',
-            position: 'absolute',
-            top: '0',
-            bottom: '0',
-            right: '0',
-            left: '0',
-            width: '100%',
-            opacity: '0'
-        };
-
-        var styleFlatButtonIcon = {
-            height: '100%',
-            display: 'inline-block',
-            verticalAlign: 'middle',
-            float: 'left',
-            paddingLeft: '12px',
-            lineHeight: '36px',
-            color: 'white'
-        };
 
         var input = React.createElement('input', {
             type: 'file',
-            style: styleInput,
+            className: 'h_chooseAnImage_input',
             accept: "image/*"
         });
 
 
         var icon = React.createElement(FontIcon, {
-            className: "fa fa-file-image-o",
-            style: styleFlatButtonIcon
+            className: "fa fa-file-image-o h_chooseAnImage_button"
         });
 
         props.children = this.props.children;

@@ -1,0 +1,154 @@
+.h_lookup_td {
+    position: relative;
+    height: 72px;
+}
+
+.h_lookup_textField {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.87);
+    font: inherit;
+    box-sizing: border-box;
+    padding-top: 26px;
+}
+
+.h_lookup_iconSearch {
+    left: 0px;
+    font-size: 14px;
+    width: 14px;
+    color: #9e9e9e;
+    position: absolute;
+    bottom: 18px;
+}
+
+.h_lookup_iconClear {
+    right: 10px;
+    font-size: 14px;
+    width: 10px;
+    color: #9e9e9e;
+    position: absolute;
+    bottom: 18px;
+}
+
+.h_lookup_paper {
+    max-height: 178px;
+    overflow: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    text-align: start;
+}
+
+.h_lookup_paper_center {
+    text-align: center !important;
+}
+
+.h_lookup_divList {
+    width: 100%;
+    position: relative;
+}
+
+.h_lookup_list {
+    max-height: 200px;
+    background-color: white;
+}
+
+.h_lookup_div_wrap {
+    position: absolute;
+    height: 260px;
+    width: ~'calc(100% + 7px)';
+    margin-left: -6px;
+    border: 1px solid lightgray;
+    background-color: white;
+}
+
+.h_lookup_label {
+    position: absolute;
+    line-height: 22px;
+    opacity: 1;
+    color: rgba(0, 0, 0, 0.298039);
+    top: 15px;
+    font-size: 14px;
+}
+
+.h_lookup_itemList {
+    height: 30px !important;
+    padding: 3px !important;
+    cursor: pointer;
+}
+
+.h_lookup_itemList:hover {
+    background-color: lightgray;
+}
+
+.h_lookup_span_itemSearch {
+    vertical-align: middle;
+}
+
+.h_lookup_span_notFoundText {
+    color: gray;
+    font-family: Roboto;
+    font-size: 100%;
+}
+
+.generate-zindex(40);
+.generate-zindex(@n,
+@i: 30) when (@i=< @n) {
+    .h_lookup_div@{i}
+    {
+        z-index: @i;
+        position: relative;
+        height: 100%;
+    }
+    .generate-zindex(@n,
+    (@i + 1));
+}
+
+.h_lookup_hr {
+    border: none;
+    border-bottom: solid 1px #e0e0e0;
+    position: absolute;
+    width: 100%;
+    bottom: 8px;
+    margin: 0;
+    box-sizing: content-box;
+    height: 0;
+}
+
+.h_lookup_hr_focus {
+    border-style: none none solid;
+    border-bottom-width: 2px;
+    position: absolute;
+    width: 100%;
+    bottom: 8px;
+    margin: 0px;
+    box-sizing: content-box;
+    height: 0px;
+    border-color: rgb(0, 188, 212);
+    transform: scaleX(1);
+}
+
+.h_lookup_span_error {
+    color: red;
+    font-size: 13px;
+    bottom: -9px;
+    position: absolute;
+    left: 0px;
+}
+
+.selected {
+    background-color: #e0e0e0;
+}
+
+.semValue {
+    top: 38px !important;
+    left: 20px !important;
+}
+
+.focus {
+    corlor: rgb(0, 188, 212)
+}

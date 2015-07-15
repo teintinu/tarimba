@@ -129,7 +129,7 @@ function DB() {
                 }
                 return ret;
             }, []));
-        }, 200);
+        }, 1000);
     }
 
     this.save = function (listing, editing, callback) {

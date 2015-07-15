@@ -18,11 +18,6 @@ var hform = React.createClass({
         var titleForm = propsTraduzidas.labelText;
         var titulo = React.createElement('h2', {}, [titleForm, React.createElement('br'), React.createElement('br')]);
 
-
-        var styleForm = {
-            padding: "10px"
-        };
-
         return (
 
             React.createElement('table', {width: "100%", cellSpacing:"10px", cellPadding: 0}, [this.props.children])

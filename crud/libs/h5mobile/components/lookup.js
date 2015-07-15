@@ -3,8 +3,9 @@ var h5mixinprops = require('../mixins/h5mixinprops');
 var h5dropdown = require('../mixins/h5dropdown');
 var Icon = require('./icon');
 var Input = require('./input');
+require('./style/lookup.less');
 
-var zIndex= 100;
+var zIndex= 40;
 var Lookup = React.createClass({
     mixins: [h5dropdown],
     propTypes: {
@@ -25,7 +26,7 @@ var Lookup = React.createClass({
             searchResult: [],
             searchResultIndex: -1,
             lookupDataBackup: {},
-            zIndex: --zIndex,
+            zIndex: zIndex--,
             focus: false
         }
     },
@@ -58,10 +59,7 @@ var Lookup = React.createClass({
 
         var propstd = {
             colSpan: colspanx,
-            style: {
-                position: 'relative',
-                height: '72px'
-            }
+            className: 'h_lookup_td'
         };
 
         if (this.props.rowSpan)
@@ -82,166 +80,80 @@ var Lookup = React.createClass({
         propsTextField.onKeyUp = this.keyUp;
         propsTextField.onKeyDown = this.keyDown;
         propsTextField.ref = this.props.field;
-        propsTextField.className = this.props.iconAlign ? 'input' + this.props.iconAlign : 'inputleft'
+        propsTextField.className =
+                this.props.iconAlign ? 'input h_lookup_textField' + this.props.iconAlign : 'inputleft h_lookup_textField'
         propsTextField.onFocus = this.focus;
         propsTextField.onBlur = this.blur;
-        propsTextField.style = {
-              position: 'relative',
-              width: '100%',
-              height: '100%',
-              border: 'none',
-              outline: 'none',
-              backgroundColor: 'transparent',
-              color: 'rgba(0, 0, 0, 0.87)',
-              font: 'inherit',
-              boxSizing: 'border-box',
-              paddingTop: '26px'
-        };
 
 
 
-        var propsIcon = {}
+        var propsIconSearch = {}
 
-        propsIcon.onClick = this.searchLupa.bind(this, '');
-        propsIcon.iconClassName = this.state._searching ? 'fa fa-search searching' : 'fa fa-search';
-        propsIcon.style = {
-            left: '0px',
-            fontSize: '14px',
-            width: '14px',
-            color: '#9e9e9e',
-            position: 'absolute',
-            bottom: '18px'
-        };
+        propsIconSearch.onClick = this.searchLupa.bind(this, '');
+        propsIconSearch.iconClassName = this.state._searching ? 'fa fa-search searching h_lookup_iconSearch' : 'fa fa-search h_lookup_iconSearch';
 
-        var propsIconApaga = {};
-        propsIconApaga.onClick = this.clearAndSearch;
-        propsIconApaga.iconClassName = 'fa fa-times-circle hoverRed';
-        propsIconApaga.style = {
-            right: '10px',
-            fontSize: '14px',
-            width: '10px',
-            color: '#9e9e9e',
-            position: 'absolute',
-            bottom: '18px'
-        };
+        var propsIconClear = {};
+        propsIconClear.onClick = this.clearAndSearch;
+        propsIconClear.iconClassName = 'fa fa-times-circle hoverRed h_lookup_iconClear';
 
-        var classPaper = this.isDropDown() ? 'animationDropDown' : '';
-        var stylePaper = {
-            maxHeight: '178px',
-            overflow: 'auto',
-            position: 'absolute',
-            width:'100%',
-            zIndex: '100',
-            textAlign: (this.state.searchResult && this.state.searchResult.length > 0)  ? 'start' : 'center'
-        };
-        var styleDiv = {
-            width: '100%',
-            position: 'relative'
-        };
-        var styleList ={
-            maxHeight: '200px',
-            backgroundColor: "white"
-        };
+        var textAlignPaper = (this.state.searchResult && this.state.searchResult.length > 0)  ? '' : 'h_lookup_paper_center';
+        var classPaper = this.isDropDown() ? ('animationDropDown h_lookup_paper ' + textAlignPaper)
+                                                : ('h_lookup_paper ' + textAlignPaper);
 
-        var styleDivQueEnglobaTodoLookup ={
-            position: 'absolute',
-            height: '260px',
-            width: 'calc(100% + 7px)',
-            marginLeft: '-6px',
-            boxShadow: 'rgba(0, 151, 167, 0.3) 0px 1px 6px, rgba(0, 151, 167, 0.5) 0px 1px 4px',
-            backgroundColor: "white"
-        };
+        var classDivList = 'h_lookup_divList'
+        var classList = 'h_lookup_list';
+
+        var classDivWrap = 'h_lookup_div_wrap';
 
 
-        var styleLabel = {}
-        styleLabel = this.state.focus || propsTextField.value || propsTextField.value == '' ?
-            {
-              position: 'absolute',
-              lineHeight: '22px',
-              opacity: '1',
-              color: this.state.focus ? 'rgb(0, 188, 212)' :  'rgba(0, 0, 0, 0.298039)',
-              top: '15px',
-              fontSize: '14px'
-        } :
-            {
-              position: 'absolute',
-              lineHeight: '22px',
-              opacity: '1',
-              color: 'rgba(0, 0, 0, 0.298039)',
-              top: '38px',
-              left: '20px'
-        };
+        var classLabel = this.state.focus || propsTextField.value || propsTextField.value == '' ?
+            ('h_lookup_label ' + (this.state.focus ? 'focus' :  ''))  : 'h_lookup_label semValue';
 
 
-        var listResult = this.state.searchResult ? <div style={styleList} >{this.state.searchResult.length > 0 ? this.state.searchResult.map(function (item, index) {
-                        var style = {
-                            height: '30px',
-                            padding: '3px'
-                        };
+        var listResult = this.state.searchResult ? <div className={classList} >{this.state.searchResult.length > 0 ? this.state.searchResult.map(function (item, index) {
+                        var classItemList = 'h_lookup_itemList';
                         if(index == self.state.searchResultIndex){
-                            style.backgroundColor = '#e0e0e0';
+                                classItemList = classItemList + ' selected';
                         }
                         var propsItemList={};
                         propsItemList.onTouchTap = function(e){
                                     e.preventDefault();
                                     self._click(index);
                         };
-                        propsItemList.style=style;
-                        return React.createElement('div', propsItemList, [React.createElement('span', {style:{verticalAlign: 'middle'}}, item.name)])
-                    }) : <span style={{color: 'gray', fontFamily: 'Roboto', fontSize: '100%'}}>
+                        propsItemList.className = classItemList;
+                        return React.createElement('div', propsItemList,
+                             [React.createElement('span', {className: 'h_lookup_span_itemSearch'}, item.name)])
+                    }) : <span className='h_lookup_span_notFoundText'>
                             {notFoundText}
                         </span>}</div>
                     : <span className="fa fa-repeat gira"></span>
 
 
         var listLookup = this.isDropDown() ?
-            <div style={styleDiv}>
-                <div ref="lookup" className={classPaper} style={stylePaper}>
+            <div className={classDivList}>
+                <div ref="lookup" className={classPaper}>
                     {listResult}
                 </div> </div>
                 : null;
 
         return (React.createElement("td", propstd,
-                        React.createElement("div", {style:{position: 'relative', zIndex: this.state.zIndex, height: '100%'}},
-                        [this.isDropDown() ? React.createElement("div", {style: styleDivQueEnglobaTodoLookup}) : null,
-                         React.createElement('label', {style: styleLabel}, [
-            this.state.focus || propsTextField.value || propsTextField.value == '' ? this.props.hintText : this.props.floatingLabelText]),
+                        React.createElement("div", {className: ('h_lookup_div' + (this.state.zIndex))},
+
+                        [this.isDropDown() ? React.createElement("div", {className: classDivWrap}) : null,
+
+                         React.createElement('label', {className: classLabel}, [
+                             this.state.focus || propsTextField.value || propsTextField.value == ''
+                                  ? this.props.hintText : this.props.floatingLabelText]),
                          React.createElement('input', propsTextField),
-                         React.createElement('hr', {style: {
-                            border: 'none',
-                            borderBottom: 'solid 1px #e0e0e0',
-                            position: 'absolute',
-                            width: '100%',
-                            bottom: '8px',
-                            margin: '0',
-                            boxSizing: 'content-box',
-                            height: '0'
-                        }}),
-                        this.state.focus ? React.createElement('hr', {style: {
-                              borderStyle: 'none none solid',
-                              borderBottomWidth: '2px',
-                              position: 'absolute',
-                              width: '100%',
-                              bottom: '8px',
-                              margin: '0px',
-                              boxSizing: 'content-box',
-                              height: '0px',
-                              borderColor: 'rgb(0, 188, 212)',
-                              transform: 'scaleX(1)'
-                        }}) : null ,
+                         React.createElement('hr', {className: 'h_lookup_hr'}),
+                        this.state.focus ? React.createElement('hr', {className: 'h_lookup_hr_focus'}) : null ,
                         error ?
-                        React.createElement('label', {style: {
-                          color: 'red',
-                          fontSize: '13px',
-                          bottom: '-9px',
-                          position: 'absolute',
-                          left: '0px'
-                        }}, [error]) : null ,
-                         React.createElement('div', {position: 'relative'}, React.createElement(Icon, propsIcon)),
+                        React.createElement('span', {className: 'h_lookup_span_error'}, [error]) : null ,
+                         React.createElement('div', {}, React.createElement(Icon, propsIconSearch)),
                          listLookup,
                          this.getEditingStore()[this.props.field].display ?
-                                  React.createElement('div', {position: 'relative'},
-                                     React.createElement(Icon, propsIconApaga)) : null]
+                                  React.createElement('div', {},
+                                     React.createElement(Icon, propsIconClear)) : null]
                         )
                     )
                );

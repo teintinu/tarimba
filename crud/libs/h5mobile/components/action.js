@@ -1,8 +1,6 @@
 require('./style/action.less');
 
-
 var React = require('react');
-var h5mixinprops = require('../mixins/h5mixinprops');
 
 var HAction = React.createClass({
     propTypes: {
@@ -15,7 +13,7 @@ var HAction = React.createClass({
             clickedButton: null
         }
     },
-    mixins: [h5mixinprops],
+    mixins: [],
     render: function () {
 
         var props = {};
