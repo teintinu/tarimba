@@ -1,0 +1,14 @@
+@@ set 
+    gridUrl         http://192.168.25.102:4444/wd/hub
+    website         http://192.168.25.207:3080
+
+@@ table browsers
+    | browserName   | gridArgs                            |
+    | Firefox       | --browser "firefox"                 |
+    | Chrome        | --browser "chrome"                  |
+
+@@ parameterized using browsers
+Action sem validação (${browserName})
+    selenium grid ${gridUrl} --page ${website} ${gridArgs}
+        check teste_sem_validacao.spec
+        
