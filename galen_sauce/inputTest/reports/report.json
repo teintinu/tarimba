@@ -1,31 +1,31 @@
 {
   "tests" : [ {
-    "name" : "Input sem validação (Firefox)",
-    "startedAt" : 1436897391908,
-    "endedAt" : 1436897395472,
+    "name" : "Input sem validacao (Firefox)",
+    "startedAt" : 1436967503600,
+    "endedAt" : 1436967507268,
     "failed" : false,
     "statistic" : {
-      "passed" : 6,
+      "passed" : 10,
       "errors" : 0,
       "warnings" : 0,
-      "total" : 6
+      "total" : 10
     },
-    "testId" : "1-input-sem-valida-o-firefox-",
-    "failed" : false,
-    "duration" : 3564
+    "testId" : "1-input-sem-validacao-firefox-",
+    "duration" : 3668,
+    "failed" : false
   }, {
-    "name" : "Input sem validação (Chrome)",
-    "startedAt" : 1436897391916,
-    "endedAt" : 1436897395710,
+    "name" : "Input sem validacao (Chrome)",
+    "startedAt" : 1436967503619,
+    "endedAt" : 1436967507615,
     "failed" : false,
     "statistic" : {
-      "passed" : 6,
+      "passed" : 10,
       "errors" : 0,
       "warnings" : 0,
-      "total" : 6
+      "total" : 10
     },
-    "testId" : "2-input-sem-valida-o-chrome-",
-    "failed" : false,
-    "duration" : 3794
+    "testId" : "2-input-sem-validacao-chrome-",
+    "duration" : 3996,
+    "failed" : false
   } ]
 }

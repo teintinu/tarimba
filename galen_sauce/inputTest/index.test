@@ -8,7 +8,7 @@
     | Chrome        | --browser "chrome"                  |
 
 @@ parameterized using browsers
-Input sem validação (${browserName})
+Input sem validacao (${browserName})
     selenium grid ${gridUrl} --page ${website} ${gridArgs}
         check testone.spec
         
