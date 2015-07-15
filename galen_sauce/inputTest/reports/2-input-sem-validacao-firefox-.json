@@ -1,6 +1,6 @@
 {
-  "testId" : "1-input-sem-valida-o-firefox-",
-  "name" : "Input sem validação (Firefox)",
+  "testId" : "2-input-sem-validacao-firefox-",
+  "name" : "Input sem validacao (Firefox)",
   "report" : {
     "nodes" : [ {
       "status" : "info",
@@ -10,7 +10,7 @@
         "nodes" : [ {
           "name" : "Check layout: testone.spec included tags: ",
           "status" : "info",
-          "time" : 1436955684677,
+          "time" : 1436965061473,
           "sections" : [ {
             "name" : "",
             "objects" : [ {
@@ -51,7 +51,7 @@
                   "filePath" : "testone.spec",
                   "lineNumber" : 15
                 },
-                "name" : "text is: BUTTON",
+                "name" : "text is: Button",
                 "highlight" : [ "btn" ]
               } ]
             } ]
@@ -64,13 +64,13 @@
               "area" : [ 8, 8, 988, 673 ]
             },
             "btn" : {
-              "area" : [ 8, 658, 79, 23 ]
+              "area" : [ 8, 658, 69, 23 ]
             }
           },
           "screenshot" : "layout-2-screenshot.png",
           "type" : "layout"
         } ],
-        "time" : 1436955684198,
+        "time" : 1436965060864,
         "type" : "node"
       }, {
         "name" : "        run testone.js",
@@ -82,7 +82,7 @@
             "name" : "css: input[name='name']",
             "type" : "text"
           } ],
-          "time" : 1436955684739,
+          "time" : 1436965061521,
           "type" : "node"
         }, {
           "name" : "Click btn",
@@ -91,10 +91,10 @@
             "name" : "css: #btn",
             "type" : "text"
           } ],
-          "time" : 1436955684868,
+          "time" : 1436965061641,
           "type" : "node"
         } ],
-        "time" : 1436955684677,
+        "time" : 1436965061473,
         "type" : "node"
       }, {
         "name" : "        check testtwo.spec",
@@ -102,7 +102,7 @@
         "nodes" : [ {
           "name" : "Check layout: testtwo.spec included tags: ",
           "status" : "info",
-          "time" : 1436955685248,
+          "time" : 1436965062149,
           "sections" : [ {
             "name" : "",
             "objects" : [ {
@@ -111,10 +111,18 @@
                 "status" : "info",
                 "place" : {
                   "filePath" : "testtwo.spec",
-                  "lineNumber" : 6
+                  "lineNumber" : 7
                 },
                 "name" : "contains: name",
                 "highlight" : [ "body", "name" ]
+              }, {
+                "status" : "info",
+                "place" : {
+                  "filePath" : "testtwo.spec",
+                  "lineNumber" : 8
+                },
+                "name" : "contains: btn",
+                "highlight" : [ "body", "btn" ]
               } ]
             }, {
               "name" : "name",
@@ -122,10 +130,21 @@
                 "status" : "info",
                 "place" : {
                   "filePath" : "testtwo.spec",
-                  "lineNumber" : 9
+                  "lineNumber" : 11
                 },
                 "name" : "text is: teste de campo",
                 "highlight" : [ "name" ]
+              } ]
+            }, {
+              "name" : "btn",
+              "specs" : [ {
+                "status" : "info",
+                "place" : {
+                  "filePath" : "testtwo.spec",
+                  "lineNumber" : 14
+                },
+                "name" : "text is: Button",
+                "highlight" : [ "btn" ]
               } ]
             } ]
           } ],
@@ -135,15 +154,18 @@
             },
             "body" : {
               "area" : [ 8, 8, 988, 657 ]
+            },
+            "btn" : {
+              "area" : [ 8, 642, 69, 23 ]
             }
           },
-          "screenshot" : "layout-4-screenshot.png",
+          "screenshot" : "layout-3-screenshot.png",
           "type" : "layout"
         } ],
-        "time" : 1436955684950,
+        "time" : 1436965061728,
         "type" : "node"
       } ],
-      "time" : 1436955681971,
+      "time" : 1436965058296,
       "type" : "node"
     } ]
   }

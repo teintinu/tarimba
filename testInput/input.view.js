@@ -8,27 +8,41 @@ window.hsession = {
 var mock_editing = {
     name: ''
 };
-var mock_editing_errors = {};
+var mock_editing_errors = {
+    name: 'required'
+};
 var mock_store = {
     getState() {
-        return {
-            editing: mock_editing,
-            editing_errors: mock_editing_errors
+            return {
+                editing: mock_editing,
+                editing_errors: mock_editing_errors
+            }
+        },
+        setState(value) {
+            mock_editing.setState({
+                name: value
+            })
         }
-    }
 }
-var AppInput = React.createClass({
+var AppDiv = React.createClass({
     render: function () {
         return (
-            React.createElement(H.Input, {
-                store: mock_store,
-                floatingLabelText: "Nome",
-                hintText: "Digite seu nome",
-                field: 'name',
-                className: 'hcol1'
-            })
+            React.createElement("div", {
+                    id: 'wrap'
+                },
+                React.createElement("button", {
+                    id: 'btn'
+                }, 'Button'),
+                React.createElement(H.Input, {
+                    store: mock_store,
+                    floatingLabelText: "Nome",
+                    hintText: "Digite seu nome",
+                    field: 'name',
+                    className: 'hcol1'
+                })
+            )
         )
     }
 });
 
-React.render( < AppInput / > , document.body);
+React.render( < AppDiv / > , document.body);
