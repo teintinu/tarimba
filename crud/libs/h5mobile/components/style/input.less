@@ -1,14 +1,15 @@
 .h_input {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 30px;
     border: none;
     outline: none;
     background-color: transparent;
     color: rgba(0, 0, 0, 0.87);
     font: inherit;
     box-sizing: border-box;
-    padding-top: 26px;
+    margin-top: 33px;
+    z-index: 20;
 }
 
 .h_input_td {
@@ -39,4 +40,44 @@
 
 .focus {
     color: rgb(0, 188, 212) !important;
+}
+
+.h_input_hr {
+    border: none;
+    border-bottom: solid 1px #e0e0e0;
+    position: absolute;
+    width: 100%;
+    bottom: 8px;
+    margin: 0;
+    box-sizing: content-box;
+    height: 0;
+}
+
+.h_input_hr_error {
+    border-bottom: solid 1px red !important;
+}
+
+.h_input_hr_focus {
+    border-style: none none solid;
+    border-bottom-width: 2px;
+    position: absolute;
+    width: 100%;
+    bottom: 8px;
+    margin: 0px;
+    box-sizing: content-box;
+    height: 0px;
+    border-color: rgb(0, 188, 212);
+    transform: scaleX(1);
+}
+
+.h_input_hr_focus_error {
+    border-bottom: solid 2px red !important;
+}
+
+.h_input_labelError {
+    color: red;
+    font-size: 10px;
+    bottom: -10px;
+    position: absolute;
+    left: 0px;
 }

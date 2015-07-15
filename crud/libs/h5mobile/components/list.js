@@ -102,16 +102,16 @@ var HList = React.createClass({
             var keyDiv = "DIV1" + (++listKey);
 
             propsItemList.key = "IL" + (++listKey)
-            propsItemList.className = index == self.state.clickedItem ? 'list_ItemList list_ItemList_click': 'list_ItemList';
+            propsItemList.className = index == self.state.clickedItem ? 'h_list_ItemList h_list_ItemList_click': 'h_list_ItemList';
 
             var propsDivItem = {};
-            propsDivItem.className ='itemMenuList';
+            propsDivItem.className ='h_itemMenuList';
             propsDivItem.key= keyDiv;
 
             return React.createElement("div", propsDivItem, [iconList,
                 React.createElement('table', propsItemList, [
-                    React.createElement('td', {className: 'td_ItemList'}, [propsItemList.leftAvatar,
-                        React.createElement('span', {className: 'text_ItemList'}, self.props.text(item))
+                    React.createElement('td', {className: 'h_td_ItemList'}, [propsItemList.leftAvatar,
+                        React.createElement('span', {className: 'h_text_ItemList'}, self.props.text(item))
                    ])
                ])
            ]);
@@ -125,7 +125,7 @@ var HList = React.createClass({
             var src = item.avatar;
 
         if (letra != "")
-           return React.createElement(src == undefined ? 'span' : 'img', {key: keyAvatar, className : 'avatar_ItemList', src: src}, src != undefined ? '' : letra);
+           return React.createElement(src == undefined ? 'span' : 'img', {key: keyAvatar, className : 'h_avatar_ItemList', src: src}, src != undefined ? '' : letra);
         return false;
     },
     defineLetterAvatar: function(text, index, arr){
@@ -149,14 +149,14 @@ var HList = React.createClass({
         var self = this;
         return(
 
-            <div key={keyDIV} className='divIcon_ItemList'>
+            <div key={keyDIV} className='h_divIcon_ItemList'>
                 <IconDropDown
                      key={keyDropDownIcon}
                      indexItens={indexItens}
                      arrayItens={arrayItens}
                      onItemClick={this._changeItens}
                      className = {!this.props.iconClassName ?
-                          "fa fa-ellipsis-v icon_ItemList" : this.props.iconClassName + ' icon_ItemList'}
+                          "fa fa-ellipsis-v h_icon_ItemList" : this.props.iconClassName + ' h_icon_ItemList'}
                     menuDropDownItens = {menuDropDownItens}
                 />
             </div>
