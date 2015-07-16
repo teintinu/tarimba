@@ -1,8 +1,6 @@
-var mui = require('material-ui');
-
+require('./style/action.less');
 
 var React = require('react');
-var h5mixinprops = require('../mixins/h5mixinprops');
 
 var HAction = React.createClass({
     propTypes: {
@@ -10,16 +8,29 @@ var HAction = React.createClass({
         run: React.PropTypes.func.isRequired,
         style: React.PropTypes.object,
     },
-    mixins: [h5mixinprops],
+    getInitialState: function(){
+        return {
+            clickedButton: null
+        }
+    },
+    mixins: [],
     render: function () {
 
         var props = {};
         props.label = this.props.labelText;
-        props.onTouchTap = this.props.run;
+        props.onTouchTap = this._click;
         props.style = this.props.style ? this.props.style : {};
-        props.className = 'btn btn-default';
+        props.className = 'h_action ' + (this.state.clickedButton == 'h_action_' + this.props.labelText ? 'clicked' : null);
+
 
         return (React.createElement("button", props, [this.props.labelText]));
+    },
+    _click: function(e){
+        this.setState({clickedButton: 'h_action_' + this.props.labelText});
+        this.props.run();
+        setTimeout(function(){
+            this.setState({clickedButton: null});
+        }.bind(this), 300)
     }
 });
 

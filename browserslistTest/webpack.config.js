@@ -8,26 +8,10 @@ module.exports = {
     },
     module: {
         loaders: [
-            {
-                test: /\.less$/,
-                loaders: ["style","css", "autoprefixer-loader?last 1 version?> 5%?Android >= 4", "less"]
-            },
              {
-                test: /\.lessbkp$/,
-                loader: "style!css!less"
-            },{
                 test: /\.jsx?$/,
-                loaders: ['babel', 'flux-easy'], // 'jsx?harmony&stripTypes', 'flowcheck'],
+                loaders: ['babel'], // 'jsx?harmony&stripTypes', 'flowcheck'],
                 exclude: /node_modules/
-            },
-            {
-                test: /\.html$/,
-                loaders: ['babel', 'flux-easy'], // 'jsx?harmony&stripTypes', 'flowcheck'],
-                exclude: /node_modules/
-            },
-            {
-                test: /\.json$/,
-                loader: "json"
             }
     ]
     },

@@ -1,6 +1,7 @@
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops');
 var h5dropdown = require('../mixins/h5dropdown');
+require('./style/menuleft.less');
 
 var HMenuLeft = React.createClass({
     propTypes: {
@@ -20,43 +21,15 @@ var HMenuLeft = React.createClass({
 
             props.menuItems = this.trataLabelText(propsMenu);
 
-            if(window.innerWidth > 750){
-                props.style = {
-                    width: "180px",
-                    height: "100%",
-                    position: "fixed",
-                    marginTop: "65px",
-                    zIndex: '1000 !important'
-                };
-            }
-
             props.onChange = props.onClick;
 
             delete props.onClick;
 
             var propsMenuLateral = {};
             var propsOverlay = {};
-            propsMenuLateral.style = {
-                height: '100%',
-                width: '256px',
-                position: 'fixed',
-                zIndex: '1000',
-                left: '0px',
-                top: '0px',
-                overflow: 'hidden',
-                backgroundColor: '#FFF'
-            };
+            propsMenuLateral.className = 'h_menuLeft';
 
-            propsOverlay.style = {
-                position: 'fixed',
-                height: '100%',
-                width: '100%',
-                zIndex: '999',
-                top: '0px',
-                left: '0px',
-                opacity: '0.5',
-                backgroundColor: '#000'
-            };
+            propsOverlay.className = 'h_menuLeft_overlay';
             propsOverlay.onTouchTap = this.closeDropDown;
             return (
                 React.createElement('div', {}, [React.createElement('div', propsMenuLateral,

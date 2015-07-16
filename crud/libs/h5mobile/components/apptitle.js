@@ -1,6 +1,8 @@
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops');
 
+require('./style/apptitle.less');
+
 var HAppTitle = React.createClass({
     propTypes: {
         titleText: React.PropTypes.object.isRequired,
@@ -20,36 +22,14 @@ var HAppTitle = React.createClass({
         var props = {};
 
         var propsAppTitle = {};
-        propsAppTitle.style = {
-            position: "fixed",
-            backgroundColor: "#00bcd4",
-            width: '100%',
-            height: '64px',
-            zIndex: '100'
-        };
+        propsAppTitle.className = 'h_appTitle';
 
         var propsH1 = {};
-        propsH1.style ={
-            color: 'white',
-            fontSize: '24px',
-            left: '58px',
-            top: '20px',
-            position: 'fixed',
-            font: 'normal normal normal 25px/1 FontAwesome'
-        };
+        propsH1.className = 'h_appTitle_h1';
 
         var propsMenuBar = {};
-        propsMenuBar.style = {
-            color: 'white',
-            position: 'fixed',
-            top: '20px',
-            fontSize: '24px',
-            left: '20px',
-            cursor: 'pointer'
-        };
+        propsMenuBar.className = 'fa fa-bars h_appTitle_menuBar';
         propsMenuBar.onTouchTap = this.props.onLeftIconButtonTouchTap;
-
-        propsMenuBar.className = 'fa fa-bars';
 
         var title = React.createElement('h1', propsH1, propriedadesTraduzidas.titleText);
         var menuBar = React.createElement('span', propsMenuBar);
