@@ -62,7 +62,7 @@ var HInput = React.createClass({
 
 
         return (React.createElement("td", propstd, [React.createElement('label', {className: classNameLabel}, [
-            this.state.focus || propsInput.value || propsInput.value != '' ? this.props.hintText : this.props.floatingLabelText]),
+            !propsInput.value || propsInput.value == '' ? this.props.hintText : this.props.floatingLabelText]),
                 React.createElement('input', propsInput),
                 React.createElement('hr', {className: 'h_input_hr '+(error ? 'h_input_hr_error' : '')}),
                 this.state.focus ? React.createElement('hr', {

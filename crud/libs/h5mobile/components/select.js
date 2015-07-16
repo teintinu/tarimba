@@ -3,17 +3,18 @@ var mui = require('material-ui');
 var React = require('react');
 require('./style/select.less');
 var h5mixinprops = require('../mixins/h5mixinprops');
-
+console.warn = console.error;
 var HSelect = React.createClass({
 
     mixins: [h5mixinprops],
     propTypes: {
         menuItems: React.PropTypes.array.isRequired,
         store: React.PropTypes.object.isRequired,
-        floatingLabelText: React.PropTypes.string.isRequired,
+        labelText: React.PropTypes.string.isRequired,
         hintText: React.PropTypes.string.isRequired,
         field: React.PropTypes.string.isRequired,
-        validations: React.PropTypes.array
+        validations: React.PropTypes.array,
+        colSpan: React.PropTypes.number
     },
     getInitialState: function(){
         return {
@@ -22,30 +23,15 @@ var HSelect = React.createClass({
     },
     render: function () {
 
-        if (!this.props.className)
-            return console.error("Is necessary propreyty className in select");
-
-        if (!this.props.menuItems)
-            return console.error("Is necessary propreyty menuItens in select");
-
-        if (!this.props.floatingLabelText)
-            return console.error("Is necessary propreyty floatingLabelText in select");
-
         var props = {};
 
-        var p = /(\d+)/.exec(this.props.className);
-        if (p)
-            var colspanx = p[1];
-
-        delete props.className;
         var propstd = {
-            colSpan: colspanx,
+            colSpan: this.props.colSpan || 1,
+            rowSpan: this.props.rowSpan || 1,
             className: 'h_select_td',
-            onTouchTap: this.focus
-        };
+            onTouchTap: this.focus,
 
-        if (this.props.rowSpan)
-            propstd.rowSpan = this.props.rowSpan;
+        };
 
         var state = this.props.store.getState();
         var value = state.editing[this.props.field];
@@ -64,7 +50,7 @@ var HSelect = React.createClass({
         });
         props.className = 'h_select'
         props.name = this.props.field;
-        props.floatingLabelText = this.props.floatingLabelText;
+        props.labelText = this.props.labelText;
         props.hintText = this.props.hintText;
         props.onChange = this.changed;
         props.onBlur = this.blur;
@@ -77,7 +63,7 @@ var HSelect = React.createClass({
 
 
         return (React.createElement("td", propstd, [React.createElement('label', {className: classNameLabel}, [
-            this.state.focus || props.value || props.value != '' ? this.props.hintText : this.props.floatingLabelText]),
+            !props.value || props.value == '0' ? this.props.hintText : this.props.labelText]),
                     React.createElement('select', props, [menuItems]),
                 React.createElement('hr', {className: 'h_select_hr '+(error ? 'h_select_hr_error' : '')}),
                 this.state.focus ? React.createElement('hr', {

@@ -1,7 +1,7 @@
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops');
 var h5dropdown = require('../mixins/h5dropdown');
-require('./style/iconDropDown.less');
+require('./style/icondropdown.less');
 
 var HIcon = React.createClass({
     propTypes: {

@@ -1,5 +1,5 @@
 var React = require('react');
-var IconDropDown = require('./iconDropDown');
+var IconDropDown = require('./icondropdown');
 var Select = require('./select');
 var h5mixinprops = require('../mixins/h5mixinprops');
 var h5dropdown = require('../mixins/h5dropdown');

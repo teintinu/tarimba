@@ -10,7 +10,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.less$/,
-                loaders: ["style","css", "autoprefixer-loader?last 1 version?> 5%?Android >= 4", "less"]
+                loaders: ["style","css", 'autoprefixer-loader?{browsers:["last 1 version", "> 5%", "Android >= 4"]}', "less"]
             },
              {
                 test: /\.lessbkp$/,

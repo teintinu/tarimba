@@ -142,7 +142,7 @@ var Lookup = React.createClass({
                         [this.isDropDown() ? React.createElement("div", {className: classDivWrap}) : null,
 
                          React.createElement('label', {className: classLabel}, [
-                             this.state.focus || propsTextField.value || propsTextField.value == ''
+                             !propsTextField.value || propsTextField.value == ''
                                   ? this.props.hintText : this.props.floatingLabelText]),
                          React.createElement('input', propsTextField),
                          React.createElement('hr', {className: 'h_lookup_hr'}),

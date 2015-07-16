@@ -1,6 +1,6 @@
 import mui from 'material-ui';
 var H5frontEnd = {
-    ChooseAnImage: require('./components/choose-an-image'),
+    ChooseAnImage: require('./components/chooseanimage'),
     Form: require('./components/form'),
     Action: require('./components/action'),
     Floatingactionbutton: require('./components/floatingactionbutton'),

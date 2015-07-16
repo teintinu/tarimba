@@ -5,7 +5,7 @@ var FontIcon = mui.FontIcon;
 var React = require('react');
 var h5mixinprops = require('../mixins/h5mixinprops')
 
-require('./style/choose-an-image.less');
+require('./style/chooseanimage.less');
 
 var ChooseAnImage = React.createClass({
     propTypes: {

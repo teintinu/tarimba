@@ -57,10 +57,10 @@ class AppCRUD extends FluxEasy.View {
                       className = 'hcol6'
                       query = 'queryMaes'
                       lookup = {this.CRUD}/>
-                  <H.Select className="hcol6"
-                  menuItems={[{_id: 'F', display: 'Feminino'}, {_id: 'M', display: 'Masculino'}]}
-                         hintText="Sexo"
-                         floatingLabelText="Sexo"
+                  <H.Select colSpan={6}
+                       menuItems={[{_id: 'F', display: 'Feminino'}, {_id: 'M', display: 'Masculino'}]}
+                         hintText="Escolha o sexo"
+                         labelText="Sexo"
                          field="sexo"
                          store={this.CRUD} />
                </H.Row>
