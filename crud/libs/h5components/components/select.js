@@ -44,7 +44,9 @@ var HSelect = React.createClass({
         var value = state.editing[this.props.field];
         var error = state.editing_errors[this.props.field];
 
-        props.menuItemStyle =  {width: "100%"};
+        props.style = {
+            width: "100%"
+        };
         props.fullWidth = true;
         props.value = value;
         props.errorText = error ? error : ''

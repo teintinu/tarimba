@@ -1,7 +1,7 @@
 var mui = require('material-ui');
 
 var React = require('react');
-//require('../less/input.less');
+require('./style/select.less');
 var h5mixinprops = require('../mixins/h5mixinprops');
 
 var HSelect = React.createClass({
@@ -44,19 +44,20 @@ var HSelect = React.createClass({
         var value = state.editing[this.props.field];
         var error = state.editing_errors[this.props.field];
 
-        props.menuItemStyle =  {width: "100%"};
-        props.fullWidth = true;
         props.value = value;
         props.errorText = error ? error : ''
 
-        props.menuItems = this.props.menuItems;
+        var menuItems = this.props.menuItems.map(function(item){
+            return (<option value={item._id}>{item.display}</option>);
+        });
+        props.className = 'h_select'
         props.name = this.props.field;
         props.floatingLabelText = this.props.floatingLabelText;
         props.hintText = this.props.hintText;
         props.onChange = this.changed;
         props.onBlur = this.props.validations ? this.validate : null;
 
-        return (React.createElement("td", propstd, React.createElement(mui.SelectField, props)));
+        return (React.createElement("td", propstd, React.createElement('select', props, [menuItems])));
     },
     changed: function (ev) {
         var editing = this.props.store.getState().editing;
