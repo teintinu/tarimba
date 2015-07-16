@@ -15,6 +15,11 @@ var HSelect = React.createClass({
         field: React.PropTypes.string.isRequired,
         validations: React.PropTypes.array
     },
+    getInitialState: function(){
+        return {
+            focus:  false
+        };
+    },
     render: function () {
 
         if (!this.props.className)
@@ -34,7 +39,9 @@ var HSelect = React.createClass({
 
         delete props.className;
         var propstd = {
-            colSpan: colspanx
+            colSpan: colspanx,
+            className: 'h_select_td',
+            onTouchTap: this.focus
         };
 
         if (this.props.rowSpan)
@@ -44,25 +51,45 @@ var HSelect = React.createClass({
         var value = state.editing[this.props.field];
         var error = state.editing_errors[this.props.field];
 
-        props.value = value;
+        props.value = value ? value : 0;
         props.errorText = error ? error : ''
 
-        var menuItems = this.props.menuItems.map(function(item){
-            return (<option value={item._id}>{item.display}</option>);
+        var menuItems = this.props.menuItems.map(function(item, idx){
+            var ret = [];
+            if(idx == 0){
+                ret.push(<option className='h_select_option' value={0}></option>);
+            }
+            ret.push(<option className='h_select_option' value={item._id}>{item.display}</option>);
+            return ret
         });
         props.className = 'h_select'
         props.name = this.props.field;
         props.floatingLabelText = this.props.floatingLabelText;
         props.hintText = this.props.hintText;
         props.onChange = this.changed;
-        props.onBlur = this.props.validations ? this.validate : null;
+        props.onBlur = this.blur;
+        props.onFocus = this.focus;
 
-        return (React.createElement("td", propstd, React.createElement('select', props, [menuItems])));
+
+        var classNameLabel = this.state.focus || props.value || props.value != '0' ?
+             'h_select_LabelComValue ' + (this.state.focus ? error ? 'erro' : 'focus' :  error ? 'erro' : '') :
+            'h_select_LabelSemValue ' + (error ? 'erro' : '');
+
+
+        return (React.createElement("td", propstd, [React.createElement('label', {className: classNameLabel}, [
+            this.state.focus || props.value || props.value != '' ? this.props.hintText : this.props.floatingLabelText]),
+                    React.createElement('select', props, [menuItems]),
+                React.createElement('hr', {className: 'h_select_hr '+(error ? 'h_select_hr_error' : '')}),
+                this.state.focus ? React.createElement('hr', {
+                      className: 'h_select_hr_focus ' + (error ? 'h_select_hr_focus_error' : '') }) : null]));
     },
     changed: function (ev) {
         var editing = this.props.store.getState().editing;
-        editing[this.props.field] = ev.target.value.payload;
+        editing[this.props.field] = ev.target.value;
         this.setState({});
+    },
+    focus: function(e){
+        this.setState({focus: true})
     },
     validate: function (ev) {
         var state = this.props.store.getState();
@@ -78,6 +105,9 @@ var HSelect = React.createClass({
             }.bind(this)))
             delete state.editing_errors[this.props.field];
         this.setState({});
+    },
+    blur: function (ev) {
+        this.setState({focus: false});
     }
 
 });

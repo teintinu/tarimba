@@ -68,7 +68,7 @@ var HInput = React.createClass({
                 this.state.focus ? React.createElement('hr', {
                       className: 'h_input_hr_focus ' + (error ? 'h_input_hr_focus_error' : '') }) : null],
                 error ?
-                React.createElement('label', {className: 'h_input_labelError'}, [error]) : null
+                React.createElement('span', {className: 'h_input_labelError'}, [error]) : null
             ));
     },
     changed: function (ev) {
