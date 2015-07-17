@@ -1,5 +1,6 @@
 import FluxEasy from 'flux-easy';
 import V from './validations';
+var sexoStore = require('./sexo.store');
 
 function DB() {
     var db = [
@@ -8,84 +9,84 @@ function DB() {
             name: "Ana",
             doc: '123',
             mae: null,
-            sexo: 'F'
+            sexo: '1'
             },
         {
             _id: 2,
             name: "Maria",
             doc: '456',
             mae: 1,
-            sexo: 'F'
+            sexo: '1'
             },
         {
             _id: 3,
             name: "Carol",
             doc: '789',
             mae: 1,
-            sexo: 'F'
+            sexo: '1'
             },
         {
             _id: 4,
             name: "Bernardo",
             doc: '',
             mae: 3,
-            sexo: 'M'
+            sexo: '2'
             },
         {
             _id: 5,
             name: "Julieta",
             doc: '',
             mae: 2,
-            sexo: 'F'
+            sexo: '1'
             },
         {
             _id: 6,
             name: "Mariana",
             doc: '',
             mae: 5,
-            sexo: 'F'
+            sexo: '1'
             },
         {
             _id: 7,
             name: "Pedrito",
             doc: '',
             mae: 6,
-            sexo: 'M'
+            sexo: '2'
             },
         {
             _id: 8,
             name: "José",
             doc: '',
             mae: 5,
-            sexo: 'M'
+            sexo: '2'
             },
         {
             _id: 9,
             name: "Dilma",
             doc: '',
             mae: 10,
-            sexo: 'F'
+            sexo: '1'
             },
         {
             _id: 10,
             name: "Lula",
             doc: '',
             mae: 9,
-            sexo: 'M'
+            sexo: '2'
             },
         {
             _id: 11,
             name: "George W. Bush",
             doc: '',
             mae: 9,
-            sexo: 'M'
+            sexo: '2'
             },
         {
             _id: 12,
             name: "Neide",
             doc: '123123',
             mae: 9,
-            sexo: 'F'
+            sexo: '1'
             },
         ];
 
@@ -124,7 +125,8 @@ function DB() {
                     ret.push({
                         _id: item._id,
                         name: item.name,
-                        sexo: item.sexo
+                        sexo: item.sexo,
+                        display: item.name + ' - ' + item.doc
                     });
                 }
                 return ret;
@@ -139,7 +141,8 @@ function DB() {
                     if (db[i]._id == editing._id) {
                         db[i].name = editing.name;
                         db[i].doc = editing.doc;
-                        db[i].mae = editing.mae._id
+                        db[i].mae = editing.mae._id;
+                        db[i].sexo = editing.sexo._id;
                     }
                 for (var i = 0; i < listing.length; i++)
                     if (listing[i]._id == editing._id) {
@@ -176,7 +179,7 @@ class CRUDStore extends FluxEasy.Store {
 
     constructor() {
         this.state.step = steps.lista;
-
+        CRUDStore.sexoStore = sexoStore.createStoreReference(dispatcher);
         this.state.listing = [];
         this.state.editing = {};
         this.state.editing_errors = {};
@@ -233,13 +236,13 @@ class CRUDStore extends FluxEasy.Store {
 
     queryPais(text, callback) {
         postgres.search(text, function (err, resp) {
-            callback(null, resp.filter((r)=>r.sexo=='M'));
+            callback(null, resp.filter((r)=>r.sexo=='2'));
         }.bind(this));
     }
 
     queryMaes(text, callback) {
         postgres.search(text, function (err, resp) {
-            callback(null, resp.filter((r)=>r.sexo=='F'));
+            callback(null, resp.filter((r)=>r.sexo=='1'));
         }.bind(this));
     }
 
@@ -276,6 +279,7 @@ class CRUDStore extends FluxEasy.Store {
             }
         });
         postgres.find(id, function (err, resp) {
+            resp.sexo = this.sexoStore.find(resp.sexo)[0];
             this.state.editing = resp;
             this.state.editing_errors = {};
             zscanapp.setContent("/" + id);

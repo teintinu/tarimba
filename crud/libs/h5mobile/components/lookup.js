@@ -109,7 +109,8 @@ var Lookup = React.createClass({
              'h_lookup_LabelComValue ' + (this.state.focus ? error ? 'erro' : 'focus' :  error ? 'erro' : ''):
             'h_lookup_LabelSemValue ' + (error ? 'erro' : '')
 
-        var listResult = this.state.searchResult ? <div className={classList} >{this.state.searchResult.length > 0 ? this.state.searchResult.map(function (item, index) {
+        var listResult = this.state.searchResult ? <div className={classList} >{this.state.searchResult.length > 0 ?
+                  this.state.searchResult.map(function (item, index) {
                         var classItemList = 'h_lookup_itemList';
                         if(index == self.state.searchResultIndex){
                                 classItemList = classItemList + ' selected';
@@ -121,7 +122,7 @@ var Lookup = React.createClass({
                         };
                         propsItemList.className = classItemList;
                         return React.createElement('div', propsItemList,
-                             [React.createElement('span', {className: 'h_lookup_span_itemSearch'}, item.name)])
+                             [React.createElement('span', {className: 'h_lookup_span_itemSearch'}, item.display)])
                     }) : <span className='h_lookup_span_notFoundText'>
                             {notFoundText}
                         </span>}</div>
@@ -305,17 +306,17 @@ var Lookup = React.createClass({
         var state = this.props.store.getState();
         if(state.validations && state.validations[this.props.field]){
             var editing = field;
-            this.props.store.validate(this.props.field, selected.name)
+            this.props.store.validate(this.props.field, selected.display)
         }
     },
     selectItem: function(){
         this.closeDropDownlookup();
         var selected = this.state.searchResult[this.state.searchResultIndex];
         this.state.lookupDataBackup._id = selected._id;
-        this.state.lookupDataBackup.display = selected.name;
+        this.state.lookupDataBackup.display = selected.display;
         var editing = this.getEditingStore()
         editing[this.props.field]._id = selected._id;
-        editing[this.props.field].display = selected.name;
+        editing[this.props.field].display = selected.display;
         this.validate(editing, selected);
         this.setState({
             searchingText: null,
@@ -337,7 +338,7 @@ var Lookup = React.createClass({
     },
     getEditingStore(){
         var editing = this.props.store.getState().editing;
-        if(editing[this.props.field])
+        if(editing[this.props.field] && editing[this.props.field].display)
            return editing;
         else{
             editing[this.props.field] = {_id: null, display:null};

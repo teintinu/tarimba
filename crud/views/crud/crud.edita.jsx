@@ -1,6 +1,7 @@
 import FluxEasy from 'flux-easy';
 import AppStore from '../../stores/app.store.js';
 import CRUDStore from '../../stores/crud.store.js';
+import SexoStore from '../../stores/sexo.store.js';
 
 import H from '../../libs/h5mobile/h5frontend.js';
 //import V from '../../libs/h5components/validacoes.js';
@@ -12,6 +13,7 @@ class AppCRUD extends FluxEasy.View {
 
         AppCRUD.app = AppStore.createStoreReference(dispatcher);
         AppCRUD.CRUD = CRUDStore.createStoreReference(dispatcher);
+        AppCRUD.SexoStore = SexoStore.createStoreReference(dispatcher);
         this.state.errorTextName = this.CRUD.getState().errorTextName;
         this.state.errorDocument = this.CRUD.getState().errorDocument;
         this.CRUD.addEventListener('Error', this.error);
@@ -56,13 +58,16 @@ class AppCRUD extends FluxEasy.View {
                       field = 'default'
                       className = 'hcol6'
                       query = 'queryMaes'
-                      lookup = {this.CRUD}/>
-                  <H.Select colSpan={6}
-                       menuItems={[{_id: 'F', display: 'Feminino'}, {_id: 'M', display: 'Masculino'}]}
-                         hintText="Escolha o sexo"
-                         labelText="Sexo"
-                         field="sexo"
-                         store={this.CRUD} />
+                      lookup = {this.CRUD} />
+
+                   <H.Lookup store={this.CRUD}
+                      floatingLabelText = "Sexo"
+                      hintText = "Escolha o sexo"
+                      field = 'sexo'
+                      className = 'hcol6'
+                      query = 'querySexo'
+                      notFoundText='Sexo não encontrado'
+                      lookup = {this.SexoStore}/>
                </H.Row>
             </H.Form>
             <H.Action labelText="Salvar"
