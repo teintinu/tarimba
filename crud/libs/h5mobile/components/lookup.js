@@ -105,10 +105,9 @@ var Lookup = React.createClass({
 
         var classDivWrap = 'h_lookup_div_wrap';
 
-
-        var classLabel = this.state.focus || propsTextField.value || propsTextField.value == '' ?
-            ('h_lookup_label ' + (this.state.focus ? 'focus' :  ''))  : 'h_lookup_label semValue';
-
+        var classNameLabel = this.state.focus || propsTextField.value != null ?
+             'h_lookup_LabelComValue ' + (this.state.focus ? error ? 'erro' : 'focus' :  error ? 'erro' : ''):
+            'h_lookup_LabelSemValue ' + (error ? 'erro' : '')
 
         var listResult = this.state.searchResult ? <div className={classList} >{this.state.searchResult.length > 0 ? this.state.searchResult.map(function (item, index) {
                         var classItemList = 'h_lookup_itemList';
@@ -141,15 +140,23 @@ var Lookup = React.createClass({
 
                         [this.isDropDown() ? React.createElement("div", {className: classDivWrap}) : null,
 
-                         React.createElement('label', {className: classLabel}, [
-                             !propsTextField.value || propsTextField.value == ''
-                                  ? this.props.hintText : this.props.floatingLabelText]),
+                         React.createElement('label', {className: classNameLabel}, [this.props.floatingLabelText]),
+
+                      !propsTextField.value && this.state.focus || propsTextField.value == '' && this.state.focus ?
+                         React.createElement('label', {className: ('h_lookup_LabelSemValue ' + (error ? 'erro' : ''))},
+                         [this.props.hintText]) : null,
+
                          React.createElement('input', propsTextField),
+
                          React.createElement('hr', {className: 'h_lookup_hr'}),
+
                         this.state.focus ? React.createElement('hr', {className: 'h_lookup_hr_focus'}) : null ,
+
                         error ?
                         React.createElement('span', {className: 'h_lookup_span_error'}, [error]) : null ,
+
                          React.createElement('div', {}, React.createElement(Icon, propsIconSearch)),
+
                          listLookup,
                          this.getEditingStore()[this.props.field].display ?
                                   React.createElement('div', {},

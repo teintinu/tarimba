@@ -66,7 +66,16 @@
     background-color: white;
 }
 
-.h_lookup_label {
+.h_lookup_LabelSemValue {
+    position: absolute;
+    line-height: 22px;
+    opacity: 1;
+    color: rgba(0, 0, 0, 0.298039);
+    top: 38px;
+    left: 18px;
+}
+
+.h_lookup_LabelComValue {
     position: absolute;
     line-height: 22px;
     opacity: 1;
@@ -96,8 +105,7 @@
 }
 
 .generate-zindex(40);
-.generate-zindex(@n,
-@i: 30) when (@i=< @n) {
+.generate-zindex(@n, @i: 30) when (@i=< @n) {
     .h_lookup_div@{i}
     {
         z-index: @i;
@@ -142,11 +150,6 @@
 
 .selected {
     background-color: #e0e0e0;
-}
-
-.semValue {
-    top: 38px !important;
-    left: 20px !important;
 }
 
 .focus {

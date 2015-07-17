@@ -61,12 +61,21 @@ var HInput = React.createClass({
             'h_Input_LabelSemValue ' + (error ? 'erro' : '');
 
 
-        return (React.createElement("td", propstd, [React.createElement('label', {className: classNameLabel}, [
-            !propsInput.value || propsInput.value == '' ? this.props.hintText : this.props.floatingLabelText]),
+        return (React.createElement("td", propstd, [
+
+            React.createElement('label', {className: classNameLabel}, [this.props.floatingLabelText]),
+
+             !propsInput.value && this.state.focus || propsInput.value == '' && this.state.focus ?
+                  React.createElement('label', {className: ('h_Input_LabelSemValue ' + (error ? 'erro' : ''))},
+                         [this.props.hintText]) : null,
+
                 React.createElement('input', propsInput),
+
                 React.createElement('hr', {className: 'h_input_hr '+(error ? 'h_input_hr_error' : '')}),
+
                 this.state.focus ? React.createElement('hr', {
                       className: 'h_input_hr_focus ' + (error ? 'h_input_hr_focus_error' : '') }) : null],
+
                 error ?
                 React.createElement('span', {className: 'h_input_labelError'}, [error]) : null
             ));

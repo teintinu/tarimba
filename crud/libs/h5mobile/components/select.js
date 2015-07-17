@@ -56,16 +56,23 @@ var HSelect = React.createClass({
         props.onBlur = this.blur;
         props.onFocus = this.focus;
 
+         var classNameLabel = this.state.focus || props.value != '0' ?
+             'h_Input_LabelComValue ' + (this.state.focus ? error ? 'erro' : 'focus' :  error ? 'erro' : '') :
+            'h_Input_LabelSemValue ' + (error ? 'erro' : '');
 
-        var classNameLabel = this.state.focus || props.value || props.value != '0' ?
-             'h_select_LabelComValue ' + (this.state.focus ? error ? 'erro' : 'focus' :  error ? 'erro' : '') :
-            'h_select_LabelSemValue ' + (error ? 'erro' : '');
+
+        return (React.createElement("td", propstd, [
+                     React.createElement('label', {className: classNameLabel}, [this.props.labelText]),
+
+             !props.value && this.state.focus || props.value == '0' && this.state.focus ?
+                  React.createElement('label', {className: ('h_select_LabelSemValue ' + (error ? 'erro' : ''))},
+                         [this.props.hintText]) : null,
 
 
-        return (React.createElement("td", propstd, [React.createElement('label', {className: classNameLabel}, [
-            !props.value || props.value == '0' ? this.props.hintText : this.props.labelText]),
                     React.createElement('select', props, [menuItems]),
+
                 React.createElement('hr', {className: 'h_select_hr '+(error ? 'h_select_hr_error' : '')}),
+
                 this.state.focus ? React.createElement('hr', {
                       className: 'h_select_hr_focus ' + (error ? 'h_select_hr_focus_error' : '') }) : null]));
     },
