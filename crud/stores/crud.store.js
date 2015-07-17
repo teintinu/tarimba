@@ -279,12 +279,14 @@ class CRUDStore extends FluxEasy.Store {
             }
         });
         postgres.find(id, function (err, resp) {
-            resp.sexo = this.sexoStore.find(resp.sexo)[0];
-            this.state.editing = resp;
-            this.state.editing_errors = {};
-            zscanapp.setContent("/" + id);
-            this.task();
-            this.emit('NULL');
+            this.sexoStore.find(resp.sexo, function(err, res){
+                resp.sexo = res;
+                this.state.editing = resp;
+                this.state.editing_errors = {};
+                zscanapp.setContent("/" + id);
+                this.task();
+                this.emit('NULL');
+            }.bind(this));
         }.bind(this));
     }
 

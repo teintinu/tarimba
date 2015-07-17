@@ -14,8 +14,8 @@ class SexoStore extends FluxEasy.Store {
         ];
     }
 
-    find(_id){
-        return JSON.parse(JSON.stringify(this.state.sexo.filter((r)=> r._id == _id)));
+    find(_id, callback){
+        callback(null, JSON.parse(JSON.stringify(this.state.sexo.filter((r)=> r._id == _id)))[0]);
     }
 
     querySexo(text, callback) {
