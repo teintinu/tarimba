@@ -26,9 +26,9 @@ Cenário: Abrir um processo
   E é percorrido o this.state.menuItems
   E processModule == menuItem.module
   E o processModule é executado recebendo do callback o mod
-  E this.state.openned_processes[processName] == {reference: mod.createStoreReference(dispatcher), subroute: subroute}
+  E this.state.openned_processes[processName] == reference= mod.createStoreReference(dispatcher), subroute= subroute}
   E this.state.lasthash != hash é executa a função this.state.openned_processes[processName].reference.route(subroute)
-  E this.state.curr_process == {process: processInfo.reference, processName: processName, subroute: subroute, task: processInfo.reference.getState().task}
+  E this.state.curr_process == {process=processInfo.reference, processName=processName, subroute=subroute, task=processInfo.reference.getState().task}
   E é executado um this.emit('RefreshContent')
 
   Dado que o usuário tenha um processo iniciado
@@ -37,20 +37,34 @@ Cenário: Abrir um processo
   Então this.state.lasthash == hash
   E processInfo == this.state.openned_processes[processName]
   E this.state.lasthash != hash é executa a função this.state.openned_processes[processName].reference.route(subroute)
-  E this.state.curr_process == {process: processInfo.reference, processName: processName, subroute: subroute, task: processInfo.reference.getState().task}
+  E this.state.curr_process == {process=processInfo.reference, processName=processName, subroute=subroute, task=processInfo.reference.getState().task}
   E é executado um this.emit('RefreshContent')
 
-
-
-Cenário: idioma Inicial / de acordo com o navegador
+Cenário: Idioma inicial de acordo com o navegador
   Dado que não tem nenhum cookie instalado no navegador que está acessado a aplicação
   Quando o usuário acessar utilizando esse navegador
   Então a aplicação deve identificar a linguagem padrão do navegador
   E atribuir window.hsession.language
 
-Cenário: Tela inicial abri o crud o botão voltar tem que voltar para tela inicial / se eu abertar o botão de ir para frente deve ir para o crud
+  Cenário: Back and forward de processos no navegador
+  Dado que o usuário está na tela inicial
+  E clicar no menu para ir para o processo crud
+  Quando ele clicar em voltar no navegador
+  Então a aplicação deverá exibir a tela inicial
+
+  Dado que o usuário está na tela inicial
+  E clicar no menu para ir para o processo crud
+  E clicar em voltar no navegador
+  Quando ele clicar em ir para frente no navegador
+  Então a aplicação deverá exibir a tela do crud
 
 
-#Cenário: idioma / cookie
-#Cenário: idioma Inicial / de acordo com o navegador
-#Cenário: Logado / não logado
+  #Cenário: idioma / cookie
+
+    case              | campo | spec_input_sem_foco | spec_input_com_foco | spec_input_onBlur
+    ----------------------------------------------------------------------------------------------
+    campo obrigatorio | c1    | spanErro            | spanErro            | spanErro
+      nao preenchido  |       |   text is:          |   text is:          |   text is: Obrigatorio
+                      |       |   below: input      |   below: input      |   below: input
+                      |       |                     |                     |   color: red
+    ----------------------------------------------------------------------------------------------
