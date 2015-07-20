@@ -6,6 +6,7 @@ window.hsession = {
 class AppStore extends FluxEasy.Store {
 
     constructor() {
+        this.state.login = null;
         this.state.apptitle = 'initializating...';
         this.state.openned_processes = {};
         this.state.curr_process = null;
