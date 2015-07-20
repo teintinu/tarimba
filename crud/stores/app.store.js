@@ -180,18 +180,19 @@ class AppStore extends FluxEasy.Store {
         this.state.menuSelecionado = index;
         this.emit('refreshMenu');
     }
-    activate_pagelet(view_of_pagelet_ref) {
-        this.state.pagelets.push(view_of_pagelet_ref);
-        this.emit('RefreshAll');
-    }
 
-    deactivate_pagelet(view_of_pagelet_ref) {
-        var i = this.state.pagelets.indexOf(view_of_pagelet_ref);
-        if (i >= 0) {
-            this.state.pagelets.splice(i, 1);
-            this.emit('RefreshAll');
-        }
-    }
+//    activate_pagelet(view_of_pagelet_ref) {
+//        this.state.pagelets.push(view_of_pagelet_ref);
+//        this.emit('RefreshAll');
+//    }
+//
+//    deactivate_pagelet(view_of_pagelet_ref) {
+//        var i = this.state.pagelets.indexOf(view_of_pagelet_ref);
+//        if (i >= 0) {
+//            this.state.pagelets.splice(i, 1);
+//            this.emit('RefreshAll');
+//        }
+//    }
 }
 
 export default AppStore;

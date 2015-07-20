@@ -3,7 +3,6 @@ Funcionalidade: Store para controlar os processos ativos/abertos na aplicação
   Eu, como programador
   Desejo utilizar o app.store
 
-
 #Cenário: Login
 #  Dado que é necessário a identificação do usuário da aplicação
 #  Quando this.state.login == null
@@ -26,9 +25,9 @@ Cenário: Abrir um processo
   E é percorrido o this.state.menuItems
   E processModule == menuItem.module
   E o processModule é executado recebendo do callback o mod
-  E this.state.openned_processes[processName] == reference= mod.createStoreReference(dispatcher), subroute= subroute}
+  E this.state.openned_processes[processName] == {reference: mod.createStoreReference(dispatcher), subroute: subroute}
   E this.state.lasthash != hash é executa a função this.state.openned_processes[processName].reference.route(subroute)
-  E this.state.curr_process == {process=processInfo.reference, processName=processName, subroute=subroute, task=processInfo.reference.getState().task}
+  E this.state.curr_process == {process:processInfo.reference, processName:processName, subroute:subroute, task:processInfo.reference.getState().task}
   E é executado um this.emit('RefreshContent')
 
   Dado que o usuário tenha um processo iniciado
@@ -46,7 +45,7 @@ Cenário: Idioma inicial de acordo com o navegador
   Então a aplicação deve identificar a linguagem padrão do navegador
   E atribuir window.hsession.language
 
-  Cenário: Back and forward de processos no navegador
+Cenário: Back and forward de processos no navegador
   Dado que o usuário está na tela inicial
   E clicar no menu para ir para o processo crud
   Quando ele clicar em voltar no navegador
@@ -58,13 +57,20 @@ Cenário: Idioma inicial de acordo com o navegador
   Quando ele clicar em ir para frente no navegador
   Então a aplicação deverá exibir a tela do crud
 
+Cenário: Mudando Título
+  Dado que eu preciso mudar o título da minha aplicação
+  Quando eu utilizar a função setTitle passando o título
+  Então this.state.apptitle == título
 
+  Dado que eu mudei o titulo indo para outro processo
+  Quando eu clicar em voltar
+  Então eu preciso voltar ao título anterior
   #Cenário: idioma / cookie
 
-    case              | campo | spec_input_sem_foco | spec_input_com_foco | spec_input_onBlur
-    ----------------------------------------------------------------------------------------------
-    campo obrigatorio | c1    | spanErro            | spanErro            | spanErro
-      nao preenchido  |       |   text is:          |   text is:          |   text is: Obrigatorio
-                      |       |   below: input      |   below: input      |   below: input
-                      |       |                     |                     |   color: red
-    ----------------------------------------------------------------------------------------------
+#    case              | campo | spec_input_sem_foco | spec_input_com_foco | spec_input_onBlur
+#    ----------------------------------------------------------------------------------------------
+#    campo obrigatorio | c1    | spanErro            | spanErro            | spanErro
+#      nao preenchido  |       |   text is:          |   text is:          |   text is: Obrigatorio
+#                      |       |   below: input      |   below: input      |   below: input
+#                      |       |                     |                     |   color: red
+#    ----------------------------------------------------------------------------------------------
