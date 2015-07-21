@@ -1,19 +1,19 @@
 import FluxEasy from 'flux-easy';
 var React = require('react');
 
-class Welcome extends FluxEasy.View {
+class View2 extends FluxEasy.View {
 
     constructor() {
-        Welcome.displayName = "Welcome";
+        View2.displayName = "View2";
     }
 
     render() {
       return (
-        <div className="Welcome">
-            Welcome
+        <div>
+            View 2
           </div>
       );
     }
 }
 
-export default Welcome;
+export default View2;

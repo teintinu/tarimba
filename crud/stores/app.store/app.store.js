@@ -7,7 +7,7 @@ class AppStore extends FluxEasy.Store {
 
     constructor() {
         this.state.login = null;
-        this.state.apptitle = 'initializating...';
+        this.state.apptitle = 'App Store';
         this.state.openned_processes = {};
         this.state.curr_process = null;
 
@@ -15,12 +15,12 @@ class AppStore extends FluxEasy.Store {
         this.state.running = true;
         this.state.menuItems = [
             {
-                name: "crud",
-                module: require('bundle?lazy!./crud.store.js'),
+                name: "View 2",
+                module: require('bundle?lazy!./store2.js'),
                 labelText: {
-                    pt_br: 'CRUD - pt_br',
-                    en: 'CRUD - en',
-                    es: 'CRUD - es'
+                    pt_br: 'Store 2 - pt_br',
+                    en: 'Store 2 - en',
+                    es: 'Store 2 - es'
                 }
             }
         ];
@@ -107,8 +107,7 @@ class AppStore extends FluxEasy.Store {
                 }
             });
             if (!processModule) {
-//                processModule = require('bundle?lazy!./welcome.js');
-                processModule = require('bundle?lazy!./crud.store.js');
+                processModule = require('bundle?lazy!./welcome.store.js');
                 isWelcome = true;
             }
             var processInfo = this.state.openned_processes[processName];
