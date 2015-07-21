@@ -16,7 +16,7 @@ class AppStore extends FluxEasy.Store {
         this.state.menuItems = [
             {
                 name: "View 2",
-                module: require('bundle?lazy!./store2.js'),
+                module: require('bundle?lazy!./view2/view2.store.js'),
                 labelText: {
                     pt_br: 'Store 2 - pt_br',
                     en: 'Store 2 - en',
@@ -107,7 +107,7 @@ class AppStore extends FluxEasy.Store {
                 }
             });
             if (!processModule) {
-                processModule = require('bundle?lazy!./welcome.store.js');
+                processModule = require('bundle?lazy!./welcome/welcome.store.js');
                 isWelcome = true;
             }
             var processInfo = this.state.openned_processes[processName];

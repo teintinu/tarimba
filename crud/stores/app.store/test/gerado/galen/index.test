@@ -1,0 +1,13 @@
+@@ set 
+    gridUrl         http://192.168.25.102:4444/wd/hub
+    website         http://192.168.25.211:3080
+
+@@ table browsers
+    | browserName   | gridArgs                            |
+    | Firefox       | --browser "firefox"                 |
+    | Chrome        | --browser "chrome"                  |
+
+@@ parameterized using browsers
+Test App (${browserName})
+    selenium grid ${gridUrl} --page ${website} ${gridArgs}
+        check test.spec

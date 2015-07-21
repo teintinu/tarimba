@@ -9,7 +9,7 @@ class Welcome extends FluxEasy.View {
 
     render() {
       return (
-        <div className="Welcome">
+        <div>
             Welcome
           </div>
       );

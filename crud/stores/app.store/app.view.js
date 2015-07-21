@@ -26,16 +26,28 @@ class AppView extends FluxEasy.View {
     }
 
     render() {
-
+            var self = this;
             if (!this.state.view_ref)
                 return React.createElement('div', {}, 'NADA PARA EXIBIR');
             return (
                 React.createElement('div', {}, [
-                    React.createElement('div', {}, [React.createElement('h1', {}, [this.app.getState().apptitle])]),
-                    React.createElement('div', {style: {backgroundColor: 'lightgray'}},
+                    React.createElement('h1', {name: "title"}, [this.app.getState().apptitle]),
+                    React.createElement('div', {name: "menu"}, [
+                       this.app.getState().menuItems.map(function(item, idx){
+                          return React.createElement('span', {onClick: function(e){
+                              self.onItemClick(e, idx, item);
+                          }}, [item.name])
+                       })
+                    ]),
+
+                    React.createElement('div', {name: "conteudo", style: {backgroundColor: 'lightgray'}},
                     React.createElement(this.state.view_ref.Class))
                 ])
             );
+    }
+     onItemClick (e, index, menuItem) {
+        this.app.setClickItem(index);
+        this.app.setContent({hash: menuItem.name, keepSubRoute: true});
     }
 }
 
