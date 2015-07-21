@@ -1,0 +1,22 @@
+{
+  "name": "app.store",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "flux": "^2.0.3",
+    "react": "^0.13.3",
+    "react-tap-event-plugin": "^0.1.7"
+  },
+  "devDependencies": {
+    "flux-easy": "0.0.9",
+    "flux-easy-loader": "0.0.9",
+    "node-libs-browser": "^0.5.2",
+    "webpack": "^1.10.1"
+  }
+}
